@@ -3,22 +3,48 @@
 const db = require('../server/db')
 const {User} = require('../server/db/models')
 
-async function seed() {
+const users = [
+  {
+    name: 'Jeff Bezos',
+    email: 'BigJDawg@ggmail.com',
+    password: 'Password123',
+    address: '123 Yeehaw Way New York,New York'
+  },
+
+  {
+    name: "Logan L'Clossier",
+    email: 'Xxda14u2NvxX@ggmail.com',
+    password: 'Password123',
+    address: '390 Party Blvd Berlin,Germany'
+  },
+  {
+    name: 'Don Julio',
+    email: 'ILuvYaats@ggmail.com',
+    password: 'Password123',
+    address: '123 yeehaw way NY,NY'
+  },
+  {
+    name: 'Richard Morgan',
+    email: 'LeCaptain@ggmail.com',
+    password: 'Password123',
+    address: '1 Matey Place, Nassau,Bahamas'
+  },
+  {
+    name: 'Cornelius Blackbeard',
+    email: 'NotThatBlackbeard@ggmail.com',
+    password: 'Password123',
+    address: '421 Lasagna Lane Champagne,France'
+  }
+]
+
+const seed = async () => {
   await db.sync({force: true})
-  console.log('db synced!')
-
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
-
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
+  await User.bulkCreate(users)
+  await Student.bulkCreate(studentsForDb)
+  console.log(green('Seeding success!'))
+  db.close()
 }
 
-// We've separated the `seed` function from the `runSeed` function.
-// This way we can isolate the error handling and exit trapping.
-// The `seed` function is concerned only with modifying the database.
 async function runSeed() {
   console.log('seeding...')
   try {
