@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const User = db.define('products', {
+const Product = db.define('product', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -30,12 +30,13 @@ const User = db.define('products', {
   ratings: {
     type: Sequelize.INTEGER
   },
-//   inventory: {
-//       type: Sequelize.INTEGER,
-//       validate: {
-//         min: 0
-//       }
-//   }
+  inventory: {
+      type: Sequelize.INTEGER,
+      defaultValue: 10,//this is temporary!
+      validate: {
+        min: 0
+      }
+  }
 })
 
-module.exports = User;
+module.exports = Product;
