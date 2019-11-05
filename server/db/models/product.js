@@ -30,7 +30,11 @@ const Product = db.define('product', {
     }
   },
   avgRating: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT,
+    validate: {
+      min: 0.0,
+      max: 5.0
+    }
   },
   quantity: {
     type: Sequelize.INTEGER,
