@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product} = require('../server/db/models')
+const {User, Product, Cart, Order, OrderDetail} = require('../server/db/models')
 
 const users = [
   {
@@ -133,10 +133,110 @@ const boats = [
   }
 ]
 
+const carts = [
+  {
+    userId: 1,
+    productId: 1,
+    quantity: 1
+  },
+  {
+    userId: 2,
+    productId: 2,
+    quantity: 2
+  },
+  {
+    userId: 3,
+    productId: 3,
+    quantity: 3
+  },
+  {
+    userId: 1,
+    productId: 3,
+    quantity: 2
+  },
+  {
+    userId: 2,
+    productId: 1,
+    quantity: 5
+  },
+  {
+    userId: 2,
+    productId: 3,
+    quantity: 1
+  }
+]
+//orderId(PK), userId, 2 addresses, totalCost
+//payment info?
+const orders = [
+  {
+    userId: 1,
+    shipping: '5 Hanover Street, New York City, NY, 09385',
+    billing: '5 Hanover Street, New York City, NY, 09385',
+    totalCost: 7000
+  },
+  {
+    userId: 2,
+    shipping: '6 Main Street, New York City, NY, 09385',
+    billing: '7 Hanover Street, New York City, NY, 09385',
+    totalCost: 20000
+  },
+  {
+    userId: 3,
+    shipping: '6 Broad Street, New York City, NY, 09385',
+    billing: '7 Hanover Street, New York City, NY, 09385',
+    totalCost: 14000
+  }
+]
+
+const orderDetail = [
+  //USERID: 1
+  {
+    detailQuantity: 1,
+    detailPrice: 3000,
+    productId: 1,
+    orderId: 1
+  },
+  {
+    detailQuanitity: 1,
+    detailPrice: 4000,
+    productId: 3,
+    orderId: 1
+  },
+  //USERID: 2
+  {
+    detailQuanitity: 2,
+    detailPrice: 10000,
+    productId: 2,
+    orderId: 2
+  },
+  {
+    detailQuanitity: 5,
+    detailPrice: 15000,
+    productId: 1,
+    orderId: 2
+  },
+  {
+    detailQuanitity: 1,
+    detailPrice: 4000,
+    productId: 3,
+    orderId: 2
+  },
+  //USERID: 3
+  {
+    detailQuanitity: 3,
+    detailPrice: 12000,
+    productId: 3,
+    orderId: 3
+  }
+]
+
 const seed = async () => {
   await db.sync({force: true})
   await User.bulkCreate(users)
   await Product.bulkCreate(boats)
+  await Cart.bulkCreate(carts)
+  await Order.bulkCreate(orders)
+  await OrderDetail.bulkCreate(orderDetail)
   console.log('Seeding success!')
   db.close()
 }
