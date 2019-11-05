@@ -5,32 +5,37 @@ const {User} = require('../server/db/models')
 
 const users = [
   {
-    name: 'Jeff Bezos',
+    firstName: 'Jeff',
+    lastName: 'Bezos',
     email: 'BigJDawg@ggmail.com',
     password: 'Password123',
     address: '123 Yeehaw Way New York,New York'
   },
 
   {
-    name: "Logan L'Clossier",
+    firstName: 'Logan',
+    lastName: 'LClossier',
     email: 'Xxda14u2NvxX@ggmail.com',
     password: 'Password123',
     address: '390 Party Blvd Berlin,Germany'
   },
   {
-    name: 'Don Julio',
+    firstName: 'Don',
+    lastName: 'Julio',
     email: 'ILuvYaats@ggmail.com',
     password: 'Password123',
     address: '123 yeehaw way NY,NY'
   },
   {
-    name: 'Richard Morgan',
-    email: 'LeCaptain@ggmail.com',
+    firstName: 'Richard',
+    lastName: 'Long',
+    email: 'CPT-R_LONG@ggmail.com',
     password: 'Password123',
     address: '1 Matey Place, Nassau,Bahamas'
   },
   {
-    name: 'Cornelius Blackbeard',
+    firstName: 'Cornelius',
+    lastName: 'Blackbeard',
     email: 'NotThatBlackbeard@ggmail.com',
     password: 'Password123',
     address: '421 Lasagna Lane Champagne,France'
@@ -40,8 +45,8 @@ const users = [
 const seed = async () => {
   await db.sync({force: true})
   await User.bulkCreate(users)
-  await Student.bulkCreate(studentsForDb)
-  console.log(green('Seeding success!'))
+  // await Product.bulkCreate(products)
+  console.log('Seeding success!')
   db.close()
 }
 
