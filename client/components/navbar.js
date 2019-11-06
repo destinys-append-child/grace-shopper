@@ -36,7 +36,7 @@ class Navbar extends React.Component {
     const {handleClick, isLoggedIn, userName} = this.props
 
     return (
-      <div>
+      <div id="navbar">
         <h1>YACHTS DON'T STOP</h1>
         <h4>A One Stop Shop for Yachts</h4>
         <nav>

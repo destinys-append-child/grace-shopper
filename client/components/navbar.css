@@ -1,3 +1,9 @@
-* {
+#navbar {
+  color: white;
   font-family: 'Playfair Display', serif;
+}
+
+#navbar nav a {
+  display: inline-block;
+  margin: 1em;
 }

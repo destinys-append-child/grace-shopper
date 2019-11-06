@@ -1,4 +1,4 @@
-div {
+body {
   background: url('https://img2.goodfon.com/wallpaper/nbig/7/5f/ostrov-yahta-okean.jpg');
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -12,11 +12,6 @@ a {
 
 label {
   display: block;
-}
-
-nav a {
-  display: inline-block;
-  margin: 1em;
 }
 
 form div {
