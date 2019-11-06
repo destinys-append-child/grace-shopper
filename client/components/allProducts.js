@@ -10,7 +10,11 @@ class YachtsList extends Component {
   componentDidMount() {
     this.props.getYachts()
   }
+
   render() {
+    if (!this.props.yachts) {
+      return null
+    }
     const {yachts} = this.props
     return (
       <div>
