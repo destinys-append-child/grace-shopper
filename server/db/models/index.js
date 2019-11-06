@@ -10,7 +10,7 @@ const Cart = require('./cart')
  *
  *    BlogPost.belongsTo(User)
  */
-
+// rethink over these associations
 Cart.belongsTo(User)
 User.hasMany(Cart)
 

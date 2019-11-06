@@ -45,7 +45,7 @@ const User = db.define('user', {
     defaultValue: false
   },
   address: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING // validationnnnnnnnnn
   }
 })
 

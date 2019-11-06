@@ -7,7 +7,7 @@ const OrderDetail = db.define('orderDetail', {
     defaultValue: 1
   },
   detailPrice: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING, // wut? why a string?
     allowNull: false
   }
 })

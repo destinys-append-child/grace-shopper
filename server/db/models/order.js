@@ -17,7 +17,7 @@ const Order = db.define('order', {
     }
   },
   totalCost: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER // missing validation & maybeeee defaultValue?
   }
 })
 

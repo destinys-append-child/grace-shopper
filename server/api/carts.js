@@ -5,7 +5,7 @@ module.exports = router
 // get items in cart for logged in user
 router.get('/', async (req, res, next) => {
   try {
-    const cart = await Cart.findAll({
+    const cart = await Cart.findAll({ // might need to rewrite
       where: {userId: req.user.id},
       include: [{model: Product}],
       attributes: ['id', 'cart_qty', 'productId']
