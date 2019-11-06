@@ -1,0 +1,20 @@
+body {
+  background: url('https://img2.goodfon.com/wallpaper/nbig/7/5f/ostrov-yahta-okean.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+a {
+  text-decoration: none;
+}
+
+label {
+  display: block;
+}
+
+form div {
+  margin: 1em;
+  display: inline-block;
+}
