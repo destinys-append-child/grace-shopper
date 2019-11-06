@@ -13,23 +13,26 @@ class YachtsList extends Component {
 
   render() {
     if (!this.props.yachts) {
-      return null
+      console.log('waiting to be populated')
+      console.log(this.props)
+      return <h1>NOTHING YET</h1>
+    } else {
+      const {yachts} = this.props
+      return (
+        <div>
+          <h1>THESE ARE ALL OUR YACHTS</h1>
+          {yachts.map(yacht => (
+            <div key={yacht.id}>
+              <h2>{yacht.name}</h2>
+              <Link to={`/product/${yacht.id}`}>
+                <img src={yacht.imgUrl} />
+              </Link>
+              <h3>{yacht.category}</h3>
+            </div>
+          ))}
+        </div>
+      )
     }
-    const {yachts} = this.props
-    return (
-      <div>
-        <h1>THESE ARE ALL OUR YACHTS</h1>
-        {yachts.map(yacht => (
-          <div key={yacht.id}>
-            <h2>{yacht.name}</h2>
-            <Link to={`/product/${yacht.id}`}>
-              <img src={yacht.imgUrl} />
-            </Link>
-            <h3>{yacht.category}</h3>
-          </div>
-        ))}
-      </div>
-    )
   }
 }
 
