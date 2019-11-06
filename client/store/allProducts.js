@@ -1,7 +1,7 @@
 import axios from 'axios'
 //ACTION TYPES
 export const GET_YACHTS = 'GET_YACHTS'
-export const GET_SINGLE_YACHT = 'GET_SINGLE_YACHT'
+export const GET_BY_CATEGORY = 'GET_BY_CATEGORY'
 
 //ACTION CREATORS
 export const getYachts = yachts => ({
@@ -9,9 +9,9 @@ export const getYachts = yachts => ({
   yachts
 })
 
-export const getSingleYacht = singleYacht => ({
-  type: GET_SINGLE_YACHT,
-  singleYacht
+export const getCategory = category => ({
+  type: GET_BY_CATEGORY,
+  category
 })
 
 //THUNK CREATOR
@@ -26,11 +26,11 @@ export const yachtsThunk = () => {
   }
 }
 
-export const singleYachtThunk = categoryName => {
+export const categoryThunk = categoryName => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/categories/${categoryName}`)
-      dispatch(getSingleYacht(data))
+      dispatch(getCategory(data))
     } catch (error) {
       console.log('PROBLEM WITH SINGLEYACHT THUNK', error)
     }
@@ -38,21 +38,13 @@ export const singleYachtThunk = categoryName => {
 }
 
 //REDUCERS
-export const allYachtsReducer = (yachts = [], action) => {
+export default function allYachtsReducer(yachts = [], action) {
   switch (action.type) {
     case GET_YACHTS:
       return action.yachts
+    case GET_BY_CATEGORY:
+      return action.category
     default:
       return yachts
   }
 }
-export const singleYachtReducer = (yacht = {}, action) => {
-  switch (action.type) {
-    case GET_SINGLE_YACHT:
-      return action.yacht
-    default:
-      return yacht
-  }
-}
-
-export default {allYachtsReducer, singleYachtReducer}

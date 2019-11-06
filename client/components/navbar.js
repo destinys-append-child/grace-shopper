@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, Route} from 'react-router-dom'
+import YachtsList from './allProducts'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
@@ -21,6 +22,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           {/* The navbar will show these links before you log in */}
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
+          <Link to="/categories">All Products</Link>
+          <Route exact path="/categories" component={YachtsList} />
         </div>
       )}
     </nav>
