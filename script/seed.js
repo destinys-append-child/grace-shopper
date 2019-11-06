@@ -39,6 +39,13 @@ const users = [
     email: 'NotThatBlackbeard@ggmail.com',
     password: 'Password123',
     address: '421 Lasagna Lane Champagne,France'
+  },
+  {
+    firstName: 'Megan',
+    lastName: 'Donnelly',
+    email: 'megan@gmail.com',
+    password: 'test1234',
+    address: '123 Main Rd., New York, NY'
   }
 ]
 
@@ -136,33 +143,33 @@ const boats = [
 const carts = [
   {
     userId: 1,
-    productId: 1,
+    cart_qty: 1,
     quantity: 1
   },
   {
     userId: 2,
     productId: 2,
-    quantity: 2
+    cart_qty: 2
   },
   {
     userId: 3,
     productId: 3,
-    quantity: 3
+    cart_qty: 3
   },
   {
     userId: 1,
     productId: 3,
-    quantity: 2
+    cart_qty: 2
   },
   {
-    userId: 2,
+    userId: 6,
     productId: 1,
-    quantity: 5
+    cart_qty: 5
   },
   {
-    userId: 2,
+    userId: 6,
     productId: 3,
-    quantity: 1
+    cart_qty: 1
   }
 ]
 //orderId(PK), userId, 2 addresses, totalCost

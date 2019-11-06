@@ -7,10 +7,11 @@ router.get('/', async (req, res, next) => {
   try {
     const cart = await Cart.findAll({
       where: {userId: req.user.id},
-      include: [{model: Product}]
+      include: [{model: Product}],
+      attributes: ['id', 'cart_qty', 'productId']
     })
     const cartItems = cart.map(cartRow => cartRow.product)
-    res.send(cartItems)
+    res.send(cart)
   } catch (err) {
     next(err)
   }
