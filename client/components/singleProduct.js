@@ -4,6 +4,9 @@ import {connect} from 'react-redux'
 import {getSingleProductThunk} from '../store/singleProduct'
 
 class DisconnectedSingleProduct extends Component {
+  constructor() {
+    super()
+  }
   componentDidMount() {
     const id = this.props.match.params.productId
     console.log(id)
@@ -11,20 +14,24 @@ class DisconnectedSingleProduct extends Component {
   }
 
   render() {
-    // const yacht = this.props.singleProduct
+    //const yacht = this.props.singleProduct
     return (
       <div className="singleProduct">
-        <img src={yacht.imageUrl} />
-        <h2>{yacht.name}</h2>
-        <h3>{yacht.price}</h3>
+        <img src={this.props.singleProduct.imageUrl} />
+        <h2>{this.props.singleProduct.name}</h2>
+        <h3>{this.props.singleProduct.price}</h3>
         <br />
         <p>{this.singleProduct.description}</p>
-        yacht.quantity > 0 ?
+        this.props.singleProduct.quantity > 0 ?
         <button id="addToCart" onClick={this.addToCart}>
           Add To Cart
         </button>
-        <input type="number" name="quantity" max={yacht.quantity} /> :{' '}
-        <h1>Sorry Boss, SOLD OUT</h1>
+        <input
+          type="number"
+          name="quantity"
+          max={this.props.singleProduct.quantity}
+        />{' '}
+        : <h1>Sorry Boss, SOLD OUT</h1>
       </div>
     )
   }
@@ -38,6 +45,6 @@ const mapDispatchToProps = dispatch => ({
   getSingleProduct: id => dispatch(getSingleProductThunk(id))
 })
 
-export const SingleProduct = connect(mapStateToProps, mapDispatchToProps)(
+export default connect(mapStateToProps, mapDispatchToProps)(
   DisconnectedSingleProduct
 )

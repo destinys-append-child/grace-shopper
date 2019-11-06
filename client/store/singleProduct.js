@@ -12,6 +12,7 @@ const getSingleProduct = product => ({type: GET_SINGLE_PRODUCT, product})
 export const getSingleProductThunk = id => async dispatch => {
   try {
     let {data} = await axios.get(`api/products/${id}`)
+    console.log(data)
     if (data) dispatch(getSingleProduct(data))
   } catch (error) {
     console.error(error)
