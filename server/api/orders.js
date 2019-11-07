@@ -29,17 +29,18 @@ router.put('/not-purchased/increase', async (req, res, next) => {
   try {
     const {productId} = req.body
     // step one: confirm there is an orderId for the user
-    // step two: confirm the order has not been purchased
-    // step three: confirm order contains the productId
     const order = await Order.findOne({
       where: {
         userId: req.user.id,
+        // step two: confirm the order has not been purchased
         isPurchased: false
       },
-      include: [{model: Product, where: {id: productId}}]
+      // step three: confirm order contains the productId
+      include: [{model: Product}]
     })
     if (order) {
-      const orderItem = order.products[0].orderProduct
+      const orderItem = order.products.find(item => item.id === productId)
+        .orderProduct
       const amount = orderItem.itemQty + 1
       await orderItem.update({itemQty: amount})
       res.status(201).send(order)
