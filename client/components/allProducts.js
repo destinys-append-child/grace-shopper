@@ -32,7 +32,7 @@ class YachtsList extends Component {
         {yachts.map(yacht => (
           <div key={yacht.id} className="yacht">
             <h2>{yacht.name}</h2>
-            <Link to={`/product/${yacht.id}`}>
+            <Link to={`/products/${yacht.id}`}>
               <img src={yacht.imageUrl} />
             </Link>
             <h3>{yacht.category}</h3>
