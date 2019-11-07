@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {yachtsThunk, categoryThunk} from '../store/allProducts'
-import {Link} from 'react-router-dom'
+import {Link, Route} from 'react-router-dom'
 
 import './allProducts.css'
 
@@ -30,6 +30,7 @@ class YachtsList extends Component {
       <div>
         <nav>
           <Link to="/categories/Catamaran">Catamaran</Link>
+          <Route exact path="/categories/Catamaran" component={YachtsList} />
         </nav>
         <h1>THESE ARE ALL OUR YACHTS</h1>
         {yachts.map(yacht => (
