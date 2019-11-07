@@ -11,8 +11,7 @@ const getSingleProduct = product => ({type: GET_SINGLE_PRODUCT, product})
 
 export const getSingleProductThunk = id => async dispatch => {
   try {
-    let {data} = await axios.get(`api/products/${id}`)
-    console.log(data)
+    let {data} = await axios.get(`/api/products/${id}`)
     if (data) dispatch(getSingleProduct(data))
   } catch (error) {
     console.error(error)
@@ -22,7 +21,6 @@ export const getSingleProductThunk = id => async dispatch => {
 export default function(state = defaultProduct, action) {
   switch (action.type) {
     case GET_SINGLE_PRODUCT:
-      console.log('HIT')
       return action.product
     default:
       return state
