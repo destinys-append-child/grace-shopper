@@ -3,7 +3,7 @@ import PropTypes from 'prop-types' // need this?
 import {connect} from 'react-redux'
 import {getSingleProductThunk} from '../store/singleProduct'
 
-class SingleProduct extends Component {
+class DisconnectedSingleProduct extends Component {
   componentDidMount() {
     const id = this.props.match.params.productId
     this.props.getSingleProduct(id)
@@ -47,4 +47,6 @@ const mapDispatchToProps = dispatch => ({
   getSingleProduct: id => dispatch(getSingleProductThunk(id))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  DisconnectedSingleProduct
+)
