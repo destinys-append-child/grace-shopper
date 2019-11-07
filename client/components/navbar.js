@@ -24,14 +24,16 @@ class Navbar extends React.Component {
   viewLoginForm() {
     this.setState(prevState => ({
       ...prevState,
-      viewLogin: !prevState.viewLogin
+      viewLogin: !prevState.viewLogin,
+      viewSignup: false
     }))
   }
 
   viewSignupForm() {
     this.setState(prevState => ({
       ...prevState,
-      viewSignup: !prevState.viewSignup
+      viewSignup: !prevState.viewSignup,
+      viewLogin: false
     }))
   }
 
