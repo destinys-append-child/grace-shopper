@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Link, Route} from 'react-router-dom'
 import YachtsList from './allProducts'
 import {logout} from '../store'
+import {logoutClearCart} from '../store/cart'
 import {Login, Signup} from '../components'
 
 import './navbar.css'
@@ -94,6 +95,7 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
+      dispatch(logoutClearCart())
     }
   }
 }

@@ -4,8 +4,27 @@ img {
   transition: transform 0.2s;
 }
 img:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 body {
   color: whitesmoke;
+}
+.navBarItem {
+  margin: 1em;
+  font-size: 200%;
+  color: rgb(104, 193, 248);
+  text-shadow: black;
+}
+#allProductsNavBar {
+  background: rgb(211, 211, 211, 0.8);
+}
+#yachtsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+.yachtContainer {
+  flex: 33.33%;
+  padding: 5px;
+  text-align: center;
 }
