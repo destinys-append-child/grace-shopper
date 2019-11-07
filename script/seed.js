@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product, Order} = require('../server/db/models')
+const {User, Product, Order, OrderProduct} = require('../server/db/models')
 
 const users = [
   {
@@ -140,7 +140,7 @@ const boats = [
   }
 ]
 
-//orderId(PK), userId, 2 addresses, totalCost
+//orderId(PK), userId, 2 addresses, orderCost
 //payment info?
 const orders = [
   {
@@ -157,10 +157,49 @@ const orders = [
     billing: '7 Hanover Street, New York City, NY, 09385'
   },
   {
-    userId: 3,
+    userId: 6,
     orderCost: 14000,
     shipping: '6 Broad Street, New York City, NY, 09385',
     billing: '7 Hanover Street, New York City, NY, 09385'
+  },
+  {
+    userId: 6,
+    orderCost: 90000,
+    shipping: '55 Seventh Ave, New York City, NY, 09385',
+    billing: '21 Washington Square, New York City, NY, 09385'
+  }
+]
+
+const orderProducts = [
+  {
+    orderId: 1,
+    productId: 3,
+    itemQty: 1,
+    itemPrice: 2491200
+  },
+  {
+    orderId: 2,
+    productId: 7,
+    itemQty: 2,
+    itemPrice: 5550000
+  },
+  {
+    orderId: 3,
+    productId: 1,
+    itemQty: 1,
+    itemPrice: 110419594
+  },
+  {
+    orderId: 3,
+    productId: 2,
+    itemQty: 4,
+    itemPrice: 500242142
+  },
+  {
+    orderId: 4,
+    productId: 6,
+    itemQty: 1,
+    itemPrice: 25463024
   }
 ]
 
@@ -169,7 +208,8 @@ const seed = async () => {
   await User.bulkCreate(users)
   await Product.bulkCreate(boats)
   await Order.bulkCreate(orders)
-  console.log('Seeding success!')
+  await OrderProduct.bulkCreate(orderProducts)
+  await console.log('Seeding success!')
   db.close()
 }
 
