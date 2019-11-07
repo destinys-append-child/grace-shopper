@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, Route} from 'react-router-dom'
+import YachtsList from './allProducts'
 import {logout} from '../store'
 import {Login, Signup} from '../components'
 
