@@ -5,7 +5,7 @@ const Home = ({isLoggedIn, firstName}) => {
   return (
     <div id="home">
       {isLoggedIn ? <div>Let's set Sail {firstName}</div> : null}
-      <button type="button" onClick="()=>">
+      <button type="button" onClick="()=> window.location.href">
         TAKE ME AWAY
       </button>
     </div>
