@@ -1,4 +1,4 @@
-const router = require('express').Router()
+/*const router = require('express').Router()
 const {Cart, Product} = require('../db/models')
 module.exports = router
 
@@ -34,3 +34,11 @@ router.put('/:cartId', async (req, res, next) => {
     next(err)
   }
 })
+
+// delete item in cart for logged in user
+router.delete('/:cartId', async (req, res, next) => {
+  try {
+  } catch (err) {
+    next(err)
+  }
+}) */

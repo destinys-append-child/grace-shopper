@@ -2,6 +2,13 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
+  orderCost: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    validate: {
+      min: 0.0
+    }
+  },
   shipping: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -16,8 +23,10 @@ const Order = db.define('order', {
       notEmpty: true
     }
   },
-  totalCost: {
-    type: Sequelize.INTEGER
+  isPurchased: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+    allowNull: false
   }
 })
 
