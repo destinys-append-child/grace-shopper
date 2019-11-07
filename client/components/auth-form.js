@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 
+import './auth-form.css'
+
 /**
  * COMPONENT
  */
@@ -10,7 +12,7 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
+    <div id="form">
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="email">

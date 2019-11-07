@@ -43,18 +43,18 @@ class Navbar extends React.Component {
         <div className="right-nav">
           <h4>A One Stop Shop for Yachts</h4>
           <nav>
+            <Link to="/home">
+              <Icon name="home" color="white" />
+            </Link>
+            <Link to="/cart">
+              <Icon name="cart" color="white" />
+            </Link>
+            <Link to="/wishlist">
+              <Icon name="heart outline" color="white" />
+            </Link>
             {isLoggedIn ? (
               <div>
                 {/* The navbar will show these links after you log in */}
-                <Link to="/home">
-                  <Icon name="home" color="white" />
-                </Link>
-                <Link to="/cart">
-                  <Icon name="cart" color="white" />
-                </Link>
-                <Link to="/wishlist">
-                  <Icon name="heart outline" color="white" />
-                </Link>
                 <a href="#" onClick={handleClick}>
                   Logout
                 </a>
@@ -62,23 +62,17 @@ class Navbar extends React.Component {
             ) : (
               <div>
                 {/* The navbar will show these links before you log in */}
-                <Link to="/cart">Cart </Link>
-                <Link to="/wishlist">Wishlist </Link>
-                <Button
-                  type="button"
-                  onClick={this.viewLoginForm}
-                  className="ui button active"
-                >
+                <a href="#" onClick={this.viewLoginForm}>
                   Login
-                </Button>
+                </a>
                 {this.state.viewLogin ? <Login /> : null}
-                <button type="button" onClick={this.viewSignupForm}>
+                <a href="#" onClick={this.viewSignupForm}>
                   Signup
-                </button>
+                </a>
                 {this.state.viewSignup ? <Signup /> : null}
-                {/*INPUT SEARCH BAR*/}
               </div>
             )}
+            {/*INPUT SEARCH BAR*/}
           </nav>
         </div>
       </div>
