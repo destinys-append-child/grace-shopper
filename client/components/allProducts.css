@@ -9,6 +9,21 @@ img:hover {
 body {
   color: whitesmoke;
 }
-.link {
-  color: pink;
+.navBarItem {
+  margin: 1em;
+  font-size: 200%;
+  color: rgb(104, 193, 248);
+  text-shadow: black;
+}
+#allProductsNavBar {
+  background: rgb(211, 211, 211, 0.8);
+}
+#yachtsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+.yachtContainer {
+  flex: 33.33%;
+  padding: 5px;
+  text-align: center;
 }

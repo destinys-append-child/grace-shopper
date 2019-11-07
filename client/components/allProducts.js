@@ -23,58 +23,64 @@ class YachtsList extends Component {
   }
 
   render() {
-    // if (!this.props.yachts) {
-    //   console.log('waiting to be populated')
-    //   console.log(this.props)
-    //   return <h1>NOTHING YET</h1>
-    // } else {
     const {yachts} = this.props
     return (
       <div>
-        <nav>
-          <div>
-            <Link
-              to="/categories/Catamaran"
-              onClick={() => this.props.getByCategory('Catamaran')}
-            >
-              Catamaran
-            </Link>
-            <Link
-              to="/categories/Super%20Yacht"
-              onClick={() => this.props.getByCategory('Super%20Yacht')}
-            >
-              Super Yacht
-            </Link>
-            <Link
-              to="/categories/Motoryacht"
-              onClick={() => this.props.getByCategory('Motoryacht')}
-            >
-              Motoryacht
-            </Link>
-            <Link
-              to="/categories/Sailing%20Yacht"
-              onClick={() => this.props.getByCategory('Sailing%20Yacht')}
-            >
-              Sailing Yacht
-            </Link>
-            <Link to="/categories" onClick={() => this.props.getYachts()}>
-              All Yachts
-            </Link>
-          </div>
+        <nav id="allProductsNavBar">
+          <br />
+          <br />
+          <Link
+            className="navBarItem"
+            to="/categories/Catamaran"
+            onClick={() => this.props.getByCategory('Catamaran')}
+          >
+            Catamaran
+          </Link>
+          <Link
+            className="navBarItem"
+            to="/categories/Super%20Yacht"
+            onClick={() => this.props.getByCategory('Super%20Yacht')}
+          >
+            Super Yacht
+          </Link>
+          <Link
+            className="navBarItem"
+            to="/categories/Motoryacht"
+            onClick={() => this.props.getByCategory('Motoryacht')}
+          >
+            Motoryacht
+          </Link>
+          <Link
+            className="navBarItem"
+            to="/categories/Sailing%20Yacht"
+            onClick={() => this.props.getByCategory('Sailing%20Yacht')}
+          >
+            Sailing Yacht
+          </Link>
+          <Link
+            className="navBarItem"
+            to="/categories"
+            onClick={() => this.props.getYachts()}
+          >
+            All Yachts
+          </Link>
+          <br />
+          <br />
         </nav>
         <h1>THESE ARE ALL OUR YACHTS</h1>
-        {yachts.map(yacht => (
-          <div key={yacht.id} className="yacht">
-            <h2>{yacht.name}</h2>
-            <Link to={`/products/${yacht.id}`}>
-              <img src={yacht.imageUrl} />
-            </Link>
-            <h3>{yacht.category}</h3>
-          </div>
-        ))}
+        <div id="yachtsContainer">
+          {yachts.map(yacht => (
+            <div key={yacht.id} className="yachtContainer">
+              <h2>{yacht.name}</h2>
+              <Link to={`/products/${yacht.id}`}>
+                <img src={yacht.imageUrl} />
+              </Link>
+              <h3>{yacht.category}</h3>
+            </div>
+          ))}
+        </div>
       </div>
     )
-    // }
   }
 }
 
