@@ -1,11 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-const Home = ({isLoggedIn, firstName}) => {
+const Home = ({isLoggedIn, firstName, history}) => {
   return (
     <div id="home">
       {isLoggedIn ? <div>Let's set Sail {firstName}</div> : null}
-      <button type="button" onClick="()=> window.location.href">
+      <button type="button" onClick={() => history.push}>
         TAKE ME AWAY
       </button>
     </div>
