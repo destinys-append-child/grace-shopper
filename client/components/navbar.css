@@ -1,15 +1,15 @@
 #navbar {
   color: white;
   display: flex;
+  text-align: center;
 }
 
 #navbar h1 {
   font-family: 'Abril Fatface', cursive;
-  font-size: 80px;
+  font-size: 65px;
 }
 
-#navbar h4,
-nav {
+#navbar nav {
   align-self: flex-end;
 }
 
