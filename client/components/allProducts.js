@@ -28,11 +28,14 @@ class YachtsList extends Component {
     const {yachts} = this.props
     return (
       <div>
+        <nav>
+          <Link to="/categories/Catamaran">Catamaran</Link>
+        </nav>
         <h1>THESE ARE ALL OUR YACHTS</h1>
         {yachts.map(yacht => (
           <div key={yacht.id} className="yacht">
             <h2>{yacht.name}</h2>
-            <Link to={`/product/${yacht.id}`}>
+            <Link to={`/products/${yacht.id}`}>
               <img src={yacht.imageUrl} />
             </Link>
             <h3>{yacht.category}</h3>
