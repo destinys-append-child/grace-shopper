@@ -1,7 +1,20 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-const Home = () => {
-  return <button type="button">TAKE ME AWAY</button>
+const Home = ({isLoggedIn, firstName}) => {
+  return (
+    <div id="home">
+      {isLoggedIn ? <div>Let's set Sail {firstName}</div> : null}
+      <button type="button">TAKE ME AWAY</button>
+    </div>
+  )
 }
 
-export default Home
+const mapState = state => {
+  return {
+    isLoggedIn: !!state.user.id,
+    firstName: state.user.firstName
+  }
+}
+
+export default connect(mapState)(Home)

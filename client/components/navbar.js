@@ -6,6 +6,7 @@ import {logout} from '../store'
 import {Login, Signup} from '../components'
 
 import './navbar.css'
+import {Button} from 'semantic-ui-react'
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class Navbar extends React.Component {
   }
 
   render() {
-    const {handleClick, isLoggedIn, userName} = this.props
+    const {handleClick, isLoggedIn} = this.props
 
     return (
       <div id="navbar">
@@ -43,7 +44,6 @@ class Navbar extends React.Component {
           {isLoggedIn ? (
             <div>
               {/* The navbar will show these links after you log in */}
-              <p>Let's set sail{userName}!</p>
               <Link to="/home">Home</Link>
               <a href="#" onClick={handleClick}>
                 Logout
@@ -54,9 +54,13 @@ class Navbar extends React.Component {
               {/* The navbar will show these links before you log in */}
               <Link to="/cart">Cart </Link>
               <Link to="/wishlist">Wishlist </Link>
-              <button type="button" onClick={this.viewLoginForm}>
+              <Button
+                type="button"
+                onClick={this.viewLoginForm}
+                class="ui button active"
+              >
                 Login
-              </button>
+              </Button>
               {this.state.viewLogin ? <Login /> : null}
               <button type="button" onClick={this.viewSignupForm}>
                 Signup
@@ -66,7 +70,6 @@ class Navbar extends React.Component {
             </div>
           )}
         </nav>
-        <hr />
       </div>
     )
   }
@@ -78,7 +81,7 @@ class Navbar extends React.Component {
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    userName: state.user.name
+    firstName: state.user.firstName
   }
 }
 
