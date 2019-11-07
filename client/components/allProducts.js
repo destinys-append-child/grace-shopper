@@ -8,7 +8,7 @@ import './allProducts.css'
 class YachtsList extends Component {
   constructor(props) {
     super(props)
-    console.log(props)
+    this.getByCategory = this.getByCategory.bind(this)
   }
 
   componentDidMount() {
@@ -17,6 +17,9 @@ class YachtsList extends Component {
     } else {
       this.props.getByCategory(this.props.match.params.categoryName)
     }
+  }
+  getByCategory(str) {
+    this.props.getByCategory(str)
   }
 
   render() {
@@ -29,8 +32,35 @@ class YachtsList extends Component {
     return (
       <div>
         <nav>
-          <Link to="/categories/Catamaran">Catamaran</Link>
-          <Route exact path="/categories/Catamaran" component={YachtsList} />
+          <div>
+            <Link
+              to="/categories/Catamaran"
+              onClick={() => this.props.getByCategory('Catamaran')}
+            >
+              Catamaran
+            </Link>
+            <Link
+              to="/categories/Super%20Yacht"
+              onClick={() => this.props.getByCategory('Super%20Yacht')}
+            >
+              Super Yacht
+            </Link>
+            <Link
+              to="/categories/Motoryacht"
+              onClick={() => this.props.getByCategory('Motoryacht')}
+            >
+              Motoryacht
+            </Link>
+            <Link
+              to="/categories/Sailing%20Yacht"
+              onClick={() => this.props.getByCategory('Sailing%20Yacht')}
+            >
+              Sailing Yacht
+            </Link>
+            <Link to="/categories" onClick={() => this.props.getYachts()}>
+              All Yachts
+            </Link>
+          </div>
         </nav>
         <h1>THESE ARE ALL OUR YACHTS</h1>
         {yachts.map(yacht => (
