@@ -52,7 +52,8 @@ router.put('/not-purchased', async (req, res, next) => {
 // delete item in cart for logged in user
 router.delete('/not-purchased/:productId', async (req, res, next) => {
   try {
-    const {productId} = req.params
+    let {productId} = req.params
+    productId = Number(productId)
     const order = await Order.findOne({
       where: {
         userId: req.user.id,
@@ -61,6 +62,9 @@ router.delete('/not-purchased/:productId', async (req, res, next) => {
       include: [{model: Product}]
     })
     if (order) {
+      const orderItem = order.products.find(item => item.id === productId)
+        .orderProduct
+      await orderItem.destroy()
       res.send(order)
     } else {
       res.status(404).send(`Unable to remove from cart productId: ${productId}`)
