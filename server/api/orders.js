@@ -65,7 +65,9 @@ router.delete('/not-purchased/:productId', async (req, res, next) => {
       const orderItem = order.products.find(item => item.id === productId)
         .orderProduct
       await orderItem.destroy()
-      res.send(order)
+      // Need to figure out how to send back updated cart,
+      // so that no refresh is required
+      res.sendStatus(204)
     } else {
       res.status(404).send(`Unable to remove from cart productId: ${productId}`)
     }
