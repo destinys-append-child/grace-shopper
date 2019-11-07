@@ -5,12 +5,20 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import singleProduct from './singleProduct'
 
-const reducer = combineReducers({user, singleProduct})
+// const reducer = combineReducers({user, singleProduct})
+import allYachtsReducer from './allProducts'
+
+const rootReducer = combineReducers({
+  user: user,
+  yachts: allYachtsReducer,
+  singleProduct: singleProduct
+})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
-const store = createStore(reducer, middleware)
+const store = createStore(rootReducer, middleware)
 
 export default store
 export * from './user'
 export * from './singleProduct'
+// export * from './allProducts'
