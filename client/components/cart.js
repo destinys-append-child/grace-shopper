@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
+import {me} from '../store/user'
 import {getCart} from '../store/cart'
 import CartItem from './cartItem'
 import './cart.css'
@@ -38,6 +39,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    fetchUser: () => dispatch(me()),
     fetchCart: () => dispatch(getCart())
   }
 }
