@@ -2,12 +2,11 @@
 
 const {expect} = require('chai')
 const db = require('../index')
-const Product = db.model('product')
+const Order = db.model('order')
 
-describe('Product model', () => {
+describe('Order model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
-  //WILL NEED TESTS ONLY WHEN ADMIN EDITS PRODUCTS
   describe('instanceMethods', () => {})
 })
