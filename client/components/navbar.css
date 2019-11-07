@@ -1,6 +1,16 @@
 #navbar {
   color: white;
-  font-family: 'Playfair Display', serif;
+  display: flex;
+}
+
+#navbar h1 {
+  font-family: 'Abril Fatface', cursive;
+  font-size: 80px;
+}
+
+#navbar h4,
+nav {
+  align-self: flex-end;
 }
 
 #navbar nav a {
