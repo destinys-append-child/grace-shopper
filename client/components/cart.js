@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
+import {me} from '../store/user'
 import {getCart} from '../store/cart'
-
+import CartItem from './cartItem'
 import './cart.css'
 
 class Cart extends Component {
@@ -15,29 +16,9 @@ class Cart extends Component {
         <h2>Items in Cart</h2>
         {this.props.cart && this.props.cart.id ? (
           <div>
-            {this.props.cart.products.map(cartItem => {
-              console.log('cartItem:', cartItem)
-              return (
-                <div key={cartItem.id} className="cart-item">
-                  <a href={`/products/${cartItem.id}`}>
-                    <h3 className="product-name">{cartItem.name}</h3>
-                    <img className="product-image" src={cartItem.imageUrl} />
-                  </a>
-                  <div>
-                    <h3 className="product-price">
-                      Price:{' '}
-                      {new Intl.NumberFormat('en-US', {
-                        style: 'currency',
-                        currency: 'USD'
-                      }).format(cartItem.price)}
-                    </h3>
-                    <h3 className="product-qty">
-                      Quantity: {cartItem.orderProduct.itemQty}
-                    </h3>
-                  </div>
-                </div>
-              )
-            })}
+            {this.props.cart.products.map(cartItem => (
+              <CartItem key={cartItem.id} cartItem={cartItem} />
+            ))}
           </div>
         ) : (
           <h3>No items in cart.</h3>
@@ -49,12 +30,14 @@ class Cart extends Component {
 
 const mapStateToProps = state => {
   return {
-    cart: state.cart
+    cart: state.cart,
+    user: state.user
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    fetchUser: () => dispatch(me()),
     fetchCart: () => dispatch(getCart())
   }
 }
