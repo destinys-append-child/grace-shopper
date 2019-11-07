@@ -4,9 +4,30 @@ import {connect} from 'react-redux'
 import {getSingleProductThunk} from '../store/singleProduct'
 
 class DisconnectedSingleProduct extends Component {
+  constructor() {
+    super()
+    this.addToCart = this.addToCart.bind(this)
+  }
   componentDidMount() {
     const id = this.props.match.params.productId
     this.props.getSingleProduct(id)
+  }
+  addToCart() {
+    let cart = localStorage.getItem('cart')
+    console.log(cart)
+    if (cart) {
+      cart = JSON.parse(cart)
+      if (cart[this.props.singleProduct.id]) cart[this.props.singleProduct.id]++
+      else {
+        cart[this.props.singleProduct.id] = 1
+      }
+      window.localStorage.setItem('cart', JSON.stringify(cart))
+    } else {
+      let cart = {}
+      cart[this.props.singleProduct.id] = 1
+      window.localStorage.setItem('cart', JSON.stringify(cart))
+    }
+    console.log(JSON.parse(window.localStorage.getItem('cart')))
   }
 
   render() {
@@ -40,7 +61,8 @@ class DisconnectedSingleProduct extends Component {
 }
 
 const mapStateToProps = state => ({
-  singleProduct: state.singleProduct
+  singleProduct: state.singleProduct,
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({
