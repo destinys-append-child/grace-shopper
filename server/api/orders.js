@@ -25,60 +25,67 @@ router.get('/not-purchased', async (req, res, next) => {
 })
 
 // increase by 1 itemQty of item in cart for logged in user
-router.put('/not-purchased/increase', async (req, res, next) => {
+router.put('/not-purchased/increase/:productId', async (req, res, next) => {
   try {
-    const {productId} = req.body
-    // step one: confirm there is an orderId for the user
+    let {productId} = req.params
+    productId = Number(productId)
     const order = await Order.findOne({
       where: {
         userId: req.user.id,
-        // step two: confirm the order has not been purchased
         isPurchased: false
       },
-      // step three: confirm order contains the productId
       include: [{model: Product}]
     })
     if (order) {
-      const orderItem = order.products.find(item => item.id === productId)
-        .orderProduct
-      const amount = orderItem.itemQty + 1
-      await orderItem.update({itemQty: amount})
-      res.status(201).send(order)
+      const product = order.products.find(item => item.id === productId)
+      if (product) {
+        orderItem = product.orderProduct
+        const newAmount = orderItem.itemQty + 1
+        await orderItem.update({itemQty: newAmount})
+        res.send(order)
+      } else {
+        res.status(404).send(`Cannot find product in order`)
+      }
     } else {
-      res
-        .status(404)
-        .send(`Unable to update itemQty for productId: ${productId}`)
+      res.status(404).send(`Cannot find order`)
     }
   } catch (err) {
     next(err)
   }
 })
 
-router.put('/not-purchased/decrease', async (req, res, next) => {
+// decrease by 1 itemQty of item in cart for logged in user
+router.put('/not-purchased/decrease/:productId', async (req, res, next) => {
   try {
-    const {productId} = req.body
+    let {productId} = req.params
+    productId = Number(productId)
     const order = await Order.findOne({
       where: {
         userId: req.user.id,
         isPurchased: false
       },
-      include: [{model: Product, where: {id: productId}}]
+      include: [{model: Product}]
     })
     if (order) {
-      const orderItem = order.products[0].orderProduct
-      const amount = orderItem.itemQty - 1
-      if (amount >= 1) {
-        await orderItem.update({itemQty: amount})
-        res.status(201).send(order)
+      const product = order.products.find(item => item.id === productId)
+      if (product) {
+        orderItem = product.orderProduct
+        const newAmount = orderItem.itemQty - 1
+        if (newAmount >= 1) {
+          await orderItem.update({itemQty: newAmount})
+          res.send(order)
+        } else {
+          res
+            .status(405)
+            .send(
+              `Cannot decrease amount less than 1. Suggest removing instead.`
+            )
+        }
       } else {
-        res.send(
-          `Cannot decrease itemQty < 1. Suggest removing product instead.`
-        )
+        res.status(404).send(`Cannot find product in order`)
       }
     } else {
-      res
-        .status(404)
-        .send(`Unable to update itemQty for productId: ${productId}`)
+      res.status(404).send(`Cannot find order`)
     }
   } catch (err) {
     next(err)

@@ -26,9 +26,9 @@ export const getCart = () => async dispatch => {
 
 export const increaseQty = productId => async dispatch => {
   try {
-    const {data} = await axios.put('/api/orders/not-purchased/increase', {
-      productId
-    })
+    const {data} = await axios.put(
+      `/api/orders/not-purchased/increase/${productId}`
+    )
     dispatch(increasedQty(data))
   } catch (err) {
     console.log('Error:', err)
@@ -37,9 +37,9 @@ export const increaseQty = productId => async dispatch => {
 
 export const decreaseQty = productId => async dispatch => {
   try {
-    const {data} = await axios.put('/api/orders/not-purchased/decrease', {
-      productId
-    })
+    const {data} = await axios.put(
+      `/api/orders/not-purchased/decrease/${productId}`
+    )
     dispatch(decreasedQty(data))
   } catch (err) {
     console.log('Error:', err)
