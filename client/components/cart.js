@@ -16,8 +16,6 @@ class Cart extends Component {
         <h2>Items in Cart</h2>
         {this.props.cart && this.props.cart.id ? (
           <div>
-            {console.log('cart:', this.props.cart)}
-            {console.log('user:', this.props.user)}
             {this.props.cart.products.map(cartItem => (
               <CartItem key={cartItem.id} cartItem={cartItem} />
             ))}

@@ -5,12 +5,14 @@ const GOT_CART = 'GOT_CART'
 const INCREASED_QTY = 'INCREASED_QTY'
 const DECREASED_QTY = 'DECREASED_QTY'
 const REMOVED_ITEM = 'REMOVED_ITEM'
+const LOGOUT_CLEAR_CART = 'LOGOUT_CLEAR_CART'
 
 // Action Creators
 const gotCart = cart => ({type: GOT_CART, cart})
 const increasedQty = cart => ({type: INCREASED_QTY, cart})
 const decreasedQty = cart => ({type: DECREASED_QTY, cart})
 const removedItem = cart => ({type: REMOVED_ITEM, cart})
+export const logoutClearCart = () => ({type: LOGOUT_CLEAR_CART})
 
 // Thunk Creators
 export const getCart = () => async dispatch => {
@@ -56,16 +58,18 @@ export const removeItem = productId => async dispatch => {
 }
 
 // Reducer
-export default function cartReducer(cart = {}, action) {
+export default function(cart = {}, action) {
   switch (action.type) {
     case GOT_CART:
       return action.cart
-    case increasedQty:
+    case INCREASED_QTY:
       return action.cart
-    case decreasedQty:
+    case DECREASED_QTY:
       return action.cart
-    case removedItem:
+    case REMOVED_ITEM:
       return action.cart
+    case LOGOUT_CLEAR_CART:
+      return {}
     default:
       return cart
   }

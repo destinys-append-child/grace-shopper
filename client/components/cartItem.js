@@ -41,9 +41,7 @@ const mapDispatchToProps = dispatch => {
     // increase: productId => dispatch(increaseQty(productId))
     clickHandler(evt) {
       const method = evt.target.name
-      console.log('evt.target.name', method)
       const productId = evt.target.parentNode.id
-      console.log('evt.target', productId)
       if (method === 'increase') {
         dispatch(increaseQty(productId))
       } else if (method === 'decrease') {
