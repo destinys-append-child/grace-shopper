@@ -7,13 +7,15 @@ module.exports = router
 router.get('/not-purchased', async (req, res, next) => {
   try {
     // should only be one cart per userId at a time
-    const cart = await Order.findOne({
-      where: {
-        userId: req.user.id,
-        isPurchased: false
-      },
-      include: [{model: Product}]
-    })
+    if (req.user.id) {
+      const cart = await Order.findOne({
+        where: {
+          userId: req.user.id,
+          isPurchased: false
+        },
+        include: [{model: Product}]
+      })
+    }
     if (cart) res.send(cart)
     else res.status(404).send(`No items in cart`)
   } catch (err) {
