@@ -60,7 +60,7 @@ class Navbar extends React.Component {
               <Button
                 type="button"
                 onClick={this.viewLoginForm}
-                class="ui button active"
+                className="ui button active"
               >
                 Login
               </Button>

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, YachtsList} from './components'
 import {me} from './store'
 import Home from './components/home'
+import allProducts from './components/allProducts'
 
 /**
  * COMPONENT
@@ -32,6 +33,7 @@ class Routes extends Component {
           </Switch>
         )} */}
         {/* Displays our Login component as a fallback */}
+        <Route path="/categories" component={allProducts} />
         <Route component={Home} />
       </Switch>
     )
