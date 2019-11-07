@@ -47,7 +47,7 @@ const boats = [
   {
     name: 'AMELS 242',
     imageUrl:
-      'https://www.moranyachts.com/wp-content/uploads/amels-242-for-sale-profile-moran-yachts.jpg',
+      'https://s3.amazonaws.com/boss.yatco.com/ForSale/Vessel/Photo/250672/medium_2591789.jpg',
     description:
       'The AMELS 242 yacht was designed by Tim Heywood and has quickly become one of the most recognizable designs afloat. Due to the AMELS Limited Edition approach, the owner can select their own Interior Designer for completely custom interiors. This AMELS 242 new construction project features an expansive 2,580 sq ft. dedicated Owner’s Deck with a spectacular forward-facing stateroom and spacious & light his-and-hers bathrooms. This deck also includes a refined Owner’s Office with separate entry, a French balcony, and a large aft lounge with shaded outdoor dining and a bar.The AMELS 242 also features an award-winning Beach Club and folding beach platform starboard. This is an amazing place to relax, enjoy a sauna, hammam, Jacuzzi, hair and nail salon or massage.',
     price: '110419594',
@@ -58,7 +58,7 @@ const boats = [
   {
     name: 'AQUARIUS',
     imageUrl:
-      'https://www.moranyachts.com/wp-content/uploads/feadship-aquarius-92m-for-sale-profile.jpg',
+      'https://www.superyachttimes.com/uploads/store/photo/96167/image/large-11ee25fdc030825b2d46c371eca7348e.jpg',
     description:
       'AQUARIUS is among the latest of incredible Feadship superyachts to benefit from this extraordinary heritage. The moment you see her, you know she is something very special. AQUARIUS begs you to explore the world and with her generous use of floor-to-ceiling windows, there is nothing you won’t miss. She has very clean lines inside and out, giving you the peace-of-mind her appearance will remain elegant and timeless well into the future. Through clever engineering, the interior spaces are voluminous and unobstructed, giving your family and friends more than enough space for fun and entertainment. While she offers an array of remarkable features, perhaps the most exceptional would be the bar situated at water level under her glass-bottom pool. When the party starts, the large pool can be transformed into a dancefloor. AQUARIUS has a helipad and a 32’ (10m) tender that is stored in a tender and toy garage. Her spacious swim platform offers direct access to the guest gym with fold-down terrace and a beach club adjacent to a massage and beauty salon. Her sundeck offers on deck dining and features a sumptuous jacuzzi.',
     price: '500242142',
