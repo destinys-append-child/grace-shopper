@@ -30,6 +30,7 @@ export const categoryThunk = categoryName => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/categories/${categoryName}`)
+      console.log('THIS IS CALLED')
       dispatch(getCategory(data))
     } catch (error) {
       console.log('PROBLEM WITH SINGLEYACHT THUNK', error)

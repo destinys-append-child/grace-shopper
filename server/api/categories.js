@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
 })
 router.get('/:categoryName', async (req, res, next) => {
   try {
-    const singleCategory = await Product.findOne({
+    const singleCategory = await Product.findAll({
       where: {
         category: req.params.categoryName
       }

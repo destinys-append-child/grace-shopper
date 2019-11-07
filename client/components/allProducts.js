@@ -1,14 +1,20 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {yachtsThunk} from '../store/allProducts'
+import {yachtsThunk, categoryThunk} from '../store/allProducts'
 import {Link} from 'react-router-dom'
 
 class YachtsList extends Component {
   constructor(props) {
     super(props)
+    console.log(props)
   }
+
   componentDidMount() {
-    this.props.getYachts()
+    if (!this.props.match.params.categoryName) {
+      this.props.getYachts()
+    } else {
+      this.props.getByCategory(this.props.match.params.categoryName)
+    }
   }
 
   render() {
@@ -25,7 +31,7 @@ class YachtsList extends Component {
             <div key={yacht.id}>
               <h2>{yacht.name}</h2>
               <Link to={`/product/${yacht.id}`}>
-                <img src={yacht.imgUrl} />
+                <img src={yacht.imageUrl} />
               </Link>
               <h3>{yacht.category}</h3>
             </div>
@@ -41,7 +47,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getYachts: () => dispatch(yachtsThunk())
+  getYachts: () => dispatch(yachtsThunk()),
+  getByCategory: categoryName => dispatch(categoryThunk(categoryName))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(YachtsList)
