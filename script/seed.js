@@ -8,44 +8,38 @@ const users = [
     firstName: 'Jeff',
     lastName: 'Bezos',
     email: 'BigJDawg@ggmail.com',
-    password: 'Password123',
-    address: '123 Yeehaw Way New York,New York'
+    password: 'Password123'
   },
 
   {
     firstName: 'Logan',
     lastName: 'LClossier',
     email: 'Xxda14u2NvxX@ggmail.com',
-    password: 'Password123',
-    address: '390 Party Blvd Berlin,Germany'
+    password: 'Password123'
   },
   {
     firstName: 'Don',
     lastName: 'Julio',
     email: 'ILuvYaats@ggmail.com',
-    password: 'Password123',
-    address: '123 yeehaw way NY,NY'
+    password: 'Password123'
   },
   {
     firstName: 'Richard',
     lastName: 'Long',
     email: 'CPT-R_LONG@ggmail.com',
-    password: 'Password123',
-    address: '1 Matey Place, Nassau,Bahamas'
+    password: 'Password123'
   },
   {
     firstName: 'Cornelius',
     lastName: 'Blackbeard',
     email: 'NotThatBlackbeard@ggmail.com',
-    password: 'Password123',
-    address: '421 Lasagna Lane Champagne,France'
+    password: 'Password123'
   },
   {
     firstName: 'Megan',
     lastName: 'Donnelly',
     email: 'megan@gmail.com',
-    password: 'test1234',
-    address: '123 Main Rd., New York, NY'
+    password: 'test1234'
   }
 ]
 

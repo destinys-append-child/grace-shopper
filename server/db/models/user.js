@@ -55,13 +55,6 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
     allowNull: false
-  },
-  address: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
   }
 })
 
