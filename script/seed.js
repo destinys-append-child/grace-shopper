@@ -146,21 +146,18 @@ const orders = [
   },
   {
     userId: 2,
-    orderCost: 20000,
-    shipping: '6 Main Street, New York City, NY, 09385',
-    billing: '7 Hanover Street, New York City, NY, 09385'
+    orderCost: 20000
   },
   {
     userId: 6,
-    orderCost: 14000,
-    shipping: '6 Broad Street, New York City, NY, 09385',
-    billing: '7 Hanover Street, New York City, NY, 09385'
+    orderCost: 14000
   },
   {
     userId: 6,
-    orderCost: 90000,
-    shipping: '55 Seventh Ave, New York City, NY, 09385',
-    billing: '21 Washington Square, New York City, NY, 09385'
+    orderCost: 992304235,
+    shipping: '15 Test Street, New York City, NY, 09385',
+    billing: '222 Fork Street, New York City, NY, 09385',
+    isPurchased: true
   }
 ]
 
