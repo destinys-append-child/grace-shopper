@@ -33,6 +33,8 @@ class Routes extends Component {
           </Switch>
         )} */}
         {/* Displays our Login component as a fallback */}
+        <Route exact path="/categories/:categoryName" component={YachtsList} />
+
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/categories" component={YachtsList} />
         <Route component={Home} />
