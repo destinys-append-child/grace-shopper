@@ -45,6 +45,8 @@ class Navbar extends React.Component {
             <div>
               {/* The navbar will show these links after you log in */}
               <Link to="/home">Home</Link>
+              <Link to="/cart">Cart </Link>
+              <Link to="/wishlist">Wishlist </Link>
               <a href="#" onClick={handleClick}>
                 Logout
               </a>
