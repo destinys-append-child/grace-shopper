@@ -141,22 +141,22 @@ const boats = [
 const orders = [
   {
     userId: 1,
-    orderCost: 7000,
+    orderCost: 2491200,
     shipping: '5 Hanover Street, New York City, NY, 09385',
     billing: '5 Hanover Street, New York City, NY, 09385',
     isPurchased: true
   },
   {
     userId: 2,
-    orderCost: 20000
+    orderCost: 5550000
   },
   {
     userId: 6,
-    orderCost: 14000
+    orderCost: 610661736
   },
   {
     userId: 6,
-    orderCost: 992304235,
+    orderCost: 25463024,
     shipping: '15 Test Street, New York City, NY, 09385',
     billing: '222 Fork Street, New York City, NY, 09385',
     isPurchased: true

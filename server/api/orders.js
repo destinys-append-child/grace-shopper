@@ -24,60 +24,100 @@ router.get('/not-purchased', async (req, res, next) => {
   }
 })
 
-// increase by 1 itemQty of item in cart for logged in user
-router.put('/not-purchased/increase', async (req, res, next) => {
+// generate a cart-like object for guests
+router.post('/not-purchased/guest', async (req, res, next) => {
   try {
-    const {productId} = req.body
-    // step one: confirm there is an orderId for the user
-    // step two: confirm the order has not been purchased
-    // step three: confirm order contains the productId
+    let cost = 0
+    let products = await Product.findAll()
+      .filter(product => {
+        return !!req.body[product.id]
+      })
+      .map(product => {
+        const quantity = req.body[product.id]
+        cost += product.price
+        product.dataValues.orderProduct = {
+          itemQty: quantity,
+          itemPrice: product.price
+        }
+        return product
+      })
+    let cart = {
+      id: 'guest',
+      orderCost: cost,
+      shipping: null,
+      billing: null,
+      isPurchased: false,
+      userId: null,
+      products
+    }
+    res.send(cart)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// increase by 1 itemQty of item in cart for logged in user
+router.put('/not-purchased/increase/:productId', async (req, res, next) => {
+  try {
+    let {productId} = req.params
+    productId = Number(productId)
     const order = await Order.findOne({
       where: {
         userId: req.user.id,
         isPurchased: false
       },
-      include: [{model: Product, where: {id: productId}}]
+      include: [{model: Product}]
     })
     if (order) {
-      const orderItem = order.products[0].orderProduct
-      const amount = orderItem.itemQty + 1
-      await orderItem.update({itemQty: amount})
-      res.status(201).send(order)
+      const product = order.products.find(item => item.id === productId)
+      if (product) {
+        orderItem = product.orderProduct
+        const newAmount = orderItem.itemQty + 1
+        await orderItem.update({itemQty: newAmount})
+        res.send(order)
+      } else {
+        res.status(404).send(`Cannot find product in order`)
+      }
     } else {
-      res
-        .status(404)
-        .send(`Unable to update itemQty for productId: ${productId}`)
+      res.status(404).send(`Cannot find order`)
     }
   } catch (err) {
     next(err)
   }
 })
 
-router.put('/not-purchased/decrease', async (req, res, next) => {
+// decrease by 1 itemQty of item in cart for logged in user
+router.put('/not-purchased/decrease/:productId', async (req, res, next) => {
   try {
-    const {productId} = req.body
+    let {productId} = req.params
+    productId = Number(productId)
     const order = await Order.findOne({
       where: {
         userId: req.user.id,
         isPurchased: false
       },
-      include: [{model: Product, where: {id: productId}}]
+      include: [{model: Product}]
     })
     if (order) {
-      const orderItem = order.products[0].orderProduct
-      const amount = orderItem.itemQty - 1
-      if (amount >= 1) {
-        await orderItem.update({itemQty: amount})
-        res.status(201).send(order)
+      const product = order.products.find(item => item.id === productId)
+      if (product) {
+        orderItem = product.orderProduct
+        const newAmount = orderItem.itemQty - 1
+        if (newAmount >= 1) {
+          await orderItem.update({itemQty: newAmount})
+          res.send(order)
+        } else {
+          res
+            .status(405)
+            .send(
+              `Cannot decrease amount less than 1. Suggest removing instead.`
+            )
+        }
       } else {
-        res.send(
-          `Cannot decrease itemQty < 1. Suggest removing product instead.`
-        )
+        res.status(404).send(`Cannot find product in order`)
       }
     } else {
-      res
-        .status(404)
-        .send(`Unable to update itemQty for productId: ${productId}`)
+      res.status(404).send(`Cannot find order`)
     }
   } catch (err) {
     next(err)
@@ -97,12 +137,18 @@ router.delete('/not-purchased/remove/:productId', async (req, res, next) => {
       include: [{model: Product}]
     })
     if (order) {
-      const orderItem = order.products.find(item => item.id === productId)
-        .orderProduct
-      await orderItem.destroy()
-      // Need to figure out how to send back updated cart,
-      // so that no refresh is required
-      res.sendStatus(204)
+      const product = order.products.find(item => item.id === productId)
+      if (product) {
+        orderItem = product.orderProduct
+        await orderItem.destroy()
+        const updatedOrder = await Order.findByPk(order.id, {
+          include: [{model: Product}]
+        })
+        // Using 201 because the order was updated
+        res.status(201).send(updatedOrder)
+      } else {
+        res.status(404).send(`Cannot find product in order`)
+      }
     } else {
       res.status(404).send(`Unable to remove from cart productId: ${productId}`)
     }
