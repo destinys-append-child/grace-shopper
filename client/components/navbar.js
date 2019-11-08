@@ -8,7 +8,7 @@ import {logoutClearCart} from '../store/cart'
 import {Login, Signup} from '../components'
 
 import './navbar.css'
-import {Button} from 'semantic-ui-react'
+import {Button, Icon} from 'semantic-ui-react'
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -24,14 +24,16 @@ class Navbar extends React.Component {
   viewLoginForm() {
     this.setState(prevState => ({
       ...prevState,
-      viewLogin: !prevState.viewLogin
+      viewLogin: !prevState.viewLogin,
+      viewSignup: false
     }))
   }
 
   viewSignupForm() {
     this.setState(prevState => ({
       ...prevState,
-      viewSignup: !prevState.viewSignup
+      viewSignup: !prevState.viewSignup,
+      viewLogin: false
     }))
   }
 
@@ -41,39 +43,41 @@ class Navbar extends React.Component {
     return (
       <div id="navbar">
         <h1>YACHTS DON'T STOP</h1>
-        <h4>A One Stop Shop for Yachts</h4>
-        <nav>
-          {isLoggedIn ? (
-            <div>
-              {/* The navbar will show these links after you log in */}
-              <Link to="/home">Home</Link>
-              <Link to="/cart">Cart </Link>
-              <Link to="/wishlist">Wishlist </Link>
-              <a href="#" onClick={handleClick}>
-                Logout
-              </a>
-            </div>
-          ) : (
-            <div>
-              {/* The navbar will show these links before you log in */}
-              <Link to="/cart">Cart </Link>
-              <Link to="/wishlist">Wishlist </Link>
-              <Button
-                type="button"
-                onClick={this.viewLoginForm}
-                className="ui button active"
-              >
-                Login
-              </Button>
-              {this.state.viewLogin ? <Login /> : null}
-              <button type="button" onClick={this.viewSignupForm}>
-                Signup
-              </button>
-              {this.state.viewSignup ? <Signup /> : null}
-              {/*INPUT SEARCH BAR*/}
-            </div>
-          )}
-        </nav>
+        <div className="right-nav">
+          <h4>A One Stop Shop for Yachts</h4>
+          <nav>
+            <Link to="/home">
+              <Icon name="home" color="white" />
+            </Link>
+            <Link to="/cart">
+              <Icon name="cart" color="white" />
+            </Link>
+            <Link to="/wishlist">
+              <Icon name="heart outline" color="white" />
+            </Link>
+            {isLoggedIn ? (
+              <div>
+                {/* The navbar will show these links after you log in */}
+                <a href="#" onClick={handleClick}>
+                  Logout
+                </a>
+              </div>
+            ) : (
+              <div>
+                {/* The navbar will show these links before you log in */}
+                <a href="#" onClick={this.viewLoginForm}>
+                  Login
+                </a>
+                {this.state.viewLogin ? <Login /> : null}
+                <a href="#" onClick={this.viewSignupForm}>
+                  Signup
+                </a>
+                {this.state.viewSignup ? <Signup /> : null}
+              </div>
+            )}
+            {/*INPUT SEARCH BAR*/}
+          </nav>
+        </div>
       </div>
     )
   }

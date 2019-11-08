@@ -31,7 +31,6 @@ router.post('/:id', async (req, res, next) => {
         return e.id == req.params.id
       })
       if (product) {
-        console.log(product)
         const orderItem = product.orderProduct
         orderItem.itemQty += req.body.quantity
         order.orderCost = product.price * orderItem.orderItem

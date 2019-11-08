@@ -17,6 +17,13 @@ const Product = db.define('product', {
       notEmpty: true
     }
   },
+  imageUrlAltView: {
+    type: Sequelize.TEXT,
+    // allowNull: false,
+    validation: {
+      notEmpty: true
+    }
+  },
   description: {
     type: Sequelize.TEXT,
     allowNull: false,

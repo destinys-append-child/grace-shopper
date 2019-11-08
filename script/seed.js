@@ -48,6 +48,8 @@ const boats = [
     name: 'AMELS 242',
     imageUrl:
       'https://s3.amazonaws.com/boss.yatco.com/ForSale/Vessel/Photo/250672/medium_2591789.jpg',
+    imageUrlAltView:
+      'https://www.charterworld.com/images/headers-6/perfection-01_01.jpg',
     description:
       'The AMELS 242 yacht was designed by Tim Heywood and has quickly become one of the most recognizable designs afloat. Due to the AMELS Limited Edition approach, the owner can select their own Interior Designer for completely custom interiors. This AMELS 242 new construction project features an expansive 2,580 sq ft. dedicated Owner’s Deck with a spectacular forward-facing stateroom and spacious & light his-and-hers bathrooms. This deck also includes a refined Owner’s Office with separate entry, a French balcony, and a large aft lounge with shaded outdoor dining and a bar.The AMELS 242 also features an award-winning Beach Club and folding beach platform starboard. This is an amazing place to relax, enjoy a sauna, hammam, Jacuzzi, hair and nail salon or massage.',
     price: '110419594',
@@ -67,7 +69,7 @@ const boats = [
     category: 'Super Yacht'
   },
   {
-    name: 'Alegria 67',
+    name: 'ALEGRIA 67',
     imageUrl:
       'https://www.catamarans-fountaine-pajot.com/wp-content/uploads/2019/02/alegria-67-fountaine-pajot-sailing-catamarans-img.jpg',
     description:
@@ -78,7 +80,7 @@ const boats = [
     category: 'Catamaran'
   },
   {
-    name: "85' Lazzara",
+    name: "85' LAZZARA",
     imageUrl:
       'https://imt.boatwizard.com/images/1/83/35/6948335_20190104114204009_1_XLARGE.jpg',
     description:
@@ -89,7 +91,7 @@ const boats = [
     category: 'Catamaran'
   },
   {
-    name: 'Jessy 1',
+    name: 'JESSY 1',
     imageUrl:
       'https://cdn.yatco.com/images/vessels2/239/239950/large_1817082.jpg?rev=1',
     description:
@@ -139,22 +141,22 @@ const boats = [
 const orders = [
   {
     userId: 1,
-    orderCost: 7000,
+    orderCost: 2491200,
     shipping: '5 Hanover Street, New York City, NY, 09385',
     billing: '5 Hanover Street, New York City, NY, 09385',
     isPurchased: true
   },
   {
     userId: 2,
-    orderCost: 20000
+    orderCost: 5550000
   },
   {
     userId: 6,
-    orderCost: 14000
+    orderCost: 610661736
   },
   {
     userId: 6,
-    orderCost: 992304235,
+    orderCost: 25463024,
     shipping: '15 Test Street, New York City, NY, 09385',
     billing: '222 Fork Street, New York City, NY, 09385',
     isPurchased: true
