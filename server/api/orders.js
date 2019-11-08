@@ -18,7 +18,7 @@ router.get('/not-purchased', async (req, res, next) => {
       include: [{model: Product}]
     })
     if (cart) res.send(cart)
-    else res.status(403).send(`No items in cart`)
+    else res.send(`No items in cart`)
   } catch (err) {
     next(err)
   }

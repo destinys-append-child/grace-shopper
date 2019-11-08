@@ -5,6 +5,7 @@ import {increaseQty, decreaseQty, removeItem} from '../store/cart'
 
 function CartItem(props) {
   const {cartItem, clickHandler} = props
+
   return (
     <div key={cartItem.id} className="cart-item">
       <a href={`/products/${cartItem.id}`}>
@@ -38,7 +39,6 @@ function CartItem(props) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // increase: productId => dispatch(increaseQty(productId))
     clickHandler(evt) {
       const method = evt.target.name
       const productId = evt.target.parentNode.id
@@ -49,7 +49,10 @@ const mapDispatchToProps = dispatch => {
       } else if (method === 'remove') {
         dispatch(removeItem(productId))
       }
-    }
+    },
+    increase: () => increaseQty(productId),
+    decrease: () => decreaseQty(productId),
+    remove: () => removeItem(productId)
   }
 }
 
