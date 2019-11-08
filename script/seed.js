@@ -67,7 +67,7 @@ const boats = [
     category: 'Super Yacht'
   },
   {
-    name: 'Alegria 67',
+    name: 'ALEGRIA 67',
     imageUrl:
       'https://www.catamarans-fountaine-pajot.com/wp-content/uploads/2019/02/alegria-67-fountaine-pajot-sailing-catamarans-img.jpg',
     description:
@@ -78,7 +78,7 @@ const boats = [
     category: 'Catamaran'
   },
   {
-    name: "85' Lazzara",
+    name: "85' LAZZARA",
     imageUrl:
       'https://imt.boatwizard.com/images/1/83/35/6948335_20190104114204009_1_XLARGE.jpg',
     description:
@@ -89,7 +89,7 @@ const boats = [
     category: 'Catamaran'
   },
   {
-    name: 'Jessy 1',
+    name: 'JESSY 1',
     imageUrl:
       'https://cdn.yatco.com/images/vessels2/239/239950/large_1817082.jpg?rev=1',
     description:

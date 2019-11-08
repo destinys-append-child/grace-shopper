@@ -67,15 +67,15 @@ class YachtsList extends Component {
           <br />
           <br />
         </nav>
-        <h1>THESE ARE ALL OUR YACHTS</h1>
-        <div id="yachtsContainer">
+        {/* <h1>THESE ARE ALL OUR YACHTS</h1> */}
+        <div id="yachtsContainer" className="ui grid">
           {yachts.map(yacht => (
             <div key={yacht.id} className="yachtContainer">
-              <h2>{yacht.name}</h2>
               <Link to={`/products/${yacht.id}`}>
-                <img src={yacht.imageUrl} />
+                <img src={yacht.imageUrl} className="image" />
+                <div className="text">{yacht.name}</div>
               </Link>
-              <h3>{yacht.category}</h3>
+              {/* <h3>{yacht.category}</h3> */}
             </div>
           ))}
         </div>
