@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types' // need this?
 import {connect} from 'react-redux'
-import {getSingleProductThunk} from '../store/singleProduct'
+import {getSingleProductThunk, userAddToCartThunk} from '../store/singleProduct'
 
 class DisconnectedSingleProduct extends Component {
   constructor() {
@@ -13,19 +13,25 @@ class DisconnectedSingleProduct extends Component {
     this.props.getSingleProduct(id)
   }
   addToCart() {
-    let cart = localStorage.getItem('cart')
-    console.log(cart)
-    if (cart) {
-      cart = JSON.parse(cart)
-      if (cart[this.props.singleProduct.id]) cart[this.props.singleProduct.id]++
-      else {
+    if (this.props.user.id) {
+      let cart = window.localStorage.getItem('cart')
+      console.log(cart)
+      if (cart) {
+        cart = JSON.parse(cart)
+        if (cart[this.props.singleProduct.id])
+          cart[this.props.singleProduct.id]++
+        else {
+          cart[this.props.singleProduct.id] = 1
+        }
+        window.localStorage.setItem('cart', JSON.stringify(cart))
+      } else {
+        let cart = {}
         cart[this.props.singleProduct.id] = 1
+        window.localStorage.setItem('cart', JSON.stringify(cart))
       }
-      window.localStorage.setItem('cart', JSON.stringify(cart))
     } else {
-      let cart = {}
-      cart[this.props.singleProduct.id] = 1
-      window.localStorage.setItem('cart', JSON.stringify(cart))
+      // userAddToCartThunk
+      return 'hello'
     }
     console.log(JSON.parse(window.localStorage.getItem('cart')))
   }
