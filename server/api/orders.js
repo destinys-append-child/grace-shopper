@@ -42,6 +42,7 @@ router.post('/not-purchased/guest', async (req, res, next) => {
         return product
       })
     let cart = {
+      id: 'guest',
       orderCost: cost,
       shipping: null,
       billing: null,

@@ -2,13 +2,14 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 import {me} from '../store/user'
-import {getCart} from '../store/cart'
+import {getCart, getGuestCart} from '../store/cart'
 import CartItem from './cartItem'
 import './cart.css'
 
 class Cart extends Component {
   componentDidMount() {
     this.props.isLoggedIn && this.props.fetchCart()
+    !this.props.isLoggedIn && this.props.fetchGuestCart()
   }
   render() {
     return (
@@ -40,7 +41,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchUser: () => dispatch(me()),
-    fetchCart: () => dispatch(getCart())
+    fetchCart: () => dispatch(getCart()),
+    fetchGuestCart: () => dispatch(getGuestCart())
   }
 }
 

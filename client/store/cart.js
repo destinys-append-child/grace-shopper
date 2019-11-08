@@ -28,7 +28,13 @@ export const getCart = () => async dispatch => {
 
 export const getGuestCart = () => async dispatch => {
   try {
-    const cartObj = JSON.parse(localStorage.getItem('cart'))
+    const localCart = JSON.parse(localStorage.getItem('cart'))
+    console.log('----------> localCart:', localCart)
+    const {data} = await axios.post(
+      '/api/orders/not-purchased/guest',
+      localCart
+    )
+    dispatch(gotGuestCart(data))
   } catch (err) {
     console.log('Error:', err)
   }
@@ -71,6 +77,8 @@ export const removeItem = productId => async dispatch => {
 export default function(cart = {}, action) {
   switch (action.type) {
     case GOT_CART:
+      return action.cart
+    case GOT_GUEST_CART:
       return action.cart
     case INCREASED_QTY:
       return action.cart
