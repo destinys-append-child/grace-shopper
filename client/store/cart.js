@@ -2,6 +2,7 @@ import axios from 'axios'
 
 // Action Types
 const GOT_CART = 'GOT_CART'
+const GOT_GUEST_CART = 'GOT_GUEST_CART'
 const INCREASED_QTY = 'INCREASED_QTY'
 const DECREASED_QTY = 'DECREASED_QTY'
 const REMOVED_ITEM = 'REMOVED_ITEM'
@@ -9,6 +10,7 @@ const LOGOUT_CLEAR_CART = 'LOGOUT_CLEAR_CART'
 
 // Action Creators
 const gotCart = cart => ({type: GOT_CART, cart})
+const gotGuestCart = cart => ({type: GOT_GUEST_CART, cart})
 const increasedQty = cart => ({type: INCREASED_QTY, cart})
 const decreasedQty = cart => ({type: DECREASED_QTY, cart})
 const removedItem = cart => ({type: REMOVED_ITEM, cart})
@@ -19,6 +21,14 @@ export const getCart = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/orders/not-purchased')
     dispatch(gotCart(data))
+  } catch (err) {
+    console.log('Error:', err)
+  }
+}
+
+export const getGuestCart = () => async dispatch => {
+  try {
+    const cartObj = JSON.parse(localStorage.getItem('cart'))
   } catch (err) {
     console.log('Error:', err)
   }

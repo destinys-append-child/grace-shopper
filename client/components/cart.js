@@ -8,7 +8,7 @@ import './cart.css'
 
 class Cart extends Component {
   componentDidMount() {
-    this.props.fetchCart()
+    this.props.isLoggedIn && this.props.fetchCart()
   }
   render() {
     return (
@@ -32,8 +32,8 @@ class Cart extends Component {
 
 const mapStateToProps = state => {
   return {
-    cart: state.cart,
-    user: state.user
+    isLoggedIn: !!state.user.id,
+    cart: state.cart
   }
 }
 
