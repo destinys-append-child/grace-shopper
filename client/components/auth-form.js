@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 
+import './auth-form.css'
+
 /**
  * COMPONENT
  */
@@ -10,38 +12,34 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
+    <div id="form">
+      <form onSubmit={handleSubmit} name={name} className="ui mini form">
         <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
+          <label htmlFor="email">{/* <small>Email</small> */}</label>
+          <input name="email" type="text" placeholder="email" />
         </div>
         <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
+          <label htmlFor="password">{/* <small>Password</small> */}</label>
+          <input name="password" type="password" placeholder="password" />
         </div>
         {name === 'signup' && (
           <div>
             <div>
               <label htmlFor="firstName">
-                <small>First Name</small>
+                {/* <small>First Name</small> */}
               </label>
-              <input name="firstName" type="text" />
+              <input name="firstName" type="text" placeholder="First Name" />
             </div>
             <div>
-              <label htmlFor="lastName">
-                <small>Last Name</small>
-              </label>
-              <input name="lastName" type="text" />
+              <label htmlFor="lastName">{/* <small>Last Name</small> */}</label>
+              <input name="lastName" type="text" placeholder="Last Name" />
             </div>
           </div>
         )}
         <div>
-          <button type="submit">{displayName}</button>
+          <button type="submit" className="mini ui button">
+            {displayName}
+          </button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>

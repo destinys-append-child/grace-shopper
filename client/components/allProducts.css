@@ -1,4 +1,4 @@
-.overlay img {
+/* .overlay img {
   width: 777px;
   height: 777px;
   transition: transform 0.7s;
@@ -20,6 +20,36 @@
 .overlay h5:hover {
   visibility: hidden;
   opacity: 1;
+   */
+#yachtsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.yachtContainer {
+  /* flex: 33.33%;
+  padding: 5px;
+  text-align: center; */
+  position: relative;
+}
+
+.yachtContainer .image {
+  display: block;
+  width: 360px;
+  height: 200px;
+  transition: transform 0.2s;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.yachtContainer .image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.yachtContainer .text {
+  font-size: 15px;
 }
 
 body {
@@ -27,19 +57,18 @@ body {
 }
 .navBarItem {
   margin: 1em;
-  font-size: 200%;
-  color: rgb(104, 193, 248);
+  /* font-size: 200%; */
+  /* color: rgb(104, 193, 248); */
+  color: white;
   text-shadow: black;
 }
+
 #allProductsNavBar {
-  background: rgb(211, 211, 211, 0.8);
-}
-#yachtsContainer {
+  /* background: rgb(211, 211, 211, 0.8); */
+  background: #044f88;
+  height: 3em;
   display: flex;
-  flex-wrap: wrap;
-}
-.yachtContainer {
-  flex: 33.33%;
-  padding: 5px;
-  text-align: center;
+  justify-content: center;
+  margin: 1em;
+  align-items: center;
 }
