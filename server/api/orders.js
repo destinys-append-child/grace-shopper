@@ -24,6 +24,37 @@ router.get('/not-purchased', async (req, res, next) => {
   }
 })
 
+// generate a cart-like object for guests
+router.post('/not-purchased/guest', async (req, res, next) => {
+  try {
+    let cost = 0
+    let products = await Product.findAll()
+      .filter(product => {
+        return !!req.body[product.id]
+      })
+      .map(product => {
+        const quantity = req.body[product.id]
+        cost += product.price
+        product.dataValues.orderProduct = {
+          itemQty: quantity,
+          itemPrice: product.price
+        }
+        return product
+      })
+    let cart = {
+      orderCost: cost,
+      shipping: null,
+      billing: null,
+      isPurchased: false,
+      userId: null,
+      products
+    }
+    res.send(cart)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // increase by 1 itemQty of item in cart for logged in user
 router.put('/not-purchased/increase/:productId', async (req, res, next) => {
   try {
