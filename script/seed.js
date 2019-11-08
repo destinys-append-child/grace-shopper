@@ -48,6 +48,8 @@ const boats = [
     name: 'AMELS 242',
     imageUrl:
       'https://s3.amazonaws.com/boss.yatco.com/ForSale/Vessel/Photo/250672/medium_2591789.jpg',
+    imageUrlAltView:
+      'https://www.charterworld.com/images/headers-6/perfection-01_01.jpg',
     description:
       'The AMELS 242 yacht was designed by Tim Heywood and has quickly become one of the most recognizable designs afloat. Due to the AMELS Limited Edition approach, the owner can select their own Interior Designer for completely custom interiors. This AMELS 242 new construction project features an expansive 2,580 sq ft. dedicated Owner’s Deck with a spectacular forward-facing stateroom and spacious & light his-and-hers bathrooms. This deck also includes a refined Owner’s Office with separate entry, a French balcony, and a large aft lounge with shaded outdoor dining and a bar.The AMELS 242 also features an award-winning Beach Club and folding beach platform starboard. This is an amazing place to relax, enjoy a sauna, hammam, Jacuzzi, hair and nail salon or massage.',
     price: '110419594',

@@ -4,6 +4,9 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getSingleProductThunk} from '../store/singleProduct'
 import {yachtsThunk, categoryThunk} from '../store/allProducts'
+import {Icon} from 'semantic-ui-react'
+
+import './singleProduct.css'
 
 class DisconnectedSingleProduct extends Component {
   constructor() {
@@ -82,26 +85,35 @@ class DisconnectedSingleProduct extends Component {
           <br />
           <br />
         </nav>
-        <br />
-        <br />
-        <img src={yacht.imageUrl} />
-        <h2>{yacht.name}</h2>
-        <h3>${yacht.price}</h3>
-        <br />
-        <p>{yacht.description}</p>
-
-        {yacht.quantity && yacht.quantity > 0 ? (
-          <div>
-            <button id="addToCart" onClick={this.addToCart}>
-              Add To Cart
-            </button>
-            <input type="number" name="quantity" max={yacht.quantity} />
+        {/* <br />
+        <br /> */}
+        <div id="singleYacht">
+          <div id="ui card">
+            <div className="ui slide masked reveal image">
+              <img src={yacht.imageUrl} className="visible content" />
+              <img src={yacht.imageUrlAltView} className="hidden content" />
+            </div>
+            <div className="content">
+              <a className="header">{yacht.name}</a>
+              <div className="meta">
+                ${yacht.price}
+                {yacht.description}
+              </div>
+            </div>
+            {yacht.quantity && yacht.quantity > 0 ? (
+              <div>
+                <button type="button" id="addToCart" onClick={this.addToCart}>
+                  Add To Cart
+                </button>
+                <input type="number" name="quantity" max={yacht.quantity} />
+              </div>
+            ) : (
+              <div>
+                <h1>Sorry Boss, SOLD OUT</h1>
+              </div>
+            )}
           </div>
-        ) : (
-          <div>
-            <h1>Sorry Boss, SOLD OUT</h1>
-          </div>
-        )}
+        </div>
       </div>
     ) : (
       'Some Type Of 404 or Sum'
