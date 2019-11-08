@@ -73,8 +73,12 @@ class YachtsList extends Component {
             <div key={yacht.id} className="yachtContainer">
               <h2>{yacht.name}</h2>
               <Link to={`/products/${yacht.id}`}>
-                <img src={yacht.imageUrl} />
+                <div className="overlay">
+                  <img src={yacht.imageUrl} />
+                  <h5>TEXT!</h5>
+                </div>
               </Link>
+
               <h3>{yacht.category}</h3>
             </div>
           ))}
