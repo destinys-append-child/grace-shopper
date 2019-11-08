@@ -105,12 +105,18 @@ router.delete('/not-purchased/remove/:productId', async (req, res, next) => {
       include: [{model: Product}]
     })
     if (order) {
-      const orderItem = order.products.find(item => item.id === productId)
-        .orderProduct
-      await orderItem.destroy()
-      // Need to figure out how to send back updated cart,
-      // so that no refresh is required
-      res.sendStatus(204)
+      const product = order.products.find(item => item.id === productId)
+      if (product) {
+        orderItem = product.orderProduct
+        await orderItem.destroy()
+        const updatedOrder = await Order.findByPk(order.id, {
+          include: [{model: Product}]
+        })
+        // Using 201 because the order was updated
+        res.status(201).send(updatedOrder)
+      } else {
+        res.status(404).send(`Cannot find product in order`)
+      }
     } else {
       res.status(404).send(`Unable to remove from cart productId: ${productId}`)
     }

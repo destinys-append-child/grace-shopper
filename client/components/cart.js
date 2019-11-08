@@ -14,7 +14,9 @@ class Cart extends Component {
     return (
       <div className="cart">
         <h2>Items in Cart</h2>
-        {this.props.cart && this.props.cart.id ? (
+        {this.props.cart &&
+        this.props.cart.id &&
+        this.props.cart.products.length ? (
           <div>
             {this.props.cart.products.map(cartItem => (
               <CartItem key={cartItem.id} cartItem={cartItem} />
