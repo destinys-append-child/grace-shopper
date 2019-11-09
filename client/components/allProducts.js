@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {yachtsThunk, categoryThunk} from '../store/allProducts'
-import {Link, Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 import './allProducts.css'
 
