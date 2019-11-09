@@ -8,7 +8,8 @@ import {
   UserHome,
   YachtsList,
   SingleProduct,
-  Cart
+  Cart,
+  Checkout
 } from './components'
 import {me} from './store'
 import Home from './components/home'
@@ -45,6 +46,7 @@ class Routes extends Component {
         <Route path="/categories/:categoryName" component={YachtsList} />
         <Route path="/categories" component={YachtsList} />
         <Route path="/cart" component={Cart} />
+        <Route path="/checkout" component={Checkout} />
         <Route component={Home} />
       </Switch>
     )

@@ -5,6 +5,7 @@ import {me} from '../store/user'
 import {getCart, getGuestCart} from '../store/cart'
 import CartItem from './cartItem'
 import './cart.css'
+import {Link} from 'react-router-dom'
 
 class Cart extends Component {
   componentDidMount() {
@@ -26,6 +27,9 @@ class Cart extends Component {
         ) : (
           <h3>No items in cart.</h3>
         )}
+        <Link to="/checkout">
+          <button type="button">CHECKOUT</button>
+        </Link>
       </div>
     )
   }
