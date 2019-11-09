@@ -88,24 +88,30 @@ class DisconnectedSingleProduct extends Component {
         {/* <br />
         <br /> */}
         <div id="singleYacht">
-          <div id="ui card">
+          <div className="ui card">
             <div className="ui slide masked reveal image">
               <img src={yacht.imageUrl} className="visible content" />
               <img src={yacht.imageUrlAltView} className="hidden content" />
             </div>
             <div className="content">
-              <a className="header">{yacht.name}</a>
-              <div className="meta">
-                ${yacht.price}
-                {yacht.description}
+              <a className="center aligned header">{yacht.name}</a>
+              <br />
+              <div className="center aligned description">
+                <p>$ {yacht.price}</p>
+                <p>{yacht.description}</p>
               </div>
             </div>
             {yacht.quantity && yacht.quantity > 0 ? (
-              <div>
+              <div className="ui bottom attached button">
                 <button type="button" id="addToCart" onClick={this.addToCart}>
                   Add To Cart
                 </button>
-                <input type="number" name="quantity" max={yacht.quantity} />
+                <input
+                  type="number"
+                  name="quantity"
+                  min="0"
+                  max={yacht.quantity}
+                />
               </div>
             ) : (
               <div>

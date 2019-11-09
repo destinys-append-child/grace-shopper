@@ -47,13 +47,13 @@ class Navbar extends React.Component {
           <h4>A One Stop Shop for Yachts</h4>
           <nav>
             <Link to="/home">
-              <Icon name="home" color="white" />
+              <Icon name="home" />
             </Link>
             <Link to="/cart">
-              <Icon name="cart" color="white" />
+              <Icon name="cart" />
             </Link>
             <Link to="/wishlist">
-              <Icon name="heart outline" color="white" />
+              <Icon name="heart outline" />
             </Link>
             {isLoggedIn ? (
               <div>

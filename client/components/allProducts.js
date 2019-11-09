@@ -64,18 +64,16 @@ class YachtsList extends Component {
           >
             All Yachts
           </Link>
-          <br />
-          <br />
         </nav>
-        {/* <h1>THESE ARE ALL OUR YACHTS</h1> */}
         <div id="yachtsContainer" className="ui grid">
           {yachts.map(yacht => (
             <div key={yacht.id} className="yachtContainer">
               <Link to={`/products/${yacht.id}`}>
-                <img src={yacht.imageUrl} className="image" />
-                <div className="text">{yacht.name}</div>
+                <img src={yacht.imageUrl} className="yacht image" />
+                <div className="hover layer top">
+                  <div className="hover text">{yacht.name}</div>
+                </div>
               </Link>
-              {/* <h3>{yacht.category}</h3> */}
             </div>
           ))}
         </div>
