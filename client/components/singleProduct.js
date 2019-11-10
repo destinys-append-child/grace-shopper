@@ -89,23 +89,33 @@ class DisconnectedSingleProduct extends Component {
         <br /> */}
         <div id="singleYacht">
           <div className="ui card">
-            <div className="ui slide masked reveal image">
-              <img src={yacht.imageUrl} className="visible content" />
-              <img src={yacht.imageUrlAltView} className="hidden content" />
-            </div>
+            {yacht.imageUrlAltView ? (
+              <div className="ui slide masked reveal image">
+                <img src={yacht.imageUrl} className="visible content" />
+                <img src={yacht.imageUrlAltView} className="hidden content" />
+              </div>
+            ) : (
+              <div className="image">
+                <img src={yacht.imageUrl} />
+              </div>
+            )}
             <div className="content">
               <a className="center aligned header">{yacht.name}</a>
               <br />
               <div className="center aligned description">
-                <p>$ {yacht.price}</p>
+                <p>$ {yacht.price.toLocaleString()} USD</p>
                 <p>{yacht.description}</p>
               </div>
             </div>
             {yacht.quantity && yacht.quantity > 0 ? (
-              <div className="ui bottom attached button">
-                <button type="button" id="addToCart" onClick={this.addToCart}>
-                  Add To Cart
-                </button>
+              <div
+                className="ui bottom attached button"
+                id="addToCart"
+                onClick={this.addToCart}
+              >
+                {/* <button type="button" > */}
+                Add To Cart
+                {/* </button> */}
                 <input
                   type="number"
                   name="quantity"

@@ -1,8 +1,18 @@
 #singleYacht {
   display: flex;
   justify-content: center;
+  height: 750px;
 }
 
 #singleYacht .ui.card {
   width: 900px;
+}
+
+#singleYacht img {
+  width: 900px;
+  height: 540px;
+}
+
+#singleYacht div.content {
+  height: 170px;
 }
