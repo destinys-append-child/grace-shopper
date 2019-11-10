@@ -3,34 +3,39 @@ import {connect} from 'react-redux'
 
 import {increaseQty, decreaseQty, removeItem} from '../store/cart'
 
+import './cartItem.css'
+
 function CartItem(props) {
   const {cartItem, clickHandler} = props
   return (
     <div key={cartItem.id} className="cart-item">
-      <a href={`/products/${cartItem.id}`}>
-        <h3 className="product-name">{cartItem.name}</h3>
-        <img className="product-image" src={cartItem.imageUrl} />
-      </a>
-      <div id={cartItem.id}>
-        <h3 className="product-price">
+      <div className="ui card">
+        <a href={`/products/${cartItem.id}`}>{cartItem.name}</a>
+        {/* <h3 className="product-name">{cartItem.name}</h3> */}
+        <a href={`/products/${cartItem.id}`}>
+          <img className="product-image" src={cartItem.imageUrl} />
+        </a>
+        {/* <div id={cartItem.id}> */}
+        <div className="product-price">
           Price:{' '}
           {new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD'
           }).format(cartItem.price)}
-        </h3>
-        <h3 className="product-qty">
-          Quantity: {cartItem.orderProduct.itemQty}
-        </h3>
-        <button type="button" name="increase" onClick={clickHandler}>
-          +
-        </button>
-        <button type="button" name="decrease" onClick={clickHandler}>
-          -
-        </button>
-        <button type="button" name="remove" onClick={clickHandler}>
-          Remove
-        </button>
+        </div>
+        <div className="product-qty">Qty: {cartItem.orderProduct.itemQty}</div>
+        <div className="cart adjust">
+          <button type="button" name="increase" onClick={clickHandler}>
+            +
+          </button>
+          <button type="button" name="decrease" onClick={clickHandler}>
+            -
+          </button>
+          <button type="button" name="remove" onClick={clickHandler}>
+            Remove
+          </button>
+        </div>
+        {/* </div> */}
       </div>
     </div>
   )

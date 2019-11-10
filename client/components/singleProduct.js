@@ -85,8 +85,6 @@ class DisconnectedSingleProduct extends Component {
           <br />
           <br />
         </nav>
-        {/* <br />
-        <br /> */}
         <div id="singleYacht">
           <div className="ui card">
             {yacht.imageUrlAltView ? (

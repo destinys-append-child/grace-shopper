@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   height: 750px;
+  /* padding: 5px; */
 }
 
 #singleYacht .ui.card {
@@ -14,7 +15,7 @@
 }
 
 #singleYacht div.content {
-  height: 170px;
+  /* height: 170px; */
 }
 
 #singleYacht .extra.content {

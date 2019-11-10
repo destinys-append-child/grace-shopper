@@ -14,7 +14,7 @@ class Cart extends Component {
   render() {
     return (
       <div className="cart">
-        <h2>Items in Cart</h2>
+        <h2>MY CART</h2>
         {this.props.cart &&
         this.props.cart.id &&
         this.props.cart.products.length ? (
