@@ -89,9 +89,9 @@ export const decreaseGuestQty = productId => async dispatch => {
       if (localCart[productId] && localCart[productId] > 1) {
         localCart[productId]--
         window.localStorage.setItem('cart', JSON.stringify(localCart))
+        dispatch(decreasedGuestQty(productId))
       }
     }
-    dispatch(decreasedGuestQty(productId))
   } catch (err) {
     console.log('Error:', err)
   }
@@ -137,26 +137,36 @@ export default function(cart = {}, action) {
     case REMOVED_ITEM:
       return action.cart
     case INCREASED_GUEST_QTY:
+      let newCost = cart.orderCost
       const newProducts = cart.products.map(product => {
         if (product.id === Number(action.productId)) {
           product.orderProduct.itemQty++
+          newCost += product.price
         }
         return product
       })
-      return {...cart, products: newProducts}
+      return {...cart, orderCost: newCost, products: newProducts}
     case DECREASED_GUEST_QTY:
+      let newTotal = cart.orderCost
       const newProds = cart.products.map(product => {
         if (product.id === Number(action.productId)) {
           product.orderProduct.itemQty--
+          newTotal -= product.price
         }
         return product
       })
-      return {...cart, products: newProds}
+      return {...cart, orderCost: newTotal, products: newProds}
     case REMOVED_GUEST_ITEM:
+      let total = cart.orderCost
       const filteredProds = cart.products.filter(product => {
-        return product.id !== Number(action.productId)
+        if (product.id === Number(action.productId)) {
+          total -= product.price * product.orderProduct.itemQty
+          return false
+        } else {
+          return true
+        }
       })
-      return {...cart, products: filteredProds}
+      return {...cart, orderCost: total, products: filteredProds}
     case LOGOUT_CLEAR_CART:
       return {}
     default:

@@ -34,7 +34,7 @@ router.post('/not-purchased/guest', async (req, res, next) => {
       })
       .map(product => {
         const quantity = req.body[product.id]
-        cost += product.price
+        cost += product.price * quantity
         product.dataValues.orderProduct = {
           itemQty: quantity,
           itemPrice: product.price
@@ -75,8 +75,10 @@ router.put('/not-purchased/increase/:productId', async (req, res, next) => {
       const product = order.products.find(item => item.id === productId)
       if (product) {
         orderItem = product.orderProduct
-        const newAmount = orderItem.itemQty + 1
-        await orderItem.update({itemQty: newAmount})
+        const newQuantity = orderItem.itemQty + 1
+        await orderItem.update({itemQty: newQuantity})
+        const newTotal = order.orderCost + product.price
+        await order.update({orderCost: newTotal})
         res.send(order)
       } else {
         res.status(404).send(`Cannot find product in order`)
@@ -108,9 +110,11 @@ router.put('/not-purchased/decrease/:productId', async (req, res, next) => {
       const product = order.products.find(item => item.id === productId)
       if (product) {
         orderItem = product.orderProduct
-        const newAmount = orderItem.itemQty - 1
-        if (newAmount >= 1) {
-          await orderItem.update({itemQty: newAmount})
+        const newQuantity = orderItem.itemQty - 1
+        if (newQuantity >= 1) {
+          await orderItem.update({itemQty: newQuantity})
+          const newTotal = order.orderCost - product.price
+          await order.update({orderCost: newTotal})
           res.send(order)
         } else {
           res
@@ -148,8 +152,11 @@ router.delete('/not-purchased/remove/:productId', async (req, res, next) => {
     if (order) {
       const product = order.products.find(item => item.id === productId)
       if (product) {
-        orderItem = product.orderProduct
+        const orderItem = product.orderProduct
+        const quantity = orderItem.itemQty
         await orderItem.destroy()
+        const newTotal = order.orderCost - product.price * quantity
+        await order.update({orderCost: newTotal})
         const updatedOrder = await Order.findByPk(order.id, {
           include: [{model: Product}]
         })

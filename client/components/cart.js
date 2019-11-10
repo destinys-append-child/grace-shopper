@@ -26,6 +26,13 @@ class Cart extends Component {
                 quantity={cartItem.orderProduct.itemQty}
               />
             ))}
+            <h3 className="order-cost">
+              Total:{' '}
+              {new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+              }).format(this.props.cart.orderCost)}
+            </h3>
           </div>
         ) : (
           <h3>No items in cart.</h3>
