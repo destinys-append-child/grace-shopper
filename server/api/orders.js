@@ -76,10 +76,20 @@ router.put('/not-purchased/increase/:productId', async (req, res, next) => {
       if (product) {
         orderItem = product.orderProduct
         const newQuantity = orderItem.itemQty + 1
-        await orderItem.update({itemQty: newQuantity})
-        const newTotal = order.orderCost + product.price
-        await order.update({orderCost: newTotal})
-        res.send(order)
+        if (newQuantity <= product.quantity) {
+          await orderItem.update({itemQty: newQuantity})
+          const newTotal = order.orderCost + product.price
+          await order.update({orderCost: newTotal})
+          res.send(order)
+        } else {
+          res
+            .status(405)
+            .send(
+              `Quantity cannot exceed  ${product.quantity} for product id: ${
+                product.id
+              }`
+            )
+        }
       } else {
         res.status(404).send(`Cannot find product in order`)
       }
