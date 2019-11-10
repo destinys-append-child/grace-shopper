@@ -45,7 +45,6 @@ function CartItem(props) {
       }
     }
   }
-  console.log('is cartItem rendering?', cartItem)
   return (
     <div key={cartItem.id} className="cart-item">
       <a href={`/products/${cartItem.id}`}>

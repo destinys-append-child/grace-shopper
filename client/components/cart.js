@@ -12,7 +12,6 @@ class Cart extends Component {
     !this.props.isLoggedIn && this.props.fetchGuestCart()
   }
   render() {
-    console.log('is cart rendering?', this.props.cart)
     return (
       <div className="cart">
         <h2>Items in Cart</h2>
@@ -38,7 +37,6 @@ class Cart extends Component {
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: !!state.user.id,
     cart: state.cart
   }
 }

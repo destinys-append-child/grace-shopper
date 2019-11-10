@@ -143,7 +143,6 @@ export default function(cart = {}, action) {
         }
         return product
       })
-      console.log('guest - increase', {...cart, products: newProducts})
       return {...cart, products: newProducts}
     case DECREASED_GUEST_QTY:
       const newProds = cart.products.map(product => {
@@ -152,13 +151,11 @@ export default function(cart = {}, action) {
         }
         return product
       })
-      console.log('guest - decrease', {...cart, products: newProds})
       return {...cart, products: newProds}
     case REMOVED_GUEST_ITEM:
       const filteredProds = cart.products.filter(product => {
         return product.id !== Number(action.productId)
       })
-      console.log('guest - remove', {...cart, products: filteredProds})
       return {...cart, products: filteredProds}
     case LOGOUT_CLEAR_CART:
       return {}
