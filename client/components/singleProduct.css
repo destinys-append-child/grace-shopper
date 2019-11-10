@@ -16,3 +16,9 @@
 #singleYacht div.content {
   height: 170px;
 }
+
+#singleYacht .extra.content {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}

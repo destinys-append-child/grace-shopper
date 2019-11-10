@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getSingleProductThunk} from '../store/singleProduct'
 import {yachtsThunk, categoryThunk} from '../store/allProducts'
-import {Icon} from 'semantic-ui-react'
+import {Button} from 'semantic-ui-react'
 
 import './singleProduct.css'
 
@@ -108,14 +108,17 @@ class DisconnectedSingleProduct extends Component {
               </div>
             </div>
             {yacht.quantity && yacht.quantity > 0 ? (
-              <div
-                className="ui bottom attached button"
-                id="addToCart"
-                onClick={this.addToCart}
-              >
-                {/* <button type="button" > */}
+              <div className="extra content">
+                <Button
+                  className="mini ui button"
+                  id="addToCart"
+                  onClick={this.addToCart}
+                >
+                  ADD TO CART
+                </Button>
+                {/* <button type="button" id="addToCart" onClick={this.addToCart}>
                 Add To Cart
-                {/* </button> */}
+                </button> */}
                 <input
                   type="number"
                   name="quantity"

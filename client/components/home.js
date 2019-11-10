@@ -8,11 +8,7 @@ const Home = ({isLoggedIn, firstName, history}) => {
   return (
     <div id="home">
       {isLoggedIn ? <div>Let's set Sail {firstName}</div> : null}
-      <Button
-        inverted
-        color="white"
-        onClick={() => history.push('/categories')}
-      >
+      <Button inverted onClick={() => history.push('/categories')}>
         TAKE ME AWAY
       </Button>
     </div>
