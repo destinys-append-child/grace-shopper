@@ -12,7 +12,7 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div id="form">
+    <div id="form" className="ui form error">
       <form onSubmit={handleSubmit} name={name} className="ui mini form">
         <div>
           <label htmlFor="email">{/* <small>Email</small> */}</label>
@@ -59,7 +59,7 @@ const AuthForm = props => {
         <br />
         {error &&
           error.response && (
-            <div className="error-msg"> {error.response.data} </div>
+            <div className="ui error message"> {error.response.data} </div>
           )}
       </form>
       <a href="/auth/google">{displayName} with Google</a>

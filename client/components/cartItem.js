@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React from 'react'
 import {connect} from 'react-redux'
 
@@ -23,8 +24,9 @@ function CartItem(props) {
     quantity
   } = props
   const clickHandler = evt => {
-    const method = evt.target.name
-    const productId = evt.target.parentNode.id
+    const method = evt.target.name || event.target.parentNode.name
+    let productId =
+      evt.target.parentNode.id || evt.target.parentNode.parentNode.id
     if (method === 'increase') {
       if (isLoggedIn) {
         increase(productId)
@@ -45,13 +47,21 @@ function CartItem(props) {
       }
     }
   }
+  let addDisabled = false
+  if (quantity >= cartItem.quantity) {
+    addDisabled = true
+  }
+  let subDisabled = false
+  if (quantity <= 1) {
+    subDisabled = true
+  }
   return (
     <div key={cartItem.id} className="cart-item">
       <a href={`/products/${cartItem.id}`}>
         <h3 className="product-name">{cartItem.name}</h3>
         <img className="product-image" src={cartItem.imageUrl} />
       </a>
-      <div id={cartItem.id}>
+      <div>
         <h3 className="product-price">
           Price:{' '}
           {new Intl.NumberFormat('en-US', {
@@ -60,15 +70,34 @@ function CartItem(props) {
           }).format(cartItem.price)}
         </h3>
         <h3 className="product-qty">Quantity: {quantity}</h3>
-        <button type="button" name="increase" onClick={clickHandler}>
-          +
-        </button>
-        <button type="button" name="decrease" onClick={clickHandler}>
-          -
-        </button>
-        <button type="button" name="remove" onClick={clickHandler}>
-          Remove
-        </button>
+        <div className="ui icon buttons" id={cartItem.id}>
+          <button
+            type="button"
+            name="increase"
+            onClick={evt => clickHandler(evt)}
+            disabled={addDisabled}
+            className="ui left attached button"
+          >
+            <i className="plus icon" />
+          </button>
+          <button
+            type="button"
+            name="decrease"
+            onClick={clickHandler}
+            disabled={subDisabled}
+            className="ui right attached button"
+          >
+            <i className="minus icon" />
+          </button>
+          <button
+            type="button"
+            name="remove"
+            className="negative ui button"
+            onClick={clickHandler}
+          >
+            Remove
+          </button>
+        </div>
       </div>
     </div>
   )
@@ -82,17 +111,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    clickHandler(evt) {
-      const method = evt.target.name
-      const productId = evt.target.parentNode.id
-      if (method === 'increase') {
-        dispatch(increaseQty(productId))
-      } else if (method === 'decrease') {
-        dispatch(decreaseQty(productId))
-      } else if (method === 'remove') {
-        dispatch(removeItem(productId))
-      }
-    },
     increase: productId => dispatch(increaseQty(productId)),
     increaseGuest: productId => dispatch(increaseGuestQty(productId)),
     decrease: productId => dispatch(decreaseQty(productId)),
