@@ -59,6 +59,9 @@ router.post('/not-purchased/guest', async (req, res, next) => {
 // increase by 1 itemQty of item in cart for logged in user
 router.put('/not-purchased/increase/:productId', async (req, res, next) => {
   try {
+    if (!req.user) {
+      res.status(401).send(`Must login to increase item in cart`)
+    }
     let {productId} = req.params
     productId = Number(productId)
     const order = await Order.findOne({
@@ -89,6 +92,9 @@ router.put('/not-purchased/increase/:productId', async (req, res, next) => {
 // decrease by 1 itemQty of item in cart for logged in user
 router.put('/not-purchased/decrease/:productId', async (req, res, next) => {
   try {
+    if (!req.user) {
+      res.status(401).send(`Must login to decrease item in cart`)
+    }
     let {productId} = req.params
     productId = Number(productId)
     const order = await Order.findOne({
@@ -127,6 +133,9 @@ router.put('/not-purchased/decrease/:productId', async (req, res, next) => {
 // delete item in cart for logged in user
 router.delete('/not-purchased/remove/:productId', async (req, res, next) => {
   try {
+    if (!req.user) {
+      res.status(401).send(`Must login to remove item from cart`)
+    }
     let {productId} = req.params
     productId = Number(productId)
     const order = await Order.findOne({

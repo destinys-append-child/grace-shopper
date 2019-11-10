@@ -1,11 +1,51 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {increaseQty, decreaseQty, removeItem} from '../store/cart'
+import {
+  increaseQty,
+  increaseGuestQty,
+  decreaseQty,
+  decreaseGuestQty,
+  removeItem,
+  removeGuestItem
+} from '../store/cart'
 
 function CartItem(props) {
-  const {cartItem, clickHandler} = props
-
+  const {
+    cartItem,
+    increase,
+    increaseGuest,
+    decrease,
+    decreaseGuest,
+    remove,
+    removeGuest,
+    isLoggedIn,
+    quantity
+  } = props
+  const clickHandler = evt => {
+    const method = evt.target.name
+    const productId = evt.target.parentNode.id
+    if (method === 'increase') {
+      if (isLoggedIn) {
+        increase(productId)
+      } else {
+        increaseGuest(productId)
+      }
+    } else if (method === 'decrease') {
+      if (isLoggedIn) {
+        decrease(productId)
+      } else {
+        decreaseGuest(productId)
+      }
+    } else if (method === 'remove') {
+      if (isLoggedIn) {
+        remove(productId)
+      } else {
+        removeGuest(productId)
+      }
+    }
+  }
+  console.log('is cartItem rendering?', cartItem)
   return (
     <div key={cartItem.id} className="cart-item">
       <a href={`/products/${cartItem.id}`}>
@@ -20,9 +60,7 @@ function CartItem(props) {
             currency: 'USD'
           }).format(cartItem.price)}
         </h3>
-        <h3 className="product-qty">
-          Quantity: {cartItem.orderProduct.itemQty}
-        </h3>
+        <h3 className="product-qty">Quantity: {quantity}</h3>
         <button type="button" name="increase" onClick={clickHandler}>
           +
         </button>
@@ -35,6 +73,12 @@ function CartItem(props) {
       </div>
     </div>
   )
+}
+
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: !!state.user.id
+  }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -50,10 +94,13 @@ const mapDispatchToProps = dispatch => {
         dispatch(removeItem(productId))
       }
     },
-    increase: () => increaseQty(productId),
-    decrease: () => decreaseQty(productId),
-    remove: () => removeItem(productId)
+    increase: productId => dispatch(increaseQty(productId)),
+    increaseGuest: productId => dispatch(increaseGuestQty(productId)),
+    decrease: productId => dispatch(decreaseQty(productId)),
+    decreaseGuest: productId => dispatch(decreaseGuestQty(productId)),
+    remove: productId => dispatch(removeItem(productId)),
+    removeGuest: productId => dispatch(removeGuestItem(productId))
   }
 }
 
-export default connect(null, mapDispatchToProps)(CartItem)
+export default connect(mapStateToProps, mapDispatchToProps)(CartItem)
