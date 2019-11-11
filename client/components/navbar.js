@@ -51,6 +51,7 @@ class Navbar extends React.Component {
             </Link>
             <Link to="/cart">
               <Icon name="cart" />
+              {/* <span className='badge'>1</span> */}
             </Link>
             <Link to="/wishlist">
               <Icon name="heart outline" />
