@@ -8,7 +8,8 @@ import {
   UserHome,
   YachtsList,
   SingleProduct,
-  Cart
+  Cart,
+  Checkout
 } from './components'
 import {me} from './store'
 import Home from './components/home'
@@ -44,6 +45,8 @@ class Routes extends Component {
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/categories/:categoryName" component={YachtsList} />
         <Route path="/categories" component={YachtsList} />
+
+        <Route path="/checkout" component={Checkout} />
         <Route
           path="/cart"
           component={() => <Cart isLoggedIn={this.props.isLoggedIn} />}
