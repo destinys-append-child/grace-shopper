@@ -62,46 +62,52 @@ class DisconnectedSingleProduct extends Component {
     }
     return yacht.name ? (
       <div className="singleProduct">
-        <nav id="allProductsNavBar">
-          <br />
-          <br />
-          <Link
-            className="navBarItem"
-            to="/categories/Catamaran"
-            onClick={() => this.props.getByCategory('Catamaran')}
-          >
-            Catamaran
-          </Link>
-          <Link
-            className="navBarItem"
-            to="/categories/Super%20Yacht"
-            onClick={() => this.props.getByCategory('Super%20Yacht')}
-          >
-            Super Yacht
-          </Link>
-          <Link
-            className="navBarItem"
-            to="/categories/Motoryacht"
-            onClick={() => this.props.getByCategory('Motoryacht')}
-          >
-            Motoryacht
-          </Link>
-          <Link
-            className="navBarItem"
-            to="/categories/Sailing%20Yacht"
-            onClick={() => this.props.getByCategory('Sailing%20Yacht')}
-          >
-            Sailing Yacht
-          </Link>
-          <Link
-            className="navBarItem"
-            to="/categories"
-            onClick={() => this.props.getYachts()}
-          >
-            All Yachts
-          </Link>
-          <br />
-          <br />
+        <nav id="allProductsNavBar" className="ui secondary pointing menu">
+          <div className="item">
+            <Link
+              className="navBarItem"
+              to="/categories/Catamaran"
+              onClick={() => this.props.getByCategory('Catamaran')}
+            >
+              Catamaran
+            </Link>
+          </div>
+          <div className="item">
+            <Link
+              className="navBarItem"
+              to="/categories/Super%20Yacht"
+              onClick={() => this.props.getByCategory('Super%20Yacht')}
+            >
+              Super Yacht
+            </Link>
+          </div>
+          <div className="item">
+            <Link
+              className="navBarItem"
+              to="/categories/Motoryacht"
+              onClick={() => this.props.getByCategory('Motoryacht')}
+            >
+              Motoryacht
+            </Link>
+          </div>
+          <div className="item">
+            <Link
+              className="navBarItem"
+              to="/categories/Sailing%20Yacht"
+              onClick={() => this.props.getByCategory('Sailing%20Yacht')}
+            >
+              Sailing Yacht
+            </Link>
+          </div>
+          <div className="item">
+            <Link
+              className="navBarItem"
+              to="/categories"
+              onClick={() => this.props.getYachts()}
+            >
+              All Yachts
+            </Link>
+          </div>
         </nav>
         <div id="singleYacht">
           <div className="ui card">
@@ -119,14 +125,13 @@ class DisconnectedSingleProduct extends Component {
               <a className="center aligned header">{yacht.name}</a>
               <br />
               <div className="center aligned description">
-                {/* <div className="meta">
-                {new Intl.NumberFormat('en-US', {
-                  style: 'currency',
-                  currency: 'USD'
-                }).format(yacht.price)}
-                {yacht.description}
-              </div> */}
-                <p>$ {yacht.price.toLocaleString()} USD</p>
+                <p>
+                  {new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD'
+                  }).format(yacht.price)}{' '}
+                  USD
+                </p>
                 <p>{yacht.description}</p>
               </div>
             </div>
