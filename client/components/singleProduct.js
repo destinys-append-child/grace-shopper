@@ -37,9 +37,9 @@ class DisconnectedSingleProduct extends Component {
       if (cart) {
         cart = JSON.parse(cart)
         if (cart[this.props.singleProduct.id])
-          cart[this.props.singleProduct.id]++
+          cart[this.props.singleProduct.id] += Number(this.state.quantity)
         else {
-          cart[this.props.singleProduct.id] = 1
+          cart[this.props.singleProduct.id] = Number(this.state.quantity)
         }
         window.localStorage.setItem('cart', JSON.stringify(cart))
       } else {
