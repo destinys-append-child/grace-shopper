@@ -5,7 +5,11 @@ import './mydetails.css'
 class MyDetails extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      firstName: '',
+      lastName: '',
+      email: ''
+    }
   }
 
   render() {
@@ -23,15 +27,18 @@ class MyDetails extends React.Component {
                 <div className="field">
                   <input
                     type="text"
-                    name="first-name"
+                    name="firstName"
                     placeholder="First Name"
                   />
                 </div>
                 <div className="field">
-                  <input type="text" name="last-name" placeholder="Last Name" />
+                  <input type="text" name="lastName" placeholder="Last Name" />
                 </div>
               </div>
             </div>
+          </div>
+          <div className="field">
+            <input type="text" name="lastName" placeholder="Last Name" />
           </div>
         </form>
       </div>
