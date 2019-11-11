@@ -18,7 +18,7 @@ router.get('/not-purchased', async (req, res, next) => {
       include: [{model: Product}]
     })
     if (cart) res.send(cart)
-    else res.send(`No items in cart`)
+    else res.status(403).send(`No items in cart`)
   } catch (err) {
     next(err)
   }
@@ -28,13 +28,14 @@ router.get('/not-purchased', async (req, res, next) => {
 router.post('/not-purchased/guest', async (req, res, next) => {
   try {
     let cost = 0
+    console.log('----------> req.body', req.body)
     let products = await Product.findAll()
       .filter(product => {
         return !!req.body[product.id]
       })
       .map(product => {
         const quantity = req.body[product.id]
-        cost += product.price * quantity
+        cost += product.price
         product.dataValues.orderProduct = {
           itemQty: quantity,
           itemPrice: product.price
@@ -59,9 +60,6 @@ router.post('/not-purchased/guest', async (req, res, next) => {
 // increase by 1 itemQty of item in cart for logged in user
 router.put('/not-purchased/increase/:productId', async (req, res, next) => {
   try {
-    if (!req.user) {
-      res.status(401).send(`Must login to increase item in cart`)
-    }
     let {productId} = req.params
     productId = Number(productId)
     const order = await Order.findOne({
@@ -75,21 +73,9 @@ router.put('/not-purchased/increase/:productId', async (req, res, next) => {
       const product = order.products.find(item => item.id === productId)
       if (product) {
         orderItem = product.orderProduct
-        const newQuantity = orderItem.itemQty + 1
-        if (newQuantity <= product.quantity) {
-          await orderItem.update({itemQty: newQuantity})
-          const newTotal = order.orderCost + product.price
-          await order.update({orderCost: newTotal})
-          res.send(order)
-        } else {
-          res
-            .status(405)
-            .send(
-              `Quantity cannot exceed  ${product.quantity} for product id: ${
-                product.id
-              }`
-            )
-        }
+        const newAmount = orderItem.itemQty + 1
+        await orderItem.update({itemQty: newAmount})
+        res.send(order)
       } else {
         res.status(404).send(`Cannot find product in order`)
       }
@@ -104,9 +90,6 @@ router.put('/not-purchased/increase/:productId', async (req, res, next) => {
 // decrease by 1 itemQty of item in cart for logged in user
 router.put('/not-purchased/decrease/:productId', async (req, res, next) => {
   try {
-    if (!req.user) {
-      res.status(401).send(`Must login to decrease item in cart`)
-    }
     let {productId} = req.params
     productId = Number(productId)
     const order = await Order.findOne({
@@ -120,11 +103,9 @@ router.put('/not-purchased/decrease/:productId', async (req, res, next) => {
       const product = order.products.find(item => item.id === productId)
       if (product) {
         orderItem = product.orderProduct
-        const newQuantity = orderItem.itemQty - 1
-        if (newQuantity >= 1) {
-          await orderItem.update({itemQty: newQuantity})
-          const newTotal = order.orderCost - product.price
-          await order.update({orderCost: newTotal})
+        const newAmount = orderItem.itemQty - 1
+        if (newAmount >= 1) {
+          await orderItem.update({itemQty: newAmount})
           res.send(order)
         } else {
           res
@@ -147,9 +128,6 @@ router.put('/not-purchased/decrease/:productId', async (req, res, next) => {
 // delete item in cart for logged in user
 router.delete('/not-purchased/remove/:productId', async (req, res, next) => {
   try {
-    if (!req.user) {
-      res.status(401).send(`Must login to remove item from cart`)
-    }
     let {productId} = req.params
     productId = Number(productId)
     const order = await Order.findOne({
@@ -162,11 +140,8 @@ router.delete('/not-purchased/remove/:productId', async (req, res, next) => {
     if (order) {
       const product = order.products.find(item => item.id === productId)
       if (product) {
-        const orderItem = product.orderProduct
-        const quantity = orderItem.itemQty
+        orderItem = product.orderProduct
         await orderItem.destroy()
-        const newTotal = order.orderCost - product.price * quantity
-        await order.update({orderCost: newTotal})
         const updatedOrder = await Order.findByPk(order.id, {
           include: [{model: Product}]
         })
