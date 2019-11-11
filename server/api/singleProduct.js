@@ -51,6 +51,8 @@ router.post('/:id', async (req, res, next) => {
             itemPrice: thisProduct.price
           }
         })
+        order.orderCost += thisProduct.price * req.body.quantity
+        await order.save()
         res.send(order)
       }
     } else {
