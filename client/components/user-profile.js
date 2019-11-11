@@ -18,7 +18,7 @@ class UserProfile extends React.Component {
       <div id="user-profile">
         <h1>MY ACCOUNT</h1>
         <div className="ui secondary pointing menu">
-          <a className="active item">
+          <a className="item">
             <i className="address card icon" /> My Details
           </a>
           <a className="item">

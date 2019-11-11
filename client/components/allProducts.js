@@ -21,25 +21,18 @@ class YachtsList extends Component {
       this.props.getByCategory(this.props.match.params.categoryName)
     }
   }
+
   getByCategory(str) {
-    console.log('getting by category!')
-    console.log(this.state.activeItem)
-    this.setState(prevState => ({
-      ...prevState,
-      activeItem: !prevState.activeItem
-    }))
     this.props.getByCategory(str)
-    console.log(this.state.activeItem)
   }
 
   render() {
     const {yachts} = this.props
-    const {activeItem} = this.state
 
     return (
       <div>
         <nav id="allProductsNavBar" className="ui secondary pointing menu">
-          <div className={activeItem ? 'active item' : 'item'}>
+          <div className="item">
             <Link
               className="navBarItem"
               to="/categories/Catamaran"
