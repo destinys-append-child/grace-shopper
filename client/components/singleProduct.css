@@ -1,7 +1,6 @@
 #singleYacht {
   display: flex;
 }
-
 #singleYacht .ui.slide.masked.reveal.image {
   width: 360px;
   height: 200px;
