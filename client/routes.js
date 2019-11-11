@@ -45,8 +45,11 @@ class Routes extends Component {
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/categories/:categoryName" component={YachtsList} />
         <Route path="/categories" component={YachtsList} />
-        <Route path="/cart" component={Cart} />
         <Route path="/profile" component={UserProfile} />
+        <Route
+          path="/cart"
+          component={() => <Cart isLoggedIn={this.props.isLoggedIn} />}
+        />
         <Route component={Home} />
       </Switch>
     )
