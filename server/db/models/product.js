@@ -13,14 +13,13 @@ const Product = db.define('product', {
   imageUrl: {
     type: Sequelize.TEXT,
     allowNull: false,
-    validation: {
+    validate: {
       notEmpty: true
     }
   },
   imageUrlAltView: {
     type: Sequelize.TEXT,
-    // allowNull: false,
-    validation: {
+    validate: {
       notEmpty: true
     }
   },

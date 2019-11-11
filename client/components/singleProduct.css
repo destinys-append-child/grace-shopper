@@ -1,7 +1,29 @@
 #singleYacht {
   display: flex;
+  justify-content: center;
+  height: 750px;
+  /* padding: 5px; */
 }
-#singleYacht .ui.slide.masked.reveal.image {
+
+#singleYacht .ui.card {
+  width: 900px;
+}
+
+#singleYacht img {
+  width: 900px;
+  height: 540px;
+}
+
+#singleYacht div.content {
+  /* height: 170px; */
+}
+
+#singleYacht .extra.content {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+/* #singleYacht .ui.slide.masked.reveal.image {
   width: 360px;
   height: 200px;
-}
+} */
