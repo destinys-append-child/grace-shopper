@@ -13,6 +13,7 @@ import {
 } from './components'
 import {me} from './store'
 import Home from './components/home'
+import UserProfile from './components/user-profile'
 
 /**
  * COMPONENT
@@ -45,7 +46,7 @@ class Routes extends Component {
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/categories/:categoryName" component={YachtsList} />
         <Route path="/categories" component={YachtsList} />
-
+        <Route path="/profile" component={UserProfile} />
         <Route path="/checkout" component={Checkout} />
         <Route
           path="/cart"

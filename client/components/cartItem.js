@@ -11,6 +11,8 @@ import {
   removeGuestItem
 } from '../store/cart'
 
+import './cartItem.css'
+
 function CartItem(props) {
   const {
     cartItem,
@@ -57,46 +59,48 @@ function CartItem(props) {
   }
   return (
     <div key={cartItem.id} className="cart-item">
-      <a href={`/products/${cartItem.id}`}>
-        <h3 className="product-name">{cartItem.name}</h3>
-        <img className="product-image" src={cartItem.imageUrl} />
-      </a>
-      <div>
-        <h3 className="product-price">
-          Price:{' '}
-          {new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD'
-          }).format(cartItem.price)}
-        </h3>
-        <h3 className="product-qty">Quantity: {quantity}</h3>
-        <div className="ui icon buttons" id={cartItem.id}>
-          <button
-            type="button"
-            name="increase"
-            onClick={evt => clickHandler(evt)}
-            disabled={addDisabled}
-            className="ui left attached button"
-          >
-            <i className="plus icon" />
-          </button>
-          <button
-            type="button"
-            name="decrease"
-            onClick={clickHandler}
-            disabled={subDisabled}
-            className="ui right attached button"
-          >
-            <i className="minus icon" />
-          </button>
-          <button
-            type="button"
-            name="remove"
-            className="negative ui button"
-            onClick={clickHandler}
-          >
-            Remove
-          </button>
+      <div className="ui card">
+        <a href={`/products/${cartItem.id}`}>{cartItem.name}</a>
+        <a href={`/products/${cartItem.id}`}>
+          <img className="product-image" src={cartItem.imageUrl} />
+        </a>
+        <div>
+          <h3 className="product-price">
+            Price:{' '}
+            {new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD'
+            }).format(cartItem.price)}
+          </h3>
+          <h3 className="product-qty">Qty: {quantity}</h3>
+          <div className="ui icon buttons" id={cartItem.id}>
+            <button
+              type="button"
+              name="increase"
+              onClick={evt => clickHandler(evt)}
+              disabled={addDisabled}
+              className="ui left attached button"
+            >
+              <i className="plus icon" />
+            </button>
+            <button
+              type="button"
+              name="decrease"
+              onClick={clickHandler}
+              disabled={subDisabled}
+              className="ui right attached button"
+            >
+              <i className="minus icon" />
+            </button>
+            <button
+              type="button"
+              name="remove"
+              className="negative ui button"
+              onClick={clickHandler}
+            >
+              Remove
+            </button>
+          </div>
         </div>
       </div>
     </div>
