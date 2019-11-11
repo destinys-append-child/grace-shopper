@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {getSingleProductThunk} from '../store/singleProduct'
 import {userAddToCartThunk} from '../store/cart'
 import {yachtsThunk, categoryThunk} from '../store/allProducts'
-import {Icon} from 'semantic-ui-react'
+import {Button} from 'semantic-ui-react'
 
 import './singleProduct.css'
 
@@ -103,38 +103,48 @@ class DisconnectedSingleProduct extends Component {
           <br />
           <br />
         </nav>
-        {/* <br />
-        <br /> */}
         <div id="singleYacht">
-          <div id="ui card">
-            <div className="ui slide masked reveal image">
-              <img src={yacht.imageUrl} className="visible content" />
-              <img src={yacht.imageUrlAltView} className="hidden content" />
-            </div>
+          <div className="ui card">
+            {yacht.imageUrlAltView ? (
+              <div className="ui slide masked reveal image">
+                <img src={yacht.imageUrl} className="visible content" />
+                <img src={yacht.imageUrlAltView} className="hidden content" />
+              </div>
+            ) : (
+              <div className="image">
+                <img src={yacht.imageUrl} />
+              </div>
+            )}
             <div className="content">
-              <a className="header">{yacht.name}</a>
-              <div className="meta">
+              <a className="center aligned header">{yacht.name}</a>
+              <br />
+              <div className="center aligned description">
+                {/* <div className="meta">
                 {new Intl.NumberFormat('en-US', {
                   style: 'currency',
                   currency: 'USD'
                 }).format(yacht.price)}
                 {yacht.description}
+              </div> */}
+                <p>$ {yacht.price.toLocaleString()} USD</p>
+                <p>{yacht.description}</p>
               </div>
             </div>
             {yacht.quantity && yacht.quantity > 0 ? (
-              <div>
-                <button
-                  type="button"
+              <div className="extra content">
+                <Button
+                  className="mini ui button"
                   id="addToCart"
                   onClick={this.addToCart}
                   disabled={addDisabled}
                 >
-                  Add To Cart
-                </button>
+                  ADD TO CART
+                </Button>
                 <input
                   type="number"
                   name="quantity"
                   value={this.state.quantity}
+                  min="0"
                   max={yacht.quantity}
                   onChange={this.changeHandler}
                 />
