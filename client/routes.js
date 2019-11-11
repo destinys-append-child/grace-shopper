@@ -9,7 +9,8 @@ import {
   YachtsList,
   SingleProduct,
   Cart,
-  Checkout
+  Checkout,
+  Orders
 } from './components'
 import {me} from './store'
 import Home from './components/home'
@@ -51,6 +52,10 @@ class Routes extends Component {
         <Route
           path="/cart"
           component={() => <Cart isLoggedIn={this.props.isLoggedIn} />}
+        />
+        <Route
+          path="/orders"
+          component={() => <Orders isLoggedIn={this.props.isLoggedIn} />}
         />
         <Route component={Home} />
       </Switch>
