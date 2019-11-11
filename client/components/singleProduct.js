@@ -119,14 +119,13 @@ class DisconnectedSingleProduct extends Component {
               <a className="center aligned header">{yacht.name}</a>
               <br />
               <div className="center aligned description">
-                {/* <div className="meta">
-                {new Intl.NumberFormat('en-US', {
-                  style: 'currency',
-                  currency: 'USD'
-                }).format(yacht.price)}
-                {yacht.description}
-              </div> */}
-                <p>$ {yacht.price.toLocaleString()} USD</p>
+                <div className="meta">
+                  {new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD'
+                  }).format(yacht.price)}
+                  {yacht.description}
+                </div>
                 <p>{yacht.description}</p>
               </div>
             </div>
