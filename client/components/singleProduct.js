@@ -37,7 +37,7 @@ class DisconnectedSingleProduct extends Component {
       if (cart) {
         cart = JSON.parse(cart)
         if (cart[this.props.singleProduct.id])
-          cart[this.props.singleProduct.id]++
+          cart[this.props.singleProduct.id] += this.state.quantity
         else {
           cart[this.props.singleProduct.id] = 1
         }
