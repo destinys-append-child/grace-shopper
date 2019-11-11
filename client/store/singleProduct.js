@@ -2,7 +2,6 @@ import axios from 'axios'
 import history from '../history'
 
 const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
-// const ADD_ITEM = 'ADD_ITEM'
 // const REMOVE_FROM_INV = 'REMOVE_FROM_INV'
 
 const defaultProduct = {}
