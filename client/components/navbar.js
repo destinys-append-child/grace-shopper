@@ -58,7 +58,9 @@ class Navbar extends React.Component {
             {isLoggedIn ? (
               <div>
                 {/* The navbar will show these links after you log in */}
-                <i className="user circle icon" />
+                <Link to="/profile">
+                  <i className="user circle icon" />
+                </Link>
                 <a href="#" onClick={handleClick}>
                   Logout
                 </a>

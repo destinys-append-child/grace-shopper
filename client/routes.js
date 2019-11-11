@@ -12,6 +12,7 @@ import {
 } from './components'
 import {me} from './store'
 import Home from './components/home'
+import UserProfile from './components/user-profile'
 
 /**
  * COMPONENT
@@ -45,6 +46,7 @@ class Routes extends Component {
         <Route path="/categories/:categoryName" component={YachtsList} />
         <Route path="/categories" component={YachtsList} />
         <Route path="/cart" component={Cart} />
+        <Route path="/profile" component={UserProfile} />
         <Route component={Home} />
       </Switch>
     )
