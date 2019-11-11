@@ -16,6 +16,11 @@
   color: white;
 }
 
+#navbar .right-nav i,
+a {
+  color: white;
+}
+
 #navbar nav a {
   margin: 1em;
 }

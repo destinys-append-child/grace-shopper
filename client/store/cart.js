@@ -4,6 +4,7 @@ import axios from 'axios'
 
 // Action Types
 const GOT_CART = 'GOT_CART'
+const ADD_ITEM_USER = 'ADD_ITEM_USER'
 const GOT_GUEST_CART = 'GOT_GUEST_CART'
 const INCREASED_QTY = 'INCREASED_QTY'
 const INCREASED_GUEST_QTY = 'INCREASED_GUEST_QTY'
@@ -23,6 +24,10 @@ const decreasedGuestQty = productId => ({type: DECREASED_GUEST_QTY, productId})
 const removedItem = cart => ({type: REMOVED_ITEM, cart})
 const removedGuestItem = productId => ({type: REMOVED_GUEST_ITEM, productId})
 export const logoutClearCart = () => ({type: LOGOUT_CLEAR_CART})
+const addToCart = cart => ({
+  type: ADD_ITEM_USER,
+  cart
+})
 
 // Thunk Creators
 export const getCart = () => async dispatch => {
@@ -123,6 +128,18 @@ export const removeGuestItem = productId => async dispatch => {
   }
 }
 
+export const userAddToCartThunk = (id, quantity) => async dispatch => {
+  try {
+    console.log('THUNK HIT')
+    let {data} = await axios.post(`/api/products/${id}`, {
+      quantity
+    })
+    if (data) dispatch(addToCart(data))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 // Reducer
 export default function(cart = {}, action) {
   switch (action.type) {
@@ -169,6 +186,9 @@ export default function(cart = {}, action) {
       return {...cart, orderCost: total, products: filteredProds}
     case LOGOUT_CLEAR_CART:
       return {}
+    case ADD_ITEM_USER:
+      console.log('HITT')
+      return action.cart
     default:
       return cart
   }

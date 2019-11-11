@@ -3,15 +3,20 @@ import PropTypes from 'prop-types' // need this?
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getSingleProductThunk} from '../store/singleProduct'
+import {userAddToCartThunk} from '../store/cart'
 import {yachtsThunk, categoryThunk} from '../store/allProducts'
-import {Icon} from 'semantic-ui-react'
+import {Button} from 'semantic-ui-react'
 
 import './singleProduct.css'
 
 class DisconnectedSingleProduct extends Component {
   constructor() {
     super()
+    this.state = {
+      quantity: 1
+    }
     this.addToCart = this.addToCart.bind(this)
+    this.changeHandler = this.changeHandler.bind(this)
   }
   componentDidMount() {
     const id = this.props.match.params.productId
@@ -20,28 +25,41 @@ class DisconnectedSingleProduct extends Component {
   getByCategory(str) {
     this.props.getByCategory(str)
   }
+  changeHandler(event) {
+    this.setState({
+      quantity: event.target.value
+    })
+  }
 
   addToCart() {
-    let cart = localStorage.getItem('cart')
-    console.log(cart)
-    if (cart) {
-      cart = JSON.parse(cart)
-      if (cart[this.props.singleProduct.id]) cart[this.props.singleProduct.id]++
-      else {
+    if (!this.props.user.id) {
+      let cart = window.localStorage.getItem('cart')
+      if (cart) {
+        cart = JSON.parse(cart)
+        if (cart[this.props.singleProduct.id])
+          cart[this.props.singleProduct.id]++
+        else {
+          cart[this.props.singleProduct.id] = 1
+        }
+        window.localStorage.setItem('cart', JSON.stringify(cart))
+      } else {
+        let cart = {}
         cart[this.props.singleProduct.id] = 1
+        window.localStorage.setItem('cart', JSON.stringify(cart))
       }
-      window.localStorage.setItem('cart', JSON.stringify(cart))
     } else {
-      let cart = {}
-      cart[this.props.singleProduct.id] = 1
-      window.localStorage.setItem('cart', JSON.stringify(cart))
+      console.log('BUTTON HIT')
+      this.props.addToUserCart(this.props.singleProduct.id, this.state.quantity)
     }
-    console.log(JSON.parse(window.localStorage.getItem('cart')))
+    this.setState({quantity: 1})
   }
 
   render() {
     const yacht = this.props.singleProduct
-
+    let addDisabled = false
+    if (this.state.quantity > this.props.singleProduct.quantity) {
+      addDisabled = true
+    }
     return yacht.name ? (
       <div className="singleProduct">
         <nav id="allProductsNavBar">
@@ -85,27 +103,51 @@ class DisconnectedSingleProduct extends Component {
           <br />
           <br />
         </nav>
-        {/* <br />
-        <br /> */}
         <div id="singleYacht">
-          <div id="ui card">
-            <div className="ui slide masked reveal image">
-              <img src={yacht.imageUrl} className="visible content" />
-              <img src={yacht.imageUrlAltView} className="hidden content" />
-            </div>
+          <div className="ui card">
+            {yacht.imageUrlAltView ? (
+              <div className="ui slide masked reveal image">
+                <img src={yacht.imageUrl} className="visible content" />
+                <img src={yacht.imageUrlAltView} className="hidden content" />
+              </div>
+            ) : (
+              <div className="image">
+                <img src={yacht.imageUrl} />
+              </div>
+            )}
             <div className="content">
-              <a className="header">{yacht.name}</a>
-              <div className="meta">
-                ${yacht.price}
+              <a className="center aligned header">{yacht.name}</a>
+              <br />
+              <div className="center aligned description">
+                {/* <div className="meta">
+                {new Intl.NumberFormat('en-US', {
+                  style: 'currency',
+                  currency: 'USD'
+                }).format(yacht.price)}
                 {yacht.description}
+              </div> */}
+                <p>$ {yacht.price.toLocaleString()} USD</p>
+                <p>{yacht.description}</p>
               </div>
             </div>
             {yacht.quantity && yacht.quantity > 0 ? (
-              <div>
-                <button type="button" id="addToCart" onClick={this.addToCart}>
-                  Add To Cart
-                </button>
-                <input type="number" name="quantity" max={yacht.quantity} />
+              <div className="extra content">
+                <Button
+                  className="mini ui button"
+                  id="addToCart"
+                  onClick={this.addToCart}
+                  disabled={addDisabled}
+                >
+                  ADD TO CART
+                </Button>
+                <input
+                  type="number"
+                  name="quantity"
+                  value={this.state.quantity}
+                  min="0"
+                  max={yacht.quantity}
+                  onChange={this.changeHandler}
+                />
               </div>
             ) : (
               <div>
@@ -130,7 +172,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getSingleProduct: id => dispatch(getSingleProductThunk(id)),
   getYachts: () => dispatch(yachtsThunk()),
-  getByCategory: categoryName => dispatch(categoryThunk(categoryName))
+  getByCategory: categoryName => dispatch(categoryThunk(categoryName)),
+  addToUserCart: (id, quantity) => dispatch(userAddToCartThunk(id, quantity))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(
