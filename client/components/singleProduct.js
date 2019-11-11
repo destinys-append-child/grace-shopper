@@ -3,11 +3,8 @@ import PropTypes from 'prop-types' // need this?
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getSingleProductThunk} from '../store/singleProduct'
-import {
-  yachtsThunk,
-  categoryThunk,
-  userAddToCartThunk
-} from '../store/allProducts'
+import {userAddToCartThunk} from '../store/cart'
+import {yachtsThunk, categoryThunk} from '../store/allProducts'
 import {Icon} from 'semantic-ui-react'
 
 import './singleProduct.css'
@@ -15,7 +12,11 @@ import './singleProduct.css'
 class DisconnectedSingleProduct extends Component {
   constructor() {
     super()
+    this.state = {
+      quantity: 1
+    }
     this.addToCart = this.addToCart.bind(this)
+    this.changeHandler = this.changeHandler.bind(this)
   }
   componentDidMount() {
     const id = this.props.match.params.productId
@@ -24,11 +25,15 @@ class DisconnectedSingleProduct extends Component {
   getByCategory(str) {
     this.props.getByCategory(str)
   }
+  changeHandler(event) {
+    this.setState({
+      quantity: event.target.value
+    })
+  }
 
   addToCart() {
-    if (this.props.user.id) {
+    if (!this.props.user.id) {
       let cart = window.localStorage.getItem('cart')
-      console.log(cart)
       if (cart) {
         cart = JSON.parse(cart)
         if (cart[this.props.singleProduct.id])
@@ -43,15 +48,18 @@ class DisconnectedSingleProduct extends Component {
         window.localStorage.setItem('cart', JSON.stringify(cart))
       }
     } else {
-      // userAddToCartThunk
-      return 'hello'
+      console.log('BUTTON HIT')
+      this.props.addToUserCart(this.props.singleProduct.id, this.state.quantity)
     }
-    console.log(JSON.parse(window.localStorage.getItem('cart')))
+    this.setState({quantity: 1})
   }
 
   render() {
     const yacht = this.props.singleProduct
-
+    let addDisabled = false
+    if (this.state.quantity > this.props.singleProduct.quantity) {
+      addDisabled = true
+    }
     return yacht.name ? (
       <div className="singleProduct">
         <nav id="allProductsNavBar">
@@ -106,16 +114,30 @@ class DisconnectedSingleProduct extends Component {
             <div className="content">
               <a className="header">{yacht.name}</a>
               <div className="meta">
-                ${yacht.price}
+                {new Intl.NumberFormat('en-US', {
+                  style: 'currency',
+                  currency: 'USD'
+                }).format(yacht.price)}
                 {yacht.description}
               </div>
             </div>
             {yacht.quantity && yacht.quantity > 0 ? (
               <div>
-                <button type="button" id="addToCart" onClick={this.addToCart}>
+                <button
+                  type="button"
+                  id="addToCart"
+                  onClick={this.addToCart}
+                  disabled={addDisabled}
+                >
                   Add To Cart
                 </button>
-                <input type="number" name="quantity" max={yacht.quantity} />
+                <input
+                  type="number"
+                  name="quantity"
+                  value={this.state.quantity}
+                  max={yacht.quantity}
+                  onChange={this.changeHandler}
+                />
               </div>
             ) : (
               <div>
@@ -140,7 +162,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getSingleProduct: id => dispatch(getSingleProductThunk(id)),
   getYachts: () => dispatch(yachtsThunk()),
-  getByCategory: categoryName => dispatch(categoryThunk(categoryName))
+  getByCategory: categoryName => dispatch(categoryThunk(categoryName)),
+  addToUserCart: (id, quantity) => dispatch(userAddToCartThunk(id, quantity))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(

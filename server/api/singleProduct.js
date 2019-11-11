@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Product, Order, OrderProduct} = require('../db/models')
+const utils = require('./utils')
 module.exports = router
 
 router.get('/:id', async (req, res, next) => {
@@ -26,32 +27,44 @@ router.post('/:id', async (req, res, next) => {
       include: [{model: Product}]
     })
     if (order) {
+      console.log('ORDER EXISTS')
       const product = order.products.find(e => {
-        console.log(e.id)
         return e.id == req.params.id
       })
       if (product) {
+        console.log('PRODUCT EXISTS')
         const orderItem = product.orderProduct
-        orderItem.itemQty += req.body.quantity
-        order.orderCost = product.price * orderItem.orderItem
-        orderItem.save()
-        order.save()
-        res.send(order)
+        orderItem.itemQty += Number(req.body.quantity)
+        if (orderItem.itemQty > product.quantity) {
+          res.status(403).send(`Max quantity is ${product.quantity}`)
+        } else {
+          order.orderCost = product.price * orderItem.itemQty
+          await orderItem.save()
+          await order.save()
+          res.send(order)
+        }
       } else {
-        order.addProduct(thisProduct.id, {
+        console.log('PRODUCT IS ADDED')
+        await order.addProduct(thisProduct.id, {
           through: {
-            itemQty: req.body.quantity,
+            itemQty: Number(req.body.quantity),
             itemPrice: thisProduct.price
           }
         })
         res.send(order)
       }
     } else {
-      order = await Order.create({
-        orderCost: thisProduct.price * req.body.quantity,
-        userId: req.user.id
-      })
-      order.addProduct(thisProduct.id, {
+      console.log('ORDER AND PRODUCT CREATED')
+      order = await Order.create(
+        {
+          orderCost: thisProduct.price * req.body.quantity,
+          userId: req.user.id
+        },
+        {
+          include: [{model: Product}]
+        }
+      )
+      await order.addProduct(thisProduct.id, {
         through: {
           itemQty: req.body.quantity,
           itemPrice: thisProduct.price
