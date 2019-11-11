@@ -152,7 +152,7 @@ const orders = [
   },
   {
     userId: 6,
-    orderCost: 610661736
+    orderCost: 1110903878
   },
   {
     userId: 6,
@@ -185,7 +185,7 @@ const orderProducts = [
   {
     orderId: 3,
     productId: 2,
-    itemQty: 4,
+    itemQty: 2,
     itemPrice: 500242142
   },
   {
