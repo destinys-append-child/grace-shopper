@@ -34,27 +34,3 @@ router.get('/confirmation', async (req, res, next) => {
     next(error)
   }
 })
-
-// router.put('/confirmation', async (req, res, next) => {
-
-//     try {
-//         let updated = await Order.update({
-//             isPurchased: true
-
-//         }, {
-//             where: {
-//                 userId: req.user.id,
-//                 isPurchased: false
-//               },
-//             returning: true, // needed for affectedRows to be populated
-//             plain: true
-//         });
-//         if (updated) {
-//             res.send(updated)
-//         }else{
-//             res.status(404).send('Order can not be completed')
-//         }
-//     } catch (error) {
-//         next(error)
-//     }
-// })
