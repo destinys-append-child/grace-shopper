@@ -73,7 +73,7 @@ function CartItem(props) {
             }).format(cartItem.price)}
           </h3>
           <h3 className="product-qty">Qty: {quantity}</h3>
-          <div className="ui icon buttons" id={cartItem.id}>
+          <div className="mini ui icon buttons" id={cartItem.id}>
             <button
               type="button"
               name="increase"
