@@ -21,8 +21,19 @@ class Cart extends Component {
         this.props.cart.products.length ? (
           <div>
             {this.props.cart.products.map(cartItem => (
-              <CartItem key={cartItem.id} cartItem={cartItem} />
+              <CartItem
+                key={cartItem.id}
+                cartItem={cartItem}
+                quantity={cartItem.orderProduct.itemQty}
+              />
             ))}
+            <h3 className="order-cost">
+              Total:{' '}
+              {new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+              }).format(this.props.cart.orderCost)}
+            </h3>
           </div>
         ) : (
           <h3>No items in cart.</h3>
@@ -37,7 +48,6 @@ class Cart extends Component {
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: !!state.user.id,
     cart: state.cart
   }
 }
