@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom'
 import './user-profile.css'
 import MyDetails from './mydetails'
 
@@ -24,9 +24,11 @@ class UserProfile extends React.Component {
           <a className="item">
             <i className="lock icon" /> Change Password
           </a>
-          <a className="item">
-            <i className="box icon" /> My Orders
-          </a>
+          <Link to="/orders">
+            <a className="item">
+              <i className="box icon" /> My Orders
+            </a>
+          </Link>
         </div>
         <MyDetails />
       </div>

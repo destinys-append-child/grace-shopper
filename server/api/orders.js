@@ -182,3 +182,23 @@ router.delete('/not-purchased/remove/:productId', async (req, res, next) => {
     next(err)
   }
 })
+
+// GET Order History for logged in user
+router.get('/purchased', async (req, res, next) => {
+  try {
+    if (!req.user) {
+      res.status(401).send(`Must login to get order history`)
+    }
+    const orders = await Order.findAll({
+      where: {
+        userId: req.user.id,
+        isPurchased: true
+      },
+      include: [{model: Product}]
+    })
+    if (orders) res.send(orders)
+    else res.send(`No past orders`)
+  } catch (err) {
+    next(err)
+  }
+})
