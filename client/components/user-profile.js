@@ -6,17 +6,19 @@ import MyDetails from './mydetails'
 class UserProfile extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      activeItem: false
+    }
   }
 
-  changeClassName() {}
-
   render() {
+    const {activeItem} = this.state
+
     return (
       <div id="user-profile">
         <h1>MY ACCOUNT</h1>
         <div className="ui secondary pointing menu">
-          <a className="active item own-color">
+          <a className="active item">
             <i className="address card icon" /> My Details
           </a>
           <a className="item">
