@@ -23,9 +23,11 @@ router.get('/', isUser, async (req, res, next) => {
 
 // PUT /api/cart/:productId
 // Update the quantity of items in cart
-router.put('/', isUser, async (req, res, next) => {
+router.put('/:productId', isUser, async (req, res, next) => {
   try {
-    const {productId, quantity} = req.body
+    const {quantity} = req.body
+    let {productId} = req.params
+    productId = Number(productId)
     const order = await Order.findOne({
       where: {
         userId: req.user.id,

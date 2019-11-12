@@ -14,7 +14,11 @@ const LOGOUT_CLEAR_CART = 'LOGOUT_CLEAR_CART'
 
 // Action Creators
 const gotCart = cart => ({type: GOT_CART, cart})
-export const gotGuestCart = () => ({type: GOT_GUEST_CART})
+export const gotGuestCart = (orderCost, products) => ({
+  type: GOT_GUEST_CART,
+  orderCost,
+  products
+})
 const updatedCart = cart => ({type: UPDATED_CART, cart})
 export const updatedGuestCart = (productId, quantity) => ({
   type: UPDATED_GUEST_CART,
@@ -42,11 +46,23 @@ export const getCart = () => async dispatch => {
 export const getGuestCart = () => async dispatch => {
   try {
     const localCart = JSON.parse(localStorage.getItem('cart'))
-    const {data} = await axios.post(
-      '/api/orders/not-purchased/guest',
-      localCart
-    )
-    dispatch(gotGuestCart(data))
+    console.log('localCart----->', localCart)
+    let orderCost = 0
+    let products = []
+    for (let key in localCart) {
+      if (localCart.hasOwnProperty(key)) {
+        let {data} = await axios.get(`/api/products/${key}`)
+        data.orderProduct = {
+          itemQty: localCart[key],
+          itemPrice: data.price
+        }
+        orderCost += localCart[key] * data.price
+        products.push(data)
+      }
+    }
+    console.log('products', products)
+    console.log('orderCost', orderCost)
+    dispatch(gotGuestCart(orderCost, products))
   } catch (err) {
     console.log('Error:', err)
   }
@@ -54,19 +70,22 @@ export const getGuestCart = () => async dispatch => {
 
 export const updateCart = (productId, quantity) => async dispatch => {
   try {
-    const {data} = await axios.put(`/api/cart`, {productId, quantity})
+    const {data} = await axios.put(`/api/cart/${productId}`, {quantity})
     dispatch(updatedCart(data))
   } catch (err) {
     console.log('Error:', err)
   }
 }
 
-const updateGuestCartThunk = (productId, quantity, cart) => {
+const updateGuestCartHelper = (productId, quantity, cart) => {
   try {
+    const localCart = JSON.parse(localStorage.getItem('cart'))
     let cost = cart.orderCost
     const updated = cart.products.map(product => {
       if (product.id === productId) {
         if (product.quantity >= quantity && quantity >= 1) {
+          localCart[productId] = quantity
+          window.localStorage.setItem('cart', JSON.stringify(localCart))
           const productCopy = {
             ...product,
             orderProduct: {...product.orderProduct}
@@ -140,11 +159,11 @@ export default function(cart = initialState, action) {
     case GOT_CART:
       return action.cart
     case GOT_GUEST_CART:
-      return action.cart
+      return {...cart, orderCost: action.orderCost, products: action.products}
     case UPDATED_CART:
       return action.cart
     case UPDATED_GUEST_CART:
-      return updateGuestCartThunk(action.productId, action.quantity, cart)
+      return updateGuestCartHelper(action.productId, action.quantity, cart)
     case REMOVED_ITEM:
       return action.cart
     case REMOVED_GUEST_ITEM:

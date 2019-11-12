@@ -8,7 +8,7 @@ const Order = db.model('order')
 const User = db.model('user')
 const Product = db.model('product')
 
-describe('Order routes', () => {
+describe('Cart routes', () => {
   const codysFirstName = 'Cody'
   const codysLastName = 'Pug'
   const codysEmail = 'cody@puppybook.com'
