@@ -48,7 +48,6 @@ class DisconnectedSingleProduct extends Component {
         window.localStorage.setItem('cart', JSON.stringify(cart))
       }
     } else {
-      console.log('BUTTON HIT')
       this.props.addToUserCart(this.props.singleProduct.id, this.state.quantity)
     }
     this.setState({quantity: 1})

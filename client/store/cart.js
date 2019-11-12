@@ -201,6 +201,7 @@ export default function(cart = initialState, action) {
     case LOGOUT_CLEAR_CART:
       return {}
     case ADD_ITEM_USER:
+      console.log(action.cart)
       return action.cart
     case UPDATE_ADDRESSES:
       console.log('ACTION ---->', action.addresses)

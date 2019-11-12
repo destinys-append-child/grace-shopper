@@ -40,6 +40,7 @@ router.post('/:productId', isUser, async (req, res, next) => {
       if (product) {
         const orderItem = product.orderProduct
         orderItem.itemQty += Number(req.body.quantity)
+        console.log(orderItem.itemQty)
         if (orderItem.itemQty > product.quantity) {
           res.status(403).send(`Max quantity is ${product.quantity}`)
         } else {

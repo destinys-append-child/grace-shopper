@@ -16,7 +16,6 @@ router.get('/', async (req, res, next) => {
           category: category
         }
       })
-      res.send(category)
     } else {
       products = await Product.findAll()
     }
