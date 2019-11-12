@@ -18,7 +18,7 @@ export const getCategory = category => ({
 export const yachtsThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get('/api/categories')
+      const {data} = await axios.get('/api/products')
       dispatch(getYachts(data))
     } catch (error) {
       console.log('THERE IS A PROBLEM WITH YACHTSTHUNK', error)
@@ -29,7 +29,7 @@ export const yachtsThunk = () => {
 export const categoryThunk = categoryName => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/categories/${categoryName}`)
+      const {data} = await axios.get(`/api/products?category=${categoryName}`)
       console.log('THIS IS CALLED')
       dispatch(getCategory(data))
     } catch (error) {

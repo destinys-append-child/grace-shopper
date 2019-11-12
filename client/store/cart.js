@@ -82,32 +82,28 @@ export const updateCart = (productId, quantity) => async dispatch => {
 }
 
 const updateGuestCartHelper = (productId, quantity, cart) => {
-  try {
-    const localCart = JSON.parse(localStorage.getItem('cart'))
-    let cost = cart.orderCost
-    const updated = cart.products.map(product => {
-      if (product.id === productId) {
-        if (product.quantity >= quantity && quantity >= 1) {
-          localCart[productId] = quantity
-          window.localStorage.setItem('cart', JSON.stringify(localCart))
-          const productCopy = {
-            ...product,
-            orderProduct: {...product.orderProduct}
-          }
-          const orderItem = productCopy.orderProduct
-          const currentItemCost = orderItem.itemQty * orderItem.itemPrice
-          const updatedItemCost = quantity * orderItem.itemPrice
-          cost += updatedItemCost - currentItemCost
-          orderItem.itemQty = quantity
-          return productCopy
+  const localCart = JSON.parse(localStorage.getItem('cart'))
+  let cost = cart.orderCost
+  const updated = cart.products.map(product => {
+    if (product.id === productId) {
+      if (product.quantity >= quantity && quantity >= 1) {
+        localCart[productId] = quantity
+        window.localStorage.setItem('cart', JSON.stringify(localCart))
+        const productCopy = {
+          ...product,
+          orderProduct: {...product.orderProduct}
         }
+        const orderItem = productCopy.orderProduct
+        const currentItemCost = orderItem.itemQty * orderItem.itemPrice
+        const updatedItemCost = quantity * orderItem.itemPrice
+        cost += updatedItemCost - currentItemCost
+        orderItem.itemQty = quantity
+        return productCopy
       }
-      return product
-    })
-    return {...cart, orderCost: cost, products: updated}
-  } catch (err) {
-    console.log('Error:', err)
-  }
+    }
+    return product
+  })
+  return {...cart, orderCost: cost, products: updated}
 }
 
 export const userAddToCartThunk = (id, quantity) => async dispatch => {
