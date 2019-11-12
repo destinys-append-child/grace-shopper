@@ -32,7 +32,7 @@ class YachtsList extends Component {
           <div className="item">
             <Link
               className="navBarItem"
-              to="/categories/Catamaran"
+              to="/products?category=Catamaran"
               onClick={() => this.props.getByCategory('Catamaran')}
             >
               Catamaran
@@ -41,7 +41,7 @@ class YachtsList extends Component {
           <div className="item">
             <Link
               className="navBarItem"
-              to="/categories/Super%20Yacht"
+              to="/products?category=Super%20Yacht"
               onClick={() => this.props.getByCategory('Super%20Yacht')}
             >
               Super Yacht
@@ -50,7 +50,7 @@ class YachtsList extends Component {
           <div className="item">
             <Link
               className="navBarItem"
-              to="/categories/Motoryacht"
+              to="/products?category=Motoryacht"
               onClick={() => this.props.getByCategory('Motoryacht')}
             >
               Motoryacht
@@ -59,7 +59,7 @@ class YachtsList extends Component {
           <div className="item">
             <Link
               className="navBarItem"
-              to="/categories/Sailing%20Yacht"
+              to="/products?category=Sailing%20Yacht"
               onClick={() => this.props.getByCategory('Sailing%20Yacht')}
             >
               Sailing Yacht
@@ -68,7 +68,7 @@ class YachtsList extends Component {
           <div className="item">
             <Link
               className="navBarItem"
-              to="/categories"
+              to="/products"
               onClick={() => this.props.getYachts()}
             >
               All Yachts

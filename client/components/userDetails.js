@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 import './userDetails.css'
+import {update} from '../store'
 
 class UserDetails extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class UserDetails extends React.Component {
       email: ''
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -21,11 +23,12 @@ class UserDetails extends React.Component {
 
   handleChange(evt) {
     this.setState({[evt.target.name]: evt.target.value})
-    console.log('local state', this.state)
   }
 
   handleSubmit(evt) {
     evt.preventDefault()
+    console.log('state in handleSubmit', this.state)
+    this.props.updateUser(this.state)
   }
 
   render() {
@@ -34,7 +37,7 @@ class UserDetails extends React.Component {
         <h4>
           Edit your details below so your YDS account is always up to date.
         </h4>
-        <form className="ui form">
+        <form className="ui form" onSubmit={this.handleSubmit}>
           <h4 className="ui dividing header">Personal Information</h4>
           <div className="two fields">
             <div className="field">
@@ -71,7 +74,9 @@ class UserDetails extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-          <div className="ui submit button">UPDATE</div>
+          <button className="ui button" type="submit">
+            UPDATE
+          </button>
         </form>
       </div>
     )
@@ -84,4 +89,10 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserDetails)
+const mapDispatch = dispatch => {
+  return {
+    updateUser: userInfo => dispatch(update(userInfo))
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserDetails)

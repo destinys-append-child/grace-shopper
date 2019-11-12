@@ -3,8 +3,7 @@ const router = require('express').Router()
 router.use('/users', require('./users'))
 router.use('/cart', require('./cart'))
 router.use('/orders', require('./orders'))
-router.use('/products', require('./singleProduct'))
-router.use('/categories', require('./categories'))
+router.use('/products', require('./products'))
 router.use('/checkout', require('./checkout'))
 
 router.use((req, res, next) => {

@@ -10,6 +10,7 @@ import {
   SingleProduct,
   Cart,
   Checkout,
+  Confirmation,
   Orders
 } from './components'
 import {me} from './store'
@@ -27,22 +28,19 @@ class Routes extends Component {
   render() {
     return (
       <Switch>
-        {/* Routes placed here are available to all visitors */}
-        {/* Displays our Login component as a fallback */}
-
         <Route path="/products/:productId" component={SingleProduct} />
-        <Route path="/categories/:categoryName" component={YachtsList} />
-        <Route path="/categories" component={YachtsList} />
-        <Route path="/checkout" component={Checkout} />
+        <Route path="/products" component={YachtsList} />
+        <Route path="/profile" component={UserProfile} />
+        <Route
+          exact
+          path="/checkout"
+          component={() => <Checkout isLoggedIn={this.props.isLoggedIn} />}
+        />
+        <Route exact path="/checkout/confirmation" component={Confirmation} />
         <Route
           path="/cart"
           component={() => <Cart isLoggedIn={this.props.isLoggedIn} />}
         />
-        {/* <Route
-          path="/orders"
-          component={() => <Orders isLoggedIn={this.props.isLoggedIn} />}
-        />
-        <Route exact path="/userDetails" component={UserDetails} /> */}
         <Route
           exact
           path="/profile/:page"
