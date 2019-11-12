@@ -1,0 +1,48 @@
+.orders {
+  margin: 5% 10%;
+  padding: 5%;
+  background-color: rgba(163, 185, 196, 0.8);
+  border-radius: 8px;
+  color: black;
+}
+
+.single-order.ui.card {
+  height: auto;
+  width: 100%;
+  padding: 5%;
+}
+
+img {
+  max-width: 200px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.order-item a {
+  text-decoration: none;
+  color: black;
+}
+
+.orders h2,
+.orders h3 {
+  color: black;
+}
+
+.orders h3,
+.orders p {
+  text-align: left;
+}
+
+.order-item {
+  margin: 5%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.order-item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: center;
+  padding-left: 2%;
+}

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import {getOrders} from '../store/orders'
 import SingleOrder from './singleOrder'
-import './orders.css'
+import '../css/orders.css'
 
 class Orders extends Component {
   componentDidMount() {
@@ -11,7 +11,7 @@ class Orders extends Component {
   }
   render() {
     return (
-      <div className="order">
+      <div className="orders">
         <h2>MY ORDERS</h2>
         {this.props.orders && this.props.orders.length ? (
           <div>

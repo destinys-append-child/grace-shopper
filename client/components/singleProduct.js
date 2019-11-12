@@ -7,7 +7,7 @@ import {userAddToCartThunk} from '../store/cart'
 import {yachtsThunk, categoryThunk} from '../store/allProducts'
 import {Button} from 'semantic-ui-react'
 
-import './singleProduct.css'
+import '../css/singleProduct.css'
 
 class DisconnectedSingleProduct extends Component {
   constructor() {
