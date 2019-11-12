@@ -1,6 +1,7 @@
 #user-profile h1:first-child {
   text-align: center;
   font-family: 'Abril Fatface', cursive;
+  color: white;
 }
 
 .ui.secondary.pointing.menu .active.item {

@@ -30,7 +30,7 @@ class Routes extends Component {
       <Switch>
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/products" component={YachtsList} />
-        <Route path="/profile" component={UserProfile} />
+        {/* <Route path="/profile" component={UserProfile} /> */}
         <Route
           exact
           path="/checkout"
@@ -42,7 +42,6 @@ class Routes extends Component {
           component={() => <Cart isLoggedIn={this.props.isLoggedIn} />}
         />
         <Route
-          exact
           path="/profile/:page"
           component={props => (
             <UserProfile {...props} isLoggedIn={this.props.isLoggedIn} />
