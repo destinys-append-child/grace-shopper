@@ -47,7 +47,10 @@ class Routes extends Component {
         <Route path="/categories/:categoryName" component={YachtsList} />
         <Route path="/categories" component={YachtsList} />
         <Route path="/profile" component={UserProfile} />
-        <Route path="/checkout" component={Checkout} />
+        <Route
+          path="/checkout"
+          component={() => <Checkout isLoggedIn={this.props.isLoggedIn} />}
+        />
         <Route
           path="/cart"
           component={() => <Cart isLoggedIn={this.props.isLoggedIn} />}

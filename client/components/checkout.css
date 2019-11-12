@@ -4,6 +4,7 @@
 }
 
 #ordersTable {
+  width: 50%;
   text-align: center;
   font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -32,4 +33,7 @@
   text-align: center;
   background-color: #4caf50;
   color: white;
+}
+h3 {
+  color: whitesmoke;
 }

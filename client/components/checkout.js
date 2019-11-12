@@ -2,14 +2,40 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 import {me} from '../store/user'
-import {getCart, getGuestCart} from '../store/cart'
+import {getCart, getGuestCart, updateAddressThunk} from '../store/cart'
 import './checkout.css'
 import {Link} from 'react-router-dom'
 
 class Checkout extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      billing: '',
+      shipping: ''
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
   componentDidMount() {
     this.props.isLoggedIn && this.props.fetchCart()
     !this.props.isLoggedIn && this.props.fetchGuestCart()
+  }
+
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value})
+    // const addresses = this.state;
+    // this.props.updateAddress(addresses)
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    const addresses = this.state
+    this.props.updateAddress(addresses)
+    this.setState({
+      billing: '',
+      shipping: ''
+    })
   }
   render() {
     return (
@@ -51,20 +77,56 @@ class Checkout extends Component {
             </table>
             <br />
             <br />
-            <h1 className="title">Payment Information</h1>
-            <br />
-            <br />
+            <h3 className="order-cost">
+              Total:{' '}
+              {new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+              }).format(this.props.cart.orderCost)}
+            </h3>
             <h1 className="title">FORM</h1>
-
-            <Link to="/checkout/confirmation">
-              <button type="button">COMPLETE ORDER</button>
-            </Link>
+            <form onSubmit={this.handleSubmit()}>
+              <label>
+                Billing Address:
+                <input
+                  type="text"
+                  name="billing"
+                  value={this.state.billing}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <br />
+              <br />
+              <label>
+                Shipping Address:
+                <input
+                  type="text"
+                  name="shipping"
+                  value={this.state.shipping}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <br />
+              <br />
+              <Link to="/checkout/confirmation">
+                <button type="submit" value="Submit">
+                  COMPLETE ORDER
+                </button>
+              </Link>
+            </form>
+            <br />
+            <br />
             <Link to="/cart">
               <button type="button">BACK TO CART</button>
             </Link>
           </div>
         ) : (
-          <h3>Nothing to checkout!</h3>
+          <div>
+            <h3>Nothing to checkout!</h3>
+            <Link to="/cart">
+              <button type="button">BACK TO CART</button>
+            </Link>
+          </div>
         )}
       </div>
     )
@@ -81,7 +143,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchUser: () => dispatch(me()),
     fetchCart: () => dispatch(getCart()),
-    fetchGuestCart: () => dispatch(getGuestCart())
+    fetchGuestCart: () => dispatch(getGuestCart()),
+    updateAddress: addresses => dispatch(updateAddressThunk(addresses))
   }
 }
 

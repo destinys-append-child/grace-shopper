@@ -13,6 +13,7 @@ const DECREASED_GUEST_QTY = 'DECREASED_GUEST_QTY'
 const REMOVED_ITEM = 'REMOVED_ITEM'
 const REMOVED_GUEST_ITEM = 'REMOVED_GUEST_ITEM'
 const LOGOUT_CLEAR_CART = 'LOGOUT_CLEAR_CART'
+const UPDATE_ADDRESSES = 'UPDATE_ADDRESSES'
 
 // Action Creators
 const gotCart = cart => ({type: GOT_CART, cart})
@@ -27,6 +28,11 @@ export const logoutClearCart = () => ({type: LOGOUT_CLEAR_CART})
 const addToCart = cart => ({
   type: ADD_ITEM_USER,
   cart
+})
+
+export const updateAddresses = addresses => ({
+  type: UPDATE_ADDRESSES,
+  addresses
 })
 
 // Thunk Creators
@@ -139,6 +145,15 @@ export const userAddToCartThunk = (id, quantity) => async dispatch => {
     console.error(error)
   }
 }
+export const updateAddressThunk = addresses => {
+  return async dispatch => {
+    const {data} = await axios.put('/api/checkout/confirmation', addresses)
+    // const { data } = await axios.put('/api/checkout/confirmation')
+    console.log('DATA', data)
+    console.log('ADDRESSES', addresses)
+    dispatch(updateAddresses(data))
+  }
+}
 
 // Reducer
 export default function(cart = {}, action) {
@@ -189,6 +204,13 @@ export default function(cart = {}, action) {
     case ADD_ITEM_USER:
       console.log('HITT')
       return action.cart
+    case UPDATE_ADDRESSES:
+      console.log('ACTION ---->', action.cart)
+      return {
+        ...cart,
+        billing: action.cart.billing,
+        shipping: action.cart.billing
+      }
     default:
       return cart
   }
