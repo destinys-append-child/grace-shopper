@@ -10,8 +10,8 @@ class Checkout extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      billing: null,
-      shipping: null,
+      billing: '',
+      shipping: '',
       redirect: false,
       email: ''
     }

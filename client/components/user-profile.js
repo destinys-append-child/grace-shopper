@@ -2,7 +2,6 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import UserDetails from './userDetails'
 import Orders from './orders'
-import ChangePassword from './changePassword'
 import '../css/user-profile.css'
 
 const UserProfile = props => {
@@ -13,13 +12,6 @@ const UserProfile = props => {
         <Link to="/profile/userDetails" className="item" value="userDetails">
           <i className="address card icon" /> My Details
         </Link>
-        <Link
-          to="/profile/changePassword"
-          className="item"
-          value="changePassword"
-        >
-          <i className="lock icon" /> Change Password
-        </Link>
         <Link to="/profile/orders" className="item" value="orders">
           <i className="box icon" /> My Orders
         </Link>
@@ -27,9 +19,6 @@ const UserProfile = props => {
       <div>
         {props.match.params.page === 'orders' ? (
           <Orders isLoggedIn={props.isLoggedIn} />
-        ) : null}
-        {props.match.params.page === 'changePassword' ? (
-          <ChangePassword />
         ) : null}
         {props.match.params.page === 'userDetails' ? <UserDetails /> : null}
       </div>
