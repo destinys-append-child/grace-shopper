@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, Product, OrderProduct} = require('../db/models')
+const {Order} = require('../db/models')
 module.exports = router
 const nodemailer = require('nodemailer')
 router.get('/', async (req, res, next) => {
@@ -29,6 +29,7 @@ router.get('/confirmation', async (req, res, next) => {
       }
     })
     confirmed.update({isPurchased: true})
+
     res.send(confirmed)
   } catch (error) {
     next(error)
@@ -64,26 +65,28 @@ router.post('/confirmation', async (req, res, next) => {
   res.send('SENT')
 })
 
-// router.put('/confirmation', async (req, res, next) => {
+router.put('/confirmation', async (req, res, next) => {
+  try {
+    if (!req.user) {
+      res.status(404).send('MUST HAVE ACCOUNT FIRST')
+    }
+    const confirmed = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        isPurchased: false
+      }
+    })
+    // confirmed.update({isPurchased: true})
+    console.log('BODDDDDDY', req.body)
+    const {shipping, billing} = req.body
+    confirmed.update({
+      // isPurchased: true,
+      shipping: shipping,
+      billing: billing
+    })
 
-//     try {
-//         let updated = await Order.update({
-//             isPurchased: true
-
-//         }, {
-//             where: {
-//                 userId: req.user.id,
-//                 isPurchased: false
-//               },
-//             returning: true, // needed for affectedRows to be populated
-//             plain: true
-//         });
-//         if (updated) {
-//             res.send(updated)
-//         }else{
-//             res.status(404).send('Order can not be completed')
-//         }
-//     } catch (error) {
-//         next(error)
-//     }
-// })
+    res.send(confirmed)
+  } catch (error) {
+    next(error)
+  }
+})

@@ -10,6 +10,7 @@ import {
   SingleProduct,
   Cart,
   Checkout,
+  Confirmation,
   Orders
 } from './components'
 import {me} from './store'
@@ -29,26 +30,15 @@ class Routes extends Component {
 
     return (
       <Switch>
-        {/* Routes placed here are available to all visitors */}
-        {/* <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
         <Route path="/products/:productId" component={SingleProduct} />
-        <Route exact path="/categories" component={YachtsList} />
-        <Route exact path="/categories/:categoryName" component={YachtsList} />
-
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-        {/* <Route path="/home" component={Home} />
-          </Switch>
-        )} */}
-        {/* Displays our Login component as a fallback */}
-
-        <Route path="/products/:productId" component={SingleProduct} />
-        <Route path="/categories/:categoryName" component={YachtsList} />
-        <Route path="/categories" component={YachtsList} />
+        <Route path="/products" component={YachtsList} />
         <Route path="/profile" component={UserProfile} />
-        <Route path="/checkout" component={Checkout} />
+        <Route
+          exact
+          path="/checkout"
+          component={() => <Checkout isLoggedIn={this.props.isLoggedIn} />}
+        />
+        <Route exact path="/checkout/confirmation" component={Confirmation} />
         <Route
           path="/cart"
           component={() => <Cart isLoggedIn={this.props.isLoggedIn} />}

@@ -40,7 +40,7 @@ class Cart extends Component {
           <h3>No items in cart.</h3>
         )}
         <div className="checkout-button">
-          <Link to="/categories">
+          <Link to="/products">
             <Button className="ui button">KEEP SHOPING</Button>
           </Link>
           <Link to="/checkout">
