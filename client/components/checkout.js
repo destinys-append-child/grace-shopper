@@ -10,9 +10,10 @@ class Checkout extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      billing: '',
-      shipping: '',
-      redirect: false
+      billing: null,
+      shipping: null,
+      redirect: false,
+      email: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -35,14 +36,16 @@ class Checkout extends Component {
       this.setState({
         billing: '',
         shipping: '',
-        redirect: true
+        redirect: true,
+        email: ''
       })
     }
     if (!this.props.isLoggedIn)
       this.setState({
         billing: '',
         shipping: '',
-        redirect: true
+        redirect: true,
+        email: ''
       })
   }
   render() {
@@ -126,6 +129,16 @@ class Checkout extends Component {
               </label>
               <br />
               <br />
+
+              <label className="checkoutFormLabel">
+                Email:
+                <input
+                  type="text"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+              </label>
               <button type="submit" value="SAIL AWAY">
                 SAIL AWAY
               </button>
