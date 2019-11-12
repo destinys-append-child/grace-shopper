@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 
-import './auth-form.css'
+import '../css/auth-form.css'
 
 /**
  * COMPONENT

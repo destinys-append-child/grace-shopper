@@ -7,7 +7,7 @@ import {logout} from '../store'
 import {logoutClearCart} from '../store/cart'
 import {Login, Signup} from '../components'
 
-import './navbar.css'
+import '../css/navbar.css'
 import {Button, Icon} from 'semantic-ui-react'
 
 class Navbar extends React.Component {

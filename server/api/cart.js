@@ -35,7 +35,7 @@ router.post('/:productId', async (req, res, next) => {
     })
     if (order) {
       const product = order.products.find(e => {
-        return e.id == req.params.id
+        return e.id == req.params.productId
       })
       if (product) {
         const orderItem = product.orderProduct

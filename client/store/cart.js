@@ -35,11 +35,11 @@ const removedItem = cart => ({type: REMOVED_ITEM, cart})
 const removedGuestItem = productId => ({type: REMOVED_GUEST_ITEM, productId})
 export const logoutClearCart = () => ({type: LOGOUT_CLEAR_CART})
 const confirmation = confirmation => ({type: CONFIRMATION, confirmation})
-
 export const updateAddresses = addresses => ({
   type: UPDATE_ADDRESSES,
   addresses
 })
+
 // Thunk Creators
 export const getCart = () => async dispatch => {
   try {
@@ -82,28 +82,32 @@ export const updateCart = (productId, quantity) => async dispatch => {
 }
 
 const updateGuestCartHelper = (productId, quantity, cart) => {
-  const localCart = JSON.parse(localStorage.getItem('cart'))
-  let cost = cart.orderCost
-  const updated = cart.products.map(product => {
-    if (product.id === productId) {
-      if (product.quantity >= quantity && quantity >= 1) {
-        localCart[productId] = quantity
-        window.localStorage.setItem('cart', JSON.stringify(localCart))
-        const productCopy = {
-          ...product,
-          orderProduct: {...product.orderProduct}
+  try {
+    const localCart = JSON.parse(localStorage.getItem('cart'))
+    let cost = cart.orderCost
+    const updated = cart.products.map(product => {
+      if (product.id === productId) {
+        if (product.quantity >= quantity && quantity >= 1) {
+          localCart[productId] = quantity
+          window.localStorage.setItem('cart', JSON.stringify(localCart))
+          const productCopy = {
+            ...product,
+            orderProduct: {...product.orderProduct}
+          }
+          const orderItem = productCopy.orderProduct
+          const currentItemCost = orderItem.itemQty * orderItem.itemPrice
+          const updatedItemCost = quantity * orderItem.itemPrice
+          cost += updatedItemCost - currentItemCost
+          orderItem.itemQty = quantity
+          return productCopy
         }
-        const orderItem = productCopy.orderProduct
-        const currentItemCost = orderItem.itemQty * orderItem.itemPrice
-        const updatedItemCost = quantity * orderItem.itemPrice
-        cost += updatedItemCost - currentItemCost
-        orderItem.itemQty = quantity
-        return productCopy
       }
-    }
-    return product
-  })
-  return {...cart, orderCost: cost, products: updated}
+      return product
+    })
+    return {...cart, orderCost: cost, products: updated}
+  } catch (err) {
+    console.log('Error:', err)
+  }
 }
 
 export const userAddToCartThunk = (id, quantity) => async dispatch => {
@@ -141,16 +145,6 @@ export const removeGuestItem = productId => async dispatch => {
   }
 }
 
-// Initial State
-const initialState = {
-  id: 'guest',
-  orderCost: 0,
-  shipping: null,
-  billing: null,
-  isPurchased: false,
-  userId: null,
-  products: []
-}
 export const updateAddressThunk = addresses => {
   return async dispatch => {
     try {
@@ -172,6 +166,17 @@ export const confirmationThunk = () => {
       console.error(error)
     }
   }
+}
+
+// Initial State
+const initialState = {
+  id: 'guest',
+  orderCost: 0,
+  shipping: null,
+  billing: null,
+  isPurchased: false,
+  userId: null,
+  products: []
 }
 
 // Reducer
