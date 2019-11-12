@@ -208,10 +208,9 @@ export default function(cart = initialState, action) {
     case ADD_ITEM_USER:
       return action.cart
     case UPDATE_ADDRESSES:
-      console.log('ACTION ---->', action.addresses)
       return action.addresses
     case CONFIRMATION:
-      return action.confirmation
+      return {}
     default:
       return cart
   }

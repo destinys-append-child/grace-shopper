@@ -1,13 +1,6 @@
 #user-profile h1:first-child {
   text-align: center;
   font-family: 'Abril Fatface', cursive;
-}
-
-.ui.secondary.pointing.menu .active.item {
-  border-bottom-color: white;
-}
-
-.ui.secondary.pointing.menu .active.item {
   color: white;
 }
 
