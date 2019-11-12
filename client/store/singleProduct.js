@@ -1,13 +1,12 @@
 import axios from 'axios'
-import history from '../history'
 
+// Action Types
 const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
-// const REMOVE_FROM_INV = 'REMOVE_FROM_INV'
 
-const defaultProduct = {}
-
+// Action Creator
 const getSingleProduct = product => ({type: GET_SINGLE_PRODUCT, product})
 
+// Thunk Creator
 export const getSingleProductThunk = id => async dispatch => {
   try {
     let {data} = await axios.get(`/api/products/${id}`)
@@ -17,6 +16,10 @@ export const getSingleProductThunk = id => async dispatch => {
   }
 }
 
+// Initial State
+const defaultProduct = {}
+
+// Reducer
 export default function(state = defaultProduct, action) {
   switch (action.type) {
     case GET_SINGLE_PRODUCT:
