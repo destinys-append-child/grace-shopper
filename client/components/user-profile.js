@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import './user-profile.css'
 import UserDetails from './userDetails'
 import Orders from './orders'
+import ChangePassword from './changePassword'
 
 const UserProfile = props => {
   return (
@@ -22,6 +23,11 @@ const UserProfile = props => {
       <div>
         {props.match.params.page === 'orders' ? (
           <Orders isLoggedIn={props.isLoggedIn} />
+        ) : (
+          <UserDetails />
+        )}
+        {props.match.params.page === 'password' ? (
+          <ChangePassword />
         ) : (
           <UserDetails />
         )}
