@@ -20,23 +20,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// router.get('/confirmation', async (req, res, next) => {
-//   try {
-//     const confirmed = await Order.findOne({
-//       where: {
-//         userId: req.user.id,
-//         isPurchased: false
-//       }
-//     })
-//     confirmed.update({isPurchased: true})
-//     confirmed.update({billing: req.body.billingAddress})
-//     res.send(confirmed)
-//   } catch (error) {
-//     next(error)
-//   }
-// })
-
-router.put('/confirmation', async (req, res, next) => {
+router.get('/confirmation', async (req, res, next) => {
   try {
     const confirmed = await Order.findOne({
       where: {
@@ -45,11 +29,31 @@ router.put('/confirmation', async (req, res, next) => {
       }
     })
     confirmed.update({isPurchased: true})
+
+    res.send(confirmed)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/confirmation', async (req, res, next) => {
+  try {
+    if (!req.user) {
+      res.status(404).send('MUST HAVE ACCOUNT FIRST')
+    }
+    const confirmed = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        isPurchased: false
+      }
+    })
+    // confirmed.update({isPurchased: true})
     console.log('BODDDDDDY', req.body)
-    // const {shippingAddress, billingAddress} = req.body;
+    const {shipping, billing} = req.body
     confirmed.update({
-      shipping: req.body.shippingAddress,
-      billing: req.body.billingAddress
+      // isPurchased: true,
+      shipping: shipping,
+      billing: billing
     })
 
     res.send(confirmed)

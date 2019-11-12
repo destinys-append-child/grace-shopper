@@ -9,7 +9,8 @@ import {
   YachtsList,
   SingleProduct,
   Cart,
-  Checkout
+  Checkout,
+  Confirmation
 } from './components'
 import {me} from './store'
 import Home from './components/home'
@@ -48,9 +49,11 @@ class Routes extends Component {
         <Route path="/categories" component={YachtsList} />
         <Route path="/profile" component={UserProfile} />
         <Route
+          exact
           path="/checkout"
           component={() => <Checkout isLoggedIn={this.props.isLoggedIn} />}
         />
+        <Route exact path="/checkout/confirmation" component={Confirmation} />
         <Route
           path="/cart"
           component={() => <Cart isLoggedIn={this.props.isLoggedIn} />}

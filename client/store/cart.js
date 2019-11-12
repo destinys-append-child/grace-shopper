@@ -14,6 +14,7 @@ const REMOVED_ITEM = 'REMOVED_ITEM'
 const REMOVED_GUEST_ITEM = 'REMOVED_GUEST_ITEM'
 const LOGOUT_CLEAR_CART = 'LOGOUT_CLEAR_CART'
 const UPDATE_ADDRESSES = 'UPDATE_ADDRESSES'
+const CONFIRMATION = 'CONFIRMATION'
 
 // Action Creators
 const gotCart = cart => ({type: GOT_CART, cart})
@@ -25,10 +26,8 @@ const decreasedGuestQty = productId => ({type: DECREASED_GUEST_QTY, productId})
 const removedItem = cart => ({type: REMOVED_ITEM, cart})
 const removedGuestItem = productId => ({type: REMOVED_GUEST_ITEM, productId})
 export const logoutClearCart = () => ({type: LOGOUT_CLEAR_CART})
-const addToCart = cart => ({
-  type: ADD_ITEM_USER,
-  cart
-})
+const addToCart = cart => ({type: ADD_ITEM_USER, cart})
+const confirmation = confirmation => ({type: CONFIRMATION, confirmation})
 
 export const updateAddresses = addresses => ({
   type: UPDATE_ADDRESSES,
@@ -147,11 +146,24 @@ export const userAddToCartThunk = (id, quantity) => async dispatch => {
 }
 export const updateAddressThunk = addresses => {
   return async dispatch => {
-    const {data} = await axios.put('/api/checkout/confirmation', addresses)
-    // const { data } = await axios.put('/api/checkout/confirmation')
-    console.log('DATA', data)
-    console.log('ADDRESSES', addresses)
-    dispatch(updateAddresses(data))
+    try {
+      const {data} = await axios.put('/api/checkout/confirmation', addresses)
+      console.log('DATA', data)
+      if (data) dispatch(updateAddresses(data))
+      else alert('MUST HAVE AN ACCOUNT TO CHECKOUT')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+export const confirmationThunk = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get('/api/checkout/confirmation')
+      if (data) dispatch(confirmation(data))
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 
@@ -205,12 +217,10 @@ export default function(cart = {}, action) {
       console.log('HITT')
       return action.cart
     case UPDATE_ADDRESSES:
-      console.log('ACTION ---->', action.cart)
-      return {
-        ...cart,
-        billing: action.cart.billing,
-        shipping: action.cart.billing
-      }
+      console.log('ACTION ---->', action.addresses)
+      return action.addresses
+    case CONFIRMATION:
+      return action.confirmation
     default:
       return cart
   }

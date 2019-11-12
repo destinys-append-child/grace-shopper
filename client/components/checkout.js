@@ -4,14 +4,15 @@ import {connect} from 'react-redux'
 import {me} from '../store/user'
 import {getCart, getGuestCart, updateAddressThunk} from '../store/cart'
 import './checkout.css'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 class Checkout extends Component {
   constructor(props) {
     super(props)
     this.state = {
       billing: '',
-      shipping: ''
+      shipping: '',
+      redirect: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -34,10 +35,22 @@ class Checkout extends Component {
     this.props.updateAddress(addresses)
     this.setState({
       billing: '',
-      shipping: ''
+      shipping: '',
+      redirect: true
     })
   }
   render() {
+    if (!this.props.isLoggedIn) {
+      window.alert('MUST LOGIN FIRST')
+      return <Redirect to="/home" />
+    }
+    if (
+      this.state.redirect === true &&
+      !this.props.cart.products &&
+      this.props.isLoggedIn
+    ) {
+      return <Redirect to="/checkout/confirmation" />
+    }
     return (
       <div>
         {this.props.cart &&
@@ -47,33 +60,35 @@ class Checkout extends Component {
             <h1 className="title">THIS IS CHECKOUT!!!!!!!!!!!!!!</h1>
             <h1 className="title">Order summary</h1>
             <table id="ordersTable">
-              <tr>
-                <th>Name</th>
-                <th>Image</th>
-                <th>Price</th>
-                <th>Quantity</th>
-              </tr>
-              {this.props.cart.products.map(cartItem => (
-                <tr key={cartItem.id}>
-                  <td>
-                    <h2>{cartItem.name}</h2>
-                  </td>
-                  <td>
-                    <img className="product-image" src={cartItem.imageUrl} />
-                  </td>
-                  <td>
-                    <h3 className="product-price">
-                      {new Intl.NumberFormat('en-US', {
-                        style: 'currency',
-                        currency: 'USD'
-                      }).format(cartItem.price)}
-                    </h3>
-                  </td>
-                  <td>
-                    <h3>{cartItem.orderProduct.itemQty}</h3>
-                  </td>
+              <tbody>
+                <tr>
+                  <th>Name</th>
+                  <th>Image</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
                 </tr>
-              ))}
+                {this.props.cart.products.map(cartItem => (
+                  <tr key={cartItem.id}>
+                    <td>
+                      <h2>{cartItem.name}</h2>
+                    </td>
+                    <td>
+                      <img className="product-image" src={cartItem.imageUrl} />
+                    </td>
+                    <td>
+                      <h3 className="product-price">
+                        {new Intl.NumberFormat('en-US', {
+                          style: 'currency',
+                          currency: 'USD'
+                        }).format(cartItem.price)}
+                      </h3>
+                    </td>
+                    <td>
+                      <h3>{cartItem.orderProduct.itemQty}</h3>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
             <br />
             <br />
@@ -85,7 +100,7 @@ class Checkout extends Component {
               }).format(this.props.cart.orderCost)}
             </h3>
             <h1 className="title">FORM</h1>
-            <form onSubmit={this.handleSubmit()}>
+            <form onSubmit={this.handleSubmit}>
               <label>
                 Billing Address:
                 <input
@@ -108,11 +123,11 @@ class Checkout extends Component {
               </label>
               <br />
               <br />
-              <Link to="/checkout/confirmation">
-                <button type="submit" value="Submit">
-                  COMPLETE ORDER
-                </button>
-              </Link>
+
+              {/* <Link to="/checkout/confirmation"> */}
+              <input type="submit" value="COMPLETE ORDER" />
+
+              {/* </Link> */}
             </form>
             <br />
             <br />
