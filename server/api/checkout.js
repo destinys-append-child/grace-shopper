@@ -75,10 +75,20 @@ router.put('/confirmation', async (req, res, next) => {
         isPurchased: false
       }
     })
-    confirmed.update({
-      shipping: req.body.shipping,
-      billing: req.body.billing
-    })
+    // confirmed.update({isPurchased: true})
+    console.log('BODDDDDDY', req.body)
+    const {shipping, billing} = req.body
+    let updates = {}
+    if (shipping) {
+      updates.shipping = shipping
+    }
+    if (billing) {
+      updates.billing = billing
+    }
+    if (updates.shipping || updates.billing) {
+      confirmed.update(updates)
+    }
+
     res.send(confirmed)
   } catch (error) {
     next(error)

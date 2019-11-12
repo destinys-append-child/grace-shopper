@@ -9,9 +9,12 @@ import {Button} from 'semantic-ui-react'
 
 class Cart extends Component {
   componentDidMount() {
-    console.log(this.props)
-    if (this.props.isLoggedIn) this.props.fetchCart()
-    else this.props.fetchGuestCart()
+    if (this.props.isLoggedIn) {
+      this.props.fetchCart()
+    }
+    if (!this.props.isLoggedIn) {
+      this.props.fetchGuestCart()
+    }
   }
   render() {
     return (
