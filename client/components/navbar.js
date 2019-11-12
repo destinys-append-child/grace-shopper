@@ -1,14 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link, Route} from 'react-router-dom'
-import YachtsList from './allProducts'
+import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {logoutClearCart} from '../store/cart'
 import {Login, Signup} from '../components'
 
 import '../css/navbar.css'
-import {Button, Icon} from 'semantic-ui-react'
+import {Icon} from 'semantic-ui-react'
 
 class Navbar extends React.Component {
   constructor(props) {

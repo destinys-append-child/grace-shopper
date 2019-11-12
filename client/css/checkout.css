@@ -58,14 +58,12 @@ h3 {
   background-color: rgba(245, 245, 245, 0.733);
   padding: 22px;
   border: 3px groove navy;
-  /* text-shadow: 1px 1px midnightblue;  */
   box-shadow: 1px 1px 1px 1px rgb(110, 110, 110);
   size: 110%;
   font-weight: bold;
 }
 
 #checkoutForm {
-  /* background: url("https://images-na.ssl-images-amazon.com/images/I/71OQbzZvD3L._SX425_.jpg"); */
   background-repeat: no-repeat;
   background-size: auto;
   opacity: 0.9;
@@ -94,10 +92,3 @@ h3 {
   opacity: 1;
   margin: 5px;
 }
-/* 
-1. underline form above
-2. format the input box
-3. format the buttons
-4. Style the order confirmation page
-4a. Inspirational quote, yacht gif, message, and shipping/billing information
-5. Use video on homepage */
