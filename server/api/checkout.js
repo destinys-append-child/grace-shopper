@@ -1,8 +1,9 @@
 const router = require('express').Router()
 const {Order} = require('../db/models')
+const {isUser} = require('../../utils')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+router.get('/', isUser, async (req, res, next) => {
   try {
     const checkout = await Order.findOne({
       where: {
@@ -20,7 +21,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/confirmation', async (req, res, next) => {
+router.get('/confirmation', isUser, async (req, res, next) => {
   try {
     const confirmed = await Order.findOne({
       where: {

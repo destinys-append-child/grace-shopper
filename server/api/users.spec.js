@@ -22,15 +22,19 @@ describe('User routes', () => {
         firstName: codysFirstName,
         lastName: codysLastName,
         email: codysEmail,
-        password: codysPassword
+        password: codysPassword,
+        isAdmin: true
       })
     })
 
     it('GET /api/users', async () => {
-      const res = await request(app)
-        .get('/api/users')
+      const authenticatedUser = request.agent(app)
+      await authenticatedUser
+        .post('/auth/login')
+        .send({email: codysEmail, password: codysPassword})
         .expect(200)
 
+      const res = await authenticatedUser.get('/api/users').expect(200)
       expect(res.body).to.be.an('array')
       expect(res.body[0].email).to.be.equal(codysEmail)
     })
