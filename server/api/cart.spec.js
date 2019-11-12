@@ -8,7 +8,7 @@ const Order = db.model('order')
 const User = db.model('user')
 const Product = db.model('product')
 
-describe('Order routes', () => {
+describe('Cart routes', () => {
   const codysFirstName = 'Cody'
   const codysLastName = 'Pug'
   const codysEmail = 'cody@puppybook.com'
@@ -26,10 +26,6 @@ describe('Order routes', () => {
   const yachtAvgRating = 4
   const yachtQuantity = 10
   const yachtCategory = 'test category'
-
-  const guestCart = {
-    '1': 4
-  }
 
   beforeEach(async () => {
     await db.sync({force: true})
@@ -56,35 +52,18 @@ describe('Order routes', () => {
     })
   })
 
-  describe('/api/orders/not-purchased', () => {
-    it('GET /api/orders/not-purchased', async () => {
+  describe('/api/cart', () => {
+    it('GET /api/cart', async () => {
       const authenticatedUser = request.agent(app)
       await authenticatedUser
         .post('/auth/login')
         .send({email: codysEmail, password: codysPassword})
         .expect(200)
-      const res = await authenticatedUser
-        .get('/api/orders/not-purchased')
-        .expect(200)
+      const res = await authenticatedUser.get('/api/cart').expect(200)
       expect(res.body).to.be.an('object')
       expect(res.body.orderCost).to.be.equal(testOrderCost)
       expect(res.body.shipping).to.be.equal(testShipping)
       expect(res.body.billing).to.be.equal(testBilling)
-    })
-  })
-
-  describe('/api/orders/not-purchased/guest', () => {
-    it('POST /api/orders/not-purchased/guest', async () => {
-      const res = await request
-        .agent(app)
-        .post('/api/orders/not-purchased/guest')
-        .send(guestCart)
-        .expect(200)
-
-      expect(res.body).to.be.an('object')
-      expect(res.body.id).to.be.equal('guest')
-      expect(res.body.products).to.be.an('array')
-      expect(res.body.products).to.have.lengthOf(1)
     })
   })
 })

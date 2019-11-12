@@ -24,10 +24,8 @@ class UserProfile extends React.Component {
           <a className="item">
             <i className="lock icon" /> Change Password
           </a>
-          <Link to="/orders">
-            <a className="item">
-              <i className="box icon" /> My Orders
-            </a>
+          <Link to="/orders" className="item">
+            <i className="box icon" /> My Orders
           </Link>
         </div>
         <MyDetails />

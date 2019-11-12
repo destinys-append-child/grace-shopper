@@ -12,7 +12,7 @@ const gotOrders = orders => ({
 // Thunk Creators
 export const getOrders = () => async dispatch => {
   try {
-    const {data} = await axios.get('/api/orders/purchased')
+    const {data} = await axios.get('/api/orders')
     dispatch(gotOrders(data))
   } catch (err) {
     console.log('Error:', err)
