@@ -15,7 +15,6 @@ import {
 import {me} from './store'
 import Home from './components/home'
 import UserProfile from './components/user-profile'
-import UserDetails from './components/userDetails'
 
 /**
  * COMPONENT
@@ -26,8 +25,6 @@ class Routes extends Component {
   }
 
   render() {
-    // const {isLoggedIn} = this.props
-
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -41,12 +38,18 @@ class Routes extends Component {
           path="/cart"
           component={() => <Cart isLoggedIn={this.props.isLoggedIn} />}
         />
-        <Route
+        {/* <Route
           path="/orders"
           component={() => <Orders isLoggedIn={this.props.isLoggedIn} />}
         />
-        <Route exact path="/userDetails" component={UserDetails} />
-        <Route path="/profile" component={UserProfile} />
+        <Route exact path="/userDetails" component={UserDetails} /> */}
+        <Route
+          exact
+          path="/profile/:page"
+          component={props => (
+            <UserProfile {...props} isLoggedIn={this.props.isLoggedIn} />
+          )}
+        />
         <Route component={Home} />
       </Switch>
     )

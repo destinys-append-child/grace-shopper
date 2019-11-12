@@ -4,22 +4,31 @@ import {connect} from 'react-redux'
 import './userDetails.css'
 
 class UserDetails extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       firstName: '',
       lastName: '',
       email: ''
     }
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
     const {firstName, lastName, email} = this.props.currentUser
-    // this.setState({firstName: })
+    this.setState({firstName: firstName, lastName: lastName, email: email})
+  }
+
+  handleChange(evt) {
+    this.setState({[evt.target.name]: evt.target.value})
+    console.log('local state', this.state)
+  }
+
+  handleSubmit(evt) {
+    evt.preventDefault()
   }
 
   render() {
-    console.log(this.props.currentUser)
     return (
       <div id="user details">
         <h4>
@@ -36,17 +45,31 @@ class UserDetails extends React.Component {
                     type="text"
                     name="firstName"
                     placeholder="First Name"
+                    value={this.state.firstName}
+                    onChange={this.handleChange}
                   />
                 </div>
                 <div className="field">
-                  <input type="text" name="lastName" placeholder="Last Name" />
+                  <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name"
+                    value={this.state.lastName}
+                    onChange={this.handleChange}
+                  />
                 </div>
               </div>
             </div>
           </div>
           <div className="field">
             <label>Email</label>
-            <input type="text" name="email" placeholder="Email" />
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
           </div>
           <div className="ui submit button">UPDATE</div>
         </form>
