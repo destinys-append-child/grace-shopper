@@ -26,13 +26,10 @@ class Routes extends Component {
   }
 
   render() {
-    // const {isLoggedIn} = this.props
-
     return (
       <Switch>
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/products" component={YachtsList} />
-        <Route path="/profile" component={UserProfile} />
         <Route
           exact
           path="/checkout"
@@ -44,8 +41,10 @@ class Routes extends Component {
           component={() => <Cart isLoggedIn={this.props.isLoggedIn} />}
         />
         <Route
-          path="/orders"
-          component={() => <Orders isLoggedIn={this.props.isLoggedIn} />}
+          path="/profile/:page"
+          component={props => (
+            <UserProfile {...props} isLoggedIn={this.props.isLoggedIn} />
+          )}
         />
         <Route component={Home} />
       </Switch>

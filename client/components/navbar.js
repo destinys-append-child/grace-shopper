@@ -51,7 +51,6 @@ class Navbar extends React.Component {
             </Link>
             <Link to="/cart">
               <Icon name="cart" />
-              {/* <span className='badge'>1</span> */}
             </Link>
             <Link to="/wishlist">
               <Icon name="heart outline" />
@@ -59,7 +58,7 @@ class Navbar extends React.Component {
             {isLoggedIn ? (
               <div>
                 {/* The navbar will show these links after you log in */}
-                <Link to="/profile">
+                <Link to="/profile/:profileId">
                   <i className="user circle icon" />
                 </Link>
                 <a href="#" onClick={handleClick}>
@@ -79,7 +78,6 @@ class Navbar extends React.Component {
                 {this.state.viewSignup ? <Signup /> : null}
               </div>
             )}
-            {/*INPUT SEARCH BAR*/}
           </nav>
         </div>
       </div>
@@ -116,5 +114,3 @@ Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }
-
-/*change view for after login: 'Let's Set Sail {user.name}!'*/
