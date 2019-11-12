@@ -25,13 +25,13 @@ export const updatedGuestCart = (productId, quantity) => ({
   productId,
   quantity
 })
-const removedItem = cart => ({type: REMOVED_ITEM, cart})
-const removedGuestItem = productId => ({type: REMOVED_GUEST_ITEM, productId})
-export const logoutClearCart = () => ({type: LOGOUT_CLEAR_CART})
 const addToCart = cart => ({
   type: ADD_ITEM_USER,
   cart
 })
+const removedItem = cart => ({type: REMOVED_ITEM, cart})
+const removedGuestItem = productId => ({type: REMOVED_GUEST_ITEM, productId})
+export const logoutClearCart = () => ({type: LOGOUT_CLEAR_CART})
 
 // Thunk Creators
 export const getCart = () => async dispatch => {
@@ -103,6 +103,17 @@ const updateGuestCartHelper = (productId, quantity, cart) => {
   }
 }
 
+export const userAddToCartThunk = (id, quantity) => async dispatch => {
+  try {
+    let {data} = await axios.post(`/api/cart/${id}`, {
+      quantity
+    })
+    if (data) dispatch(addToCart(data))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export const removeItem = productId => async dispatch => {
   try {
     const {data} = await axios.delete(`/api/cart/${productId}`)
@@ -124,18 +135,6 @@ export const removeGuestItem = productId => async dispatch => {
     dispatch(removedGuestItem(productId))
   } catch (err) {
     console.log('Error:', err)
-  }
-}
-
-export const userAddToCartThunk = (id, quantity) => async dispatch => {
-  try {
-    console.log('THUNK HIT')
-    let {data} = await axios.post(`/api/products/${id}`, {
-      quantity
-    })
-    if (data) dispatch(addToCart(data))
-  } catch (error) {
-    console.error(error)
   }
 }
 
