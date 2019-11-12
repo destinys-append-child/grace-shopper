@@ -56,16 +56,14 @@ describe('Order routes', () => {
     })
   })
 
-  describe('/api/orders/not-purchased', () => {
-    it('GET /api/orders/not-purchased', async () => {
+  describe('/api/cart', () => {
+    it('GET /api/cart', async () => {
       const authenticatedUser = request.agent(app)
       await authenticatedUser
         .post('/auth/login')
         .send({email: codysEmail, password: codysPassword})
         .expect(200)
-      const res = await authenticatedUser
-        .get('/api/orders/not-purchased')
-        .expect(200)
+      const res = await authenticatedUser.get('/api/cart').expect(200)
       expect(res.body).to.be.an('object')
       expect(res.body.orderCost).to.be.equal(testOrderCost)
       expect(res.body.shipping).to.be.equal(testShipping)

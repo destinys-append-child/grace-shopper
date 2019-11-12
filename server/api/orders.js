@@ -1,28 +1,6 @@
 const router = require('express').Router()
-const {Order, Product, OrderProduct} = require('../db/models')
+const {Order, Product} = require('../db/models')
 module.exports = router
-
-// get cart for logged in users
-// pull from orders table where isPurchased is false
-router.get('/not-purchased', async (req, res, next) => {
-  try {
-    // should only be one cart per userId at a time
-    if (!req.user) {
-      res.status(401).send(`Must login to get cart`)
-    }
-    const cart = await Order.findOne({
-      where: {
-        userId: req.user.id,
-        isPurchased: false
-      },
-      include: [{model: Product}]
-    })
-    if (cart) res.send(cart)
-    else res.send(`No items in cart`)
-  } catch (err) {
-    next(err)
-  }
-})
 
 // generate a cart-like object for guests
 router.post('/not-purchased/guest', async (req, res, next) => {

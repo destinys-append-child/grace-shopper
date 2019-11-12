@@ -4,12 +4,10 @@ import axios from 'axios'
 
 // Action Types
 const GOT_CART = 'GOT_CART'
-const ADD_ITEM_USER = 'ADD_ITEM_USER'
 const GOT_GUEST_CART = 'GOT_GUEST_CART'
-const INCREASED_QTY = 'INCREASED_QTY'
-const INCREASED_GUEST_QTY = 'INCREASED_GUEST_QTY'
-const DECREASED_QTY = 'DECREASED_QTY'
-const DECREASED_GUEST_QTY = 'DECREASED_GUEST_QTY'
+const UPDATED_CART = 'UPDATED_CART'
+const UPDATED_GUEST_CART = 'UPDATED_GUEST_CART'
+const ADD_ITEM_USER = 'ADD_ITEM_USER'
 const REMOVED_ITEM = 'REMOVED_ITEM'
 const REMOVED_GUEST_ITEM = 'REMOVED_GUEST_ITEM'
 const LOGOUT_CLEAR_CART = 'LOGOUT_CLEAR_CART'
@@ -17,10 +15,12 @@ const LOGOUT_CLEAR_CART = 'LOGOUT_CLEAR_CART'
 // Action Creators
 const gotCart = cart => ({type: GOT_CART, cart})
 const gotGuestCart = cart => ({type: GOT_GUEST_CART, cart})
-const increasedQty = cart => ({type: INCREASED_QTY, cart})
-const increasedGuestQty = productId => ({type: INCREASED_GUEST_QTY, productId})
-const decreasedQty = cart => ({type: DECREASED_QTY, cart})
-const decreasedGuestQty = productId => ({type: DECREASED_GUEST_QTY, productId})
+const updatedCart = cart => ({type: UPDATED_CART, cart})
+export const updatedGuestCart = (productId, quantity) => ({
+  type: UPDATED_GUEST_CART,
+  productId,
+  quantity
+})
 const removedItem = cart => ({type: REMOVED_ITEM, cart})
 const removedGuestItem = productId => ({type: REMOVED_GUEST_ITEM, productId})
 export const logoutClearCart = () => ({type: LOGOUT_CLEAR_CART})
@@ -32,7 +32,7 @@ const addToCart = cart => ({
 // Thunk Creators
 export const getCart = () => async dispatch => {
   try {
-    const {data} = await axios.get('/api/orders/not-purchased')
+    const {data} = await axios.get('/api/cart')
     dispatch(gotCart(data))
   } catch (err) {
     console.log('Error:', err)
@@ -52,51 +52,36 @@ export const getGuestCart = () => async dispatch => {
   }
 }
 
-export const increaseQty = productId => async dispatch => {
+export const updateCart = (productId, quantity) => async dispatch => {
   try {
-    const {data} = await axios.put(
-      `/api/orders/not-purchased/increase/${productId}`
-    )
-    dispatch(increasedQty(data))
+    const {data} = await axios.put(`/api/cart`, {productId, quantity})
+    dispatch(updatedCart(data))
   } catch (err) {
     console.log('Error:', err)
   }
 }
 
-export const increaseGuestQty = productId => async dispatch => {
+const updateGuestCartThunk = (productId, quantity, cart) => {
   try {
-    let localCart = JSON.parse(localStorage.getItem('cart'))
-    if (localCart) {
-      localCart[productId] ? localCart[productId]++ : (localCart[productId] = 1)
-      window.localStorage.setItem('cart', JSON.stringify(localCart))
-    }
-    dispatch(increasedGuestQty(productId))
-  } catch (err) {
-    console.log('Error:', err)
-  }
-}
-
-export const decreaseQty = productId => async dispatch => {
-  try {
-    const {data} = await axios.put(
-      `/api/orders/not-purchased/decrease/${productId}`
-    )
-    dispatch(decreasedQty(data))
-  } catch (err) {
-    console.log('Error:', err)
-  }
-}
-
-export const decreaseGuestQty = productId => async dispatch => {
-  try {
-    let localCart = JSON.parse(localStorage.getItem('cart'))
-    if (localCart) {
-      if (localCart[productId] && localCart[productId] > 1) {
-        localCart[productId]--
-        window.localStorage.setItem('cart', JSON.stringify(localCart))
-        dispatch(decreasedGuestQty(productId))
+    let cost = cart.orderCost
+    const updated = cart.products.map(product => {
+      if (product.id === productId) {
+        if (product.quantity >= quantity && quantity >= 1) {
+          const productCopy = {
+            ...product,
+            orderProduct: {...product.orderProduct}
+          }
+          const orderItem = productCopy.orderProduct
+          const currentItemCost = orderItem.itemQty * orderItem.itemPrice
+          const updatedItemCost = quantity * orderItem.itemPrice
+          cost += updatedItemCost - currentItemCost
+          orderItem.itemQty = quantity
+          return productCopy
+        }
       }
-    }
+      return product
+    })
+    return {...cart, orderCost: cost, products: updated}
   } catch (err) {
     console.log('Error:', err)
   }
@@ -147,32 +132,12 @@ export default function(cart = {}, action) {
       return action.cart
     case GOT_GUEST_CART:
       return action.cart
-    case INCREASED_QTY:
+    case UPDATED_CART:
       return action.cart
-    case DECREASED_QTY:
-      return action.cart
+    case UPDATED_GUEST_CART:
+      return updateGuestCartThunk(action.productId, action.quantity, cart)
     case REMOVED_ITEM:
       return action.cart
-    case INCREASED_GUEST_QTY:
-      let newCost = cart.orderCost
-      const newProducts = cart.products.map(product => {
-        if (product.id === Number(action.productId)) {
-          product.orderProduct.itemQty++
-          newCost += product.price
-        }
-        return product
-      })
-      return {...cart, orderCost: newCost, products: newProducts}
-    case DECREASED_GUEST_QTY:
-      let newTotal = cart.orderCost
-      const newProds = cart.products.map(product => {
-        if (product.id === Number(action.productId)) {
-          product.orderProduct.itemQty--
-          newTotal -= product.price
-        }
-        return product
-      })
-      return {...cart, orderCost: newTotal, products: newProds}
     case REMOVED_GUEST_ITEM:
       let total = cart.orderCost
       const filteredProds = cart.products.filter(product => {
