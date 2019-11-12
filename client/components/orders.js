@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import {getOrders} from '../store/orders'
 import SingleOrder from './singleOrder'
-import './orders.css'
+import '../css/orders.css'
 
 class Orders extends Component {
   componentDidMount() {

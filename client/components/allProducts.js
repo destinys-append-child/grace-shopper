@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {yachtsThunk, categoryThunk} from '../store/allProducts'
 import {Link} from 'react-router-dom'
 
-import './allProducts.css'
+import '../css/allProducts.css'
 
 class YachtsList extends Component {
   constructor(props) {

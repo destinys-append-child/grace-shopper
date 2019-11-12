@@ -9,7 +9,7 @@ import {
   updatedGuestCart
 } from '../store/cart'
 
-import './cartItem.css'
+import '../css/cartItem.css'
 
 function CartItem(props) {
   const {

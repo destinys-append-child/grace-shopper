@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import {me} from '../store/user'
 import {getCart, getGuestCart, updateAddressThunk} from '../store/cart'
-import './checkout.css'
+import '../css/checkout.css'
 import {Link, Redirect} from 'react-router-dom'
 
 class Checkout extends Component {

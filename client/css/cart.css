@@ -1,11 +1,21 @@
-.cart h2 {
-  font-family: 'Abril Fatface', cursive;
+.cart {
+  margin: 5% 10%;
+  padding: 5%;
   text-align: center;
-  color: white;
+  background: #cccccc;
+  border-radius: 8px;
+  color: black;
+}
+.cart,
+.checkout-button {
+  text-align: center;
+}
+.cart h2,
+.cart h3 {
+  color: black;
 }
 
 .cart .order-cost {
-  color: white;
   text-align: center;
 }
 
@@ -16,8 +26,5 @@
 .cart .checkout-button {
   display: flex;
   justify-content: center;
-}
-
-.cart .checkout-button .ui.button {
   margin: 10px;
 }
