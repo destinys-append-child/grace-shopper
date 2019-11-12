@@ -15,10 +15,13 @@ class YachtsList extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.match.params.categoryName) {
+    console.log('SEARC', this.props.location.search)
+    if (!this.props.location.search) {
       this.props.getYachts()
     } else {
-      this.props.getByCategory(this.props.match.params.categoryName)
+      const categoryName = this.props.location.search.slice(10)
+      console.log('CATEGORYNAME', categoryName)
+      this.props.getByCategory(categoryName)
     }
   }
 

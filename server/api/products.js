@@ -20,6 +20,7 @@ router.get('/', async (req, res, next) => {
     } else {
       products = await Product.findAll()
     }
+
     if (products) {
       res.json(products)
     } else {

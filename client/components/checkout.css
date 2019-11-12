@@ -1,16 +1,30 @@
+.checkout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 .title {
   text-align: center;
   font-family: arial, sans-serif;
+  color: whitesmoke;
+}
+#table {
+  width: 70%;
+  border: 12px ridge saddlebrown;
+  color: dodgerblue;
 }
 
 #ordersTable {
-  width: 50%;
+  justify-content: center;
   text-align: center;
   font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  border: 3px solid #ddd;
+  border: 3px solid floralwhite;
   width: 100%;
-  background: rgba(5, 82, 247, 0.7);
+  background: rgba(245, 245, 245, 0.63);
+  box-shadow: 5px 5px 2px sienna;
 }
 
 #ordersTable td,
@@ -20,20 +34,69 @@
 }
 
 #ordersTable tr:nth-child(even) {
-  background-color: #0ac4f3c4;
+  background-color: whitesmoke;
 }
 
 #ordersTable tr:hover {
-  background-color: rgba(9, 245, 245, 0.863);
+  background-color: rgba(0, 0, 139, 0.568);
+  box-shadow: 1px 1px 1px 1px black;
 }
 
 #ordersTable th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #4caf50;
-  color: white;
+  background-color: aqua;
+  color: navy;
+  size: 112%;
+  font-weight: bold;
 }
 h3 {
-  color: whitesmoke;
+  color: dodgerblue;
 }
+.cost {
+  background-color: rgba(245, 245, 245, 0.733);
+  padding: 22px;
+  border: 3px groove navy;
+  /* text-shadow: 1px 1px midnightblue;  */
+  box-shadow: 1px 1px 1px 1px rgb(110, 110, 110);
+  size: 110%;
+  font-weight: bold;
+}
+
+#checkoutForm {
+  /* background-image: url("https://images-na.ssl-images-amazon.com/images/I/71omqOcn87L._SX425_.jpg"); */
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.7;
+  background-color: rgba(245, 245, 245, 0.774);
+  padding: 22px;
+  margin: 22px;
+  size: 110%;
+  width: 55%;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+.checkoutFormLabel label {
+  opacity: 1;
+  color: black;
+  font-weight: bold;
+  justify-content: center;
+}
+.checkoutFormLabel input {
+  opacity: 1;
+  border: 5px ridge saddlebrown;
+}
+#checkoutForm button {
+  opacity: 1;
+  margin: 5px;
+}
+/* 
+1. underline form above
+2. format the input box
+3. format the buttons
+4. Style the order confirmation page
+4a. Inspirational quote, yacht gif, message, and shipping/billing information
+5. Use video on homepage */

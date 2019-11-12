@@ -1,8 +1,10 @@
 const router = require('express').Router()
 const {Order} = require('../db/models')
+const {isUser} = require('../../utils')
 module.exports = router
 const nodemailer = require('nodemailer')
-router.get('/', async (req, res, next) => {
+
+router.get('/', isUser, async (req, res, next) => {
   try {
     const checkout = await Order.findOne({
       where: {
@@ -20,7 +22,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/confirmation', async (req, res, next) => {
+router.get('/confirmation', isUser, async (req, res, next) => {
   try {
     const confirmed = await Order.findOne({
       where: {
@@ -48,9 +50,6 @@ router.post('/confirmation', async (req, res, next) => {
     from: process.env.NODEMAIL_EMAIL,
     to: req.body.email,
     subject: `It\'s All Smooth Sailing From Here ${req.user.firstName} 😎`,
-    // html:<p>
-
-    // </p>,
     text: `Look, not every one can be a winner.Fortunately, that has absolutely nothing to do with you!(Because you are a winner)Congrats on that new 👏FAT👏ASS👏YACHT!`,
     replyTo: ''
   }
@@ -76,15 +75,10 @@ router.put('/confirmation', async (req, res, next) => {
         isPurchased: false
       }
     })
-    // confirmed.update({isPurchased: true})
-    console.log('BODDDDDDY', req.body)
-    const {shipping, billing} = req.body
     confirmed.update({
-      // isPurchased: true,
-      shipping: shipping,
-      billing: billing
+      shipping: req.body.shipping,
+      billing: req.body.billing
     })
-
     res.send(confirmed)
   } catch (error) {
     next(error)
