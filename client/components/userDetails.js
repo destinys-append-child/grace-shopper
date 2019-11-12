@@ -1,8 +1,9 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-import './mydetails.css'
+import './userDetails.css'
 
-class MyDetails extends React.Component {
+class UserDetails extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -12,9 +13,15 @@ class MyDetails extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const {firstName, lastName, email} = this.props.currentUser
+    // this.setState({firstName: })
+  }
+
   render() {
+    console.log(this.props.currentUser)
     return (
-      <div id="my details">
+      <div id="user details">
         <h4>
           Edit your details below so your YDS account is always up to date.
         </h4>
@@ -38,12 +45,20 @@ class MyDetails extends React.Component {
             </div>
           </div>
           <div className="field">
-            <input type="text" name="lastName" placeholder="Last Name" />
+            <label>Email</label>
+            <input type="text" name="email" placeholder="Email" />
           </div>
+          <div className="ui submit button">UPDATE</div>
         </form>
       </div>
     )
   }
 }
 
-export default MyDetails
+const mapState = state => {
+  return {
+    currentUser: state.user
+  }
+}
+
+export default connect(mapState)(UserDetails)

@@ -8,9 +8,6 @@ import './allProducts.css'
 class YachtsList extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      activeItem: false
-    }
     this.getByCategory = this.getByCategory.bind(this)
   }
 

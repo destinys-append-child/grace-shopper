@@ -1,19 +1,12 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import './user-profile.css'
-import MyDetails from './mydetails'
 
 class UserProfile extends React.Component {
   constructor() {
     super()
-    this.state = {
-      activeItem: false
-    }
   }
 
   render() {
-    const {activeItem} = this.state
-
     return (
       <div id="user-profile">
         <h1>MY ACCOUNT</h1>
@@ -21,16 +14,13 @@ class UserProfile extends React.Component {
           <a className="item">
             <i className="address card icon" /> My Details
           </a>
-          <a className="item">
+          <a className="active item">
             <i className="lock icon" /> Change Password
           </a>
-          <Link to="/orders">
-            <a className="item">
-              <i className="box icon" /> My Orders
-            </a>
-          </Link>
+          <a to="/orders" className="active item">
+            <i className="box icon" /> My Orders
+          </a>
         </div>
-        <MyDetails />
       </div>
     )
   }

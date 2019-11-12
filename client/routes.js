@@ -15,6 +15,7 @@ import {
 import {me} from './store'
 import Home from './components/home'
 import UserProfile from './components/user-profile'
+import UserDetails from './components/userDetails'
 
 /**
  * COMPONENT
@@ -30,24 +31,11 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        {/* <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/products/:productId" component={SingleProduct} />
-        <Route exact path="/categories" component={YachtsList} />
-        <Route exact path="/categories/:categoryName" component={YachtsList} />
-
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-        {/* <Route path="/home" component={Home} />
-          </Switch>
-        )} */}
         {/* Displays our Login component as a fallback */}
 
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/categories/:categoryName" component={YachtsList} />
         <Route path="/categories" component={YachtsList} />
-        <Route path="/profile" component={UserProfile} />
         <Route path="/checkout" component={Checkout} />
         <Route
           path="/cart"
@@ -57,6 +45,8 @@ class Routes extends Component {
           path="/orders"
           component={() => <Orders isLoggedIn={this.props.isLoggedIn} />}
         />
+        <Route exact path="/userDetails" component={UserDetails} />
+        <Route path="/profile" component={UserProfile} />
         <Route component={Home} />
       </Switch>
     )

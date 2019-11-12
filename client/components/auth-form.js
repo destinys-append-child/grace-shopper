@@ -15,11 +15,11 @@ const AuthForm = props => {
     <div id="form" className="ui form error">
       <form onSubmit={handleSubmit} name={name} className="ui mini form">
         <div>
-          <label htmlFor="email">{/* <small>Email</small> */}</label>
+          <label htmlFor="email" />
           <input name="email" type="email" placeholder="email" required />
         </div>
         <div>
-          <label htmlFor="password">{/* <small>Password</small> */}</label>
+          <label htmlFor="password" />
           <input
             name="password"
             type="password"
@@ -30,9 +30,7 @@ const AuthForm = props => {
         {name === 'signup' && (
           <div>
             <div>
-              <label htmlFor="firstName">
-                {/* <small>First Name</small> */}
-              </label>
+              <label htmlFor="firstName" />
               <input
                 name="firstName"
                 type="text"
@@ -41,7 +39,7 @@ const AuthForm = props => {
               />
             </div>
             <div>
-              <label htmlFor="lastName">{/* <small>Last Name</small> */}</label>
+              <label htmlFor="lastName" />
               <input
                 name="lastName"
                 type="text"
