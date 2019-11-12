@@ -57,19 +57,23 @@ function CartItem(props) {
   return (
     <div key={cartItem.id} className="cart-item">
       <div className="ui card">
-        <a href={`/products/${cartItem.id}`}>{cartItem.name}</a>
         <a href={`/products/${cartItem.id}`}>
           <img className="product-image" src={cartItem.imageUrl} />
         </a>
         <div>
-          <h3 className="product-price">
-            Price:{' '}
+          <a href={`/products/${cartItem.id}`}>
+            <h3>{cartItem.name}</h3>
+          </a>
+          <p className="product-price">
+            <strong>Price:</strong>{' '}
             {new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD'
             }).format(cartItem.price)}
-          </h3>
-          <h3 className="product-qty">Qty: {quantity}</h3>
+          </p>
+          <p className="product-qty">
+            <strong>Qty:</strong> {quantity}
+          </p>
           <div className="mini ui icon buttons" id={cartItem.id}>
             <button
               type="button"

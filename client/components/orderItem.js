@@ -1,21 +1,27 @@
 import React from 'react'
 
 function OrderItem(props) {
-  const {name, imageUrl} = props.product
+  const {id, name, imageUrl} = props.product
   const {itemPrice, itemQty} = props.product.orderProduct
   return (
     <div className="order-item">
-      <img className="product-image" src={imageUrl} />
+      <a href={`/products/${id}`}>
+        <img className="product-image" src={imageUrl} />
+      </a>
       <div className="order-item-info">
-        <h4>Name: {name}</h4>
-        <h4>
-          Price:{' '}
+        <a href={`/products/${id}`}>
+          <h4>{name}</h4>
+        </a>
+        <p>
+          <strong>Price:</strong>{' '}
           {new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD'
           }).format(itemPrice)}
-        </h4>
-        <h4>Quantity: {itemQty}</h4>
+        </p>
+        <p>
+          <strong>Qty:</strong> {itemQty}
+        </p>
       </div>
     </div>
   )

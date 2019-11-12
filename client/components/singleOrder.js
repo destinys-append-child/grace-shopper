@@ -7,16 +7,20 @@ function SingleOrder(props) {
   return (
     <div className="ui card single-order">
       <h3>Order #: {id}</h3>
-      <h4>
-        Order Cost:{' '}
+      <p>
+        <strong>Order Cost:</strong>{' '}
         {new Intl.NumberFormat('en-US', {
           style: 'currency',
           currency: 'USD'
         }).format(orderCost)}
-      </h4>
-      <h4>Shipping: {shipping}</h4>
-      <h4>Billing: {billing}</h4>
-      <h4>Order Items:</h4>
+      </p>
+      <p>
+        <strong>Shipping:</strong> {shipping}
+      </p>
+      <p>
+        <strong>Billing:</strong> {billing}
+      </p>
+      <h3>Order Items:</h3>
       {products.map(product => {
         return <OrderItem key={product.id} product={product} />
       })}

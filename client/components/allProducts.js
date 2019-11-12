@@ -15,6 +15,7 @@ class YachtsList extends Component {
   }
 
   componentDidMount() {
+    console.log('this props', this.props)
     if (!this.props.match.params.categoryName) {
       this.props.getYachts()
     } else {
