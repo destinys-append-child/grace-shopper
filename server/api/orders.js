@@ -34,8 +34,9 @@ router.post('/not-purchased/guest', async (req, res, next) => {
   }
 })
 
-// GET Order History for logged in user
-router.get('/purchased', async (req, res, next) => {
+// GET /api/orders
+// Order History for logged in user
+router.get('/', async (req, res, next) => {
   try {
     if (!req.user) {
       res.status(401).send(`Must login to get order history`)

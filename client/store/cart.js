@@ -14,7 +14,7 @@ const LOGOUT_CLEAR_CART = 'LOGOUT_CLEAR_CART'
 
 // Action Creators
 const gotCart = cart => ({type: GOT_CART, cart})
-const gotGuestCart = cart => ({type: GOT_GUEST_CART, cart})
+export const gotGuestCart = () => ({type: GOT_GUEST_CART})
 const updatedCart = cart => ({type: UPDATED_CART, cart})
 export const updatedGuestCart = (productId, quantity) => ({
   type: UPDATED_GUEST_CART,
@@ -123,8 +123,19 @@ export const userAddToCartThunk = (id, quantity) => async dispatch => {
   }
 }
 
+// Initial State
+const initialState = {
+  id: 'guest',
+  orderCost: 0,
+  shipping: null,
+  billing: null,
+  isPurchased: false,
+  userId: null,
+  products: []
+}
+
 // Reducer
-export default function(cart = {}, action) {
+export default function(cart = initialState, action) {
   switch (action.type) {
     case GOT_CART:
       return action.cart

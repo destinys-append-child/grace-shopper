@@ -27,10 +27,6 @@ describe('Order routes', () => {
   const yachtQuantity = 10
   const yachtCategory = 'test category'
 
-  const guestCart = {
-    '1': 4
-  }
-
   beforeEach(async () => {
     await db.sync({force: true})
     const user = await User.create({
@@ -68,21 +64,6 @@ describe('Order routes', () => {
       expect(res.body.orderCost).to.be.equal(testOrderCost)
       expect(res.body.shipping).to.be.equal(testShipping)
       expect(res.body.billing).to.be.equal(testBilling)
-    })
-  })
-
-  describe('/api/orders/not-purchased/guest', () => {
-    it('POST /api/orders/not-purchased/guest', async () => {
-      const res = await request
-        .agent(app)
-        .post('/api/orders/not-purchased/guest')
-        .send(guestCart)
-        .expect(200)
-
-      expect(res.body).to.be.an('object')
-      expect(res.body.id).to.be.equal('guest')
-      expect(res.body.products).to.be.an('array')
-      expect(res.body.products).to.have.lengthOf(1)
     })
   })
 })
