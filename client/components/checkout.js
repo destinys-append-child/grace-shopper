@@ -25,30 +25,28 @@ class Checkout extends Component {
 
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value})
-    // const addresses = this.state;
-    // this.props.updateAddress(addresses)
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    const addresses = this.state
-    this.props.updateAddress(addresses)
-    this.setState({
-      billing: '',
-      shipping: '',
-      redirect: true
-    })
+    if (this.props.isLoggedIn) {
+      const addresses = this.state
+      this.props.updateAddress(addresses)
+      this.setState({
+        billing: '',
+        shipping: '',
+        redirect: true
+      })
+    }
+    if (!this.props.isLoggedIn)
+      this.setState({
+        billing: '',
+        shipping: '',
+        redirect: true
+      })
   }
   render() {
-    if (!this.props.isLoggedIn) {
-      window.alert('MUST LOGIN FIRST')
-      return <Redirect to="/home" />
-    }
-    if (
-      this.state.redirect === true &&
-      !this.props.cart.products &&
-      this.props.isLoggedIn
-    ) {
+    if (this.state.redirect === true) {
       return <Redirect to="/checkout/confirmation" />
     }
     return (
