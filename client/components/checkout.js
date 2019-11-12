@@ -57,51 +57,56 @@ class Checkout extends Component {
         this.props.cart.id &&
         this.props.cart.products.length ? (
           <div className="checkout">
-            <h1 className="title">THIS IS CHECKOUT!!!!!!!!!!!!!!</h1>
+            <h1 className="title">Checkout</h1>
             <h1 className="title">Order summary</h1>
-            <table id="ordersTable">
-              <tbody>
-                <tr>
-                  <th>Name</th>
-                  <th>Image</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                </tr>
-                {this.props.cart.products.map(cartItem => (
-                  <tr key={cartItem.id}>
-                    <td>
-                      <h2>{cartItem.name}</h2>
-                    </td>
-                    <td>
-                      <img className="product-image" src={cartItem.imageUrl} />
-                    </td>
-                    <td>
-                      <h3 className="product-price">
-                        {new Intl.NumberFormat('en-US', {
-                          style: 'currency',
-                          currency: 'USD'
-                        }).format(cartItem.price)}
-                      </h3>
-                    </td>
-                    <td>
-                      <h3>{cartItem.orderProduct.itemQty}</h3>
-                    </td>
+            <div id="table">
+              <table id="ordersTable">
+                <tbody>
+                  <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                  {this.props.cart.products.map(cartItem => (
+                    <tr key={cartItem.id}>
+                      <td>
+                        <h2>{cartItem.name}</h2>
+                      </td>
+                      <td>
+                        <img
+                          className="product-image"
+                          src={cartItem.imageUrl}
+                        />
+                      </td>
+                      <td>
+                        <h3 className="product-price">
+                          {new Intl.NumberFormat('en-US', {
+                            style: 'currency',
+                            currency: 'USD'
+                          }).format(cartItem.price)}
+                        </h3>
+                      </td>
+                      <td>
+                        <h3>{cartItem.orderProduct.itemQty}</h3>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
             <br />
             <br />
-            <h3 className="order-cost">
+            <h3 className="cost">
               Total:{' '}
               {new Intl.NumberFormat('en-US', {
                 style: 'currency',
                 currency: 'USD'
               }).format(this.props.cart.orderCost)}
             </h3>
-            <h1 className="title">FORM</h1>
-            <form onSubmit={this.handleSubmit}>
-              <label>
+            <h1 className="title">Harbour</h1>
+            <form id="checkoutForm" onSubmit={this.handleSubmit}>
+              <label className="checkoutFormLabel">
                 Billing Address:
                 <input
                   type="text"
@@ -112,7 +117,7 @@ class Checkout extends Component {
               </label>
               <br />
               <br />
-              <label>
+              <label className="checkoutFormLabel">
                 Shipping Address:
                 <input
                   type="text"
@@ -123,17 +128,17 @@ class Checkout extends Component {
               </label>
               <br />
               <br />
-
-              {/* <Link to="/checkout/confirmation"> */}
-              <input type="submit" value="COMPLETE ORDER" />
-
-              {/* </Link> */}
+              <button type="submit" value="SAIL AWAY">
+                SAIL AWAY
+              </button>
+              <Link to="/cart">
+                <button type="button">BACK TO CART</button>
+              </Link>
+              <br />
+              <br />
             </form>
             <br />
             <br />
-            <Link to="/cart">
-              <button type="button">BACK TO CART</button>
-            </Link>
           </div>
         ) : (
           <div>
