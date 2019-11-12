@@ -6,7 +6,7 @@ import user from './user'
 import singleProduct from './singleProduct'
 import cart from './cart'
 import orders from './orders'
-import checkoutReducer from './checkout'
+
 import allYachtsReducer from './allProducts'
 
 const rootReducer = combineReducers({
@@ -14,7 +14,6 @@ const rootReducer = combineReducers({
   yachts: allYachtsReducer,
   singleProduct: singleProduct,
   cart: cart,
-  cost: checkoutReducer,
   orders: orders
 })
 const middleware = composeWithDevTools(
@@ -27,5 +26,4 @@ export * from './user'
 export * from './singleProduct'
 export * from './cart'
 export * from './orders'
-export * from './checkout'
 export * from './allProducts'

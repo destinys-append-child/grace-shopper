@@ -11,6 +11,8 @@ const ADD_ITEM_USER = 'ADD_ITEM_USER'
 const REMOVED_ITEM = 'REMOVED_ITEM'
 const REMOVED_GUEST_ITEM = 'REMOVED_GUEST_ITEM'
 const LOGOUT_CLEAR_CART = 'LOGOUT_CLEAR_CART'
+const UPDATE_ADDRESSES = 'UPDATE_ADDRESSES'
+const CONFIRMATION = 'CONFIRMATION'
 
 // Action Creators
 const gotCart = cart => ({type: GOT_CART, cart})
@@ -32,7 +34,12 @@ const addToCart = cart => ({
 const removedItem = cart => ({type: REMOVED_ITEM, cart})
 const removedGuestItem = productId => ({type: REMOVED_GUEST_ITEM, productId})
 export const logoutClearCart = () => ({type: LOGOUT_CLEAR_CART})
+const confirmation = confirmation => ({type: CONFIRMATION, confirmation})
 
+export const updateAddresses = addresses => ({
+  type: UPDATE_ADDRESSES,
+  addresses
+})
 // Thunk Creators
 export const getCart = () => async dispatch => {
   try {
@@ -148,6 +155,28 @@ const initialState = {
   userId: null,
   products: []
 }
+export const updateAddressThunk = addresses => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put('/api/checkout/confirmation', addresses)
+      console.log('DATA', data)
+      if (data) dispatch(updateAddresses(data))
+      else alert('MUST HAVE AN ACCOUNT TO CHECKOUT')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+export const confirmationThunk = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get('/api/checkout/confirmation')
+      if (data) dispatch(confirmation(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
 
 // Reducer
 export default function(cart = initialState, action) {
@@ -177,6 +206,11 @@ export default function(cart = initialState, action) {
       return {}
     case ADD_ITEM_USER:
       return action.cart
+    case UPDATE_ADDRESSES:
+      console.log('ACTION ---->', action.addresses)
+      return action.addresses
+    case CONFIRMATION:
+      return action.confirmation
     default:
       return cart
   }
