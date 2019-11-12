@@ -15,7 +15,7 @@ const UPDATE_ADDRESSES = 'UPDATE_ADDRESSES'
 const CONFIRMATION = 'CONFIRMATION'
 
 // Action Creators
-const gotCart = cart => ({type: GOT_CART, cart})
+export const gotCart = cart => ({type: GOT_CART, cart})
 export const gotGuestCart = (orderCost, products) => ({
   type: GOT_GUEST_CART,
   orderCost,

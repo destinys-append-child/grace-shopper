@@ -23,7 +23,7 @@ router.get('/', isUser, async (req, res, next) => {
 
 // POST /api/cart/:productId
 // Add product to cart
-router.post('/:productId', isUser, async (req, res, next) => {
+router.post('/:productId', async (req, res, next) => {
   try {
     const thisProduct = await Product.findByPk(req.params.productId)
     let order = await Order.findOne({
