@@ -1,0 +1,14 @@
+#user-details h4:first-child {
+  color: white;
+}
+
+#user-details .ui.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#user-details .ui.form input,
+button {
+  width: 300px;
+}

@@ -36,7 +36,7 @@ router.post('/:productId', isUser, async (req, res, next) => {
     if (order) {
       console.log('ORDER EXISTS')
       const product = order.products.find(e => {
-        return e.id == req.params.id
+        return e.id == req.params.productId
       })
       if (product) {
         console.log('PRODUCT EXISTS')

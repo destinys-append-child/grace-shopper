@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {yachtsThunk, categoryThunk} from '../store/allProducts'
 import {Link} from 'react-router-dom'
 
-import './allProducts.css'
+import '../css/allProducts.css'
 
 class YachtsList extends Component {
   constructor(props) {
@@ -12,7 +12,6 @@ class YachtsList extends Component {
   }
 
   componentDidMount() {
-    console.log('SEARC', this.props.location.search)
     if (!this.props.location.search) {
       this.props.getYachts()
     } else {

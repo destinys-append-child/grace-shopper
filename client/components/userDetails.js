@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import './userDetails.css'
+import '../css/userDetails.css'
 import {update} from '../store'
 
 class UserDetails extends React.Component {
@@ -27,13 +27,12 @@ class UserDetails extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-    console.log('state in handleSubmit', this.state)
     this.props.updateUser(this.state)
   }
 
   render() {
     return (
-      <div id="user details">
+      <div id="user-details">
         <h4>
           Edit your details below so your YDS account is always up to date.
         </h4>

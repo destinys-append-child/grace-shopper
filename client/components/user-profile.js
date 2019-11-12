@@ -1,9 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import './user-profile.css'
 import UserDetails from './userDetails'
 import Orders from './orders'
 import ChangePassword from './changePassword'
+import '../css/user-profile.css'
 
 const UserProfile = props => {
   return (
