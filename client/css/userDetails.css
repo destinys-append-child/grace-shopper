@@ -9,6 +9,6 @@
 }
 
 #user-details .ui.form input,
-button {
+#user-details button {
   width: 300px;
 }
