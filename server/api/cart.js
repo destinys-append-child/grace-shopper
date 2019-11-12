@@ -42,10 +42,11 @@ router.post('/:productId', isUser, async (req, res, next) => {
         console.log('PRODUCT EXISTS')
         const orderItem = product.orderProduct
         orderItem.itemQty += Number(req.body.quantity)
+
         if (orderItem.itemQty > product.quantity) {
           res.status(403).send(`Max quantity is ${product.quantity}`)
         } else {
-          order.orderCost = product.price * orderItem.itemQty
+          order.orderCost += product.price * orderItem.itemQty
           await orderItem.save()
           await order.save()
           res.send(order)
@@ -58,7 +59,7 @@ router.post('/:productId', isUser, async (req, res, next) => {
             itemPrice: thisProduct.price
           }
         })
-        order.orderCost += thisProduct.price * req.body.quantity
+        order.orderCost += thisProduct.price * Number(req.body.quantity)
         await order.save()
         res.send(order)
       }
@@ -75,7 +76,7 @@ router.post('/:productId', isUser, async (req, res, next) => {
       )
       await order.addProduct(thisProduct.id, {
         through: {
-          itemQty: req.body.quantity,
+          itemQty: Number(req.body.quantity),
           itemPrice: thisProduct.price
         }
       })
