@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Button} from 'semantic-ui-react'
 
-import './home.css'
+import '../css/home.css'
 
 const Home = ({isLoggedIn, firstName, history}) => {
   return (

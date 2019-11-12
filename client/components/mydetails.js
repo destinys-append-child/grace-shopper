@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './mydetails.css'
+import '../css/mydetails.css'
 
 class MyDetails extends React.Component {
   constructor() {

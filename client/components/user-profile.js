@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import './user-profile.css'
+import '../css/user-profile.css'
 import MyDetails from './mydetails'
 
 class UserProfile extends React.Component {
