@@ -65,19 +65,20 @@ h3 {
 }
 
 #checkoutForm {
-  /* background-image: url("https://images-na.ssl-images-amazon.com/images/I/71omqOcn87L._SX425_.jpg"); */
+  /* background: url("https://images-na.ssl-images-amazon.com/images/I/71OQbzZvD3L._SX425_.jpg"); */
   background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.7;
+  background-size: auto;
+  opacity: 0.9;
   background-color: rgba(245, 245, 245, 0.774);
   padding: 22px;
   margin: 22px;
-  size: 110%;
-  width: 55%;
+  size: 112%;
+  width: 45%;
   justify-content: center;
   align-items: center;
   align-content: center;
   text-align: center;
+  border: 3px solid darkgreen;
 }
 .checkoutFormLabel label {
   opacity: 1;
