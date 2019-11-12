@@ -15,7 +15,7 @@ class Cart extends Component {
   render() {
     return (
       <div>
-        <div className="cart">
+        <div className="cart-view">
           <h2>MY CART</h2>
           {this.props.cart &&
           this.props.cart.id &&

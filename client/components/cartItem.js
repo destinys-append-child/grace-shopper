@@ -9,8 +9,6 @@ import {
   updatedGuestCart
 } from '../store/cart'
 
-import '../css/cartItem.css'
-
 function CartItem(props) {
   const {
     cartItem,

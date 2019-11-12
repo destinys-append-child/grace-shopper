@@ -11,7 +11,7 @@ class Orders extends Component {
   }
   render() {
     return (
-      <div className="order">
+      <div className="orders">
         <h2>MY ORDERS</h2>
         {this.props.orders && this.props.orders.length ? (
           <div>

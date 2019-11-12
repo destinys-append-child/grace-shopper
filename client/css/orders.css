@@ -1,4 +1,43 @@
+.orders {
+  margin: 5% 10%;
+  padding: 5%;
+  background: #c7c5c5;
+  border-radius: 8px;
+  text-align: center;
+  color: black;
+}
+
+.single-order.ui.card {
+  height: auto;
+  width: 90%;
+  padding: 5%;
+}
+
 img {
-  height: 100px;
-  width: 100px;
+  max-width: 200px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.orders h2,
+.orders h3 {
+  color: black;
+}
+
+.orders h3,
+.orders h4 {
+  text-align: left;
+}
+
+.order-item {
+  margin: 5%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.order-item-info {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  padding-left: 2%;
 }
