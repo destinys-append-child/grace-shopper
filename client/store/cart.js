@@ -46,7 +46,6 @@ export const getCart = () => async dispatch => {
 export const getGuestCart = () => async dispatch => {
   try {
     const localCart = JSON.parse(localStorage.getItem('cart'))
-    console.log('localCart----->', localCart)
     let orderCost = 0
     let products = []
     for (let key in localCart) {
@@ -60,8 +59,6 @@ export const getGuestCart = () => async dispatch => {
         products.push(data)
       }
     }
-    console.log('products', products)
-    console.log('orderCost', orderCost)
     dispatch(gotGuestCart(orderCost, products))
   } catch (err) {
     console.log('Error:', err)
@@ -180,7 +177,6 @@ export default function(cart = initialState, action) {
     case LOGOUT_CLEAR_CART:
       return {}
     case ADD_ITEM_USER:
-      console.log('HITT')
       return action.cart
     default:
       return cart
