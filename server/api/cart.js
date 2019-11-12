@@ -54,3 +54,39 @@ router.put('/', isUser, async (req, res, next) => {
     next(err)
   }
 })
+
+// DELETE /api/cart/:productId
+// Delete item in cart
+router.delete('/:productId', isUser, async (req, res, next) => {
+  try {
+    let {productId} = req.params
+    productId = Number(productId)
+    const order = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        isPurchased: false
+      },
+      include: [{model: Product}]
+    })
+    if (order) {
+      const product = order.products.find(item => item.id === productId)
+      if (product) {
+        const orderItem = product.orderProduct
+        const quantity = orderItem.itemQty
+        await orderItem.destroy()
+        const newTotal = order.orderCost - product.price * quantity
+        await order.update({orderCost: newTotal})
+        const updatedOrder = await Order.findByPk(order.id, {
+          include: [{model: Product}]
+        })
+        res.send(updatedOrder)
+      } else {
+        res.status(404).send(`Cannot find productId ${productId} in order`)
+      }
+    } else {
+      res.status(404).send(`Unable to remove from cart productId: ${productId}`)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
