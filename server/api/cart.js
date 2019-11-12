@@ -34,12 +34,10 @@ router.post('/:productId', isUser, async (req, res, next) => {
       include: [{model: Product}]
     })
     if (order) {
-      console.log('ORDER EXISTS')
       const product = order.products.find(e => {
         return e.id == req.params.id
       })
       if (product) {
-        console.log('PRODUCT EXISTS')
         const orderItem = product.orderProduct
         orderItem.itemQty += Number(req.body.quantity)
         if (orderItem.itemQty > product.quantity) {
@@ -51,7 +49,6 @@ router.post('/:productId', isUser, async (req, res, next) => {
           res.send(order)
         }
       } else {
-        console.log('PRODUCT IS ADDED')
         await order.addProduct(thisProduct.id, {
           through: {
             itemQty: Number(req.body.quantity),
@@ -63,7 +60,6 @@ router.post('/:productId', isUser, async (req, res, next) => {
         res.send(order)
       }
     } else {
-      console.log('ORDER AND PRODUCT CREATED')
       order = await Order.create(
         {
           orderCost: thisProduct.price * req.body.quantity,
