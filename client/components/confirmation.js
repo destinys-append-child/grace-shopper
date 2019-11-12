@@ -14,7 +14,9 @@ class Confirmation extends Component {
   render() {
     return (
       <div>
-        <h1>CONFIRMATION</h1>
+        <div className="confirmation">
+          <h1>CONGRATULATIONS! ORDER CONFIRMED:</h1>
+        </div>
       </div>
     )
   }

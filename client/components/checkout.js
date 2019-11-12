@@ -10,9 +10,10 @@ class Checkout extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      billing: '',
-      shipping: '',
-      redirect: false
+      billing: null,
+      shipping: null,
+      redirect: false,
+      email: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -25,30 +26,30 @@ class Checkout extends Component {
 
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value})
-    // const addresses = this.state;
-    // this.props.updateAddress(addresses)
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    const addresses = this.state
-    this.props.updateAddress(addresses)
-    this.setState({
-      billing: '',
-      shipping: '',
-      redirect: true
-    })
+    if (this.props.isLoggedIn) {
+      const addresses = this.state
+      this.props.updateAddress(addresses)
+      this.setState({
+        billing: '',
+        shipping: '',
+        redirect: true,
+        email: ''
+      })
+    }
+    if (!this.props.isLoggedIn)
+      this.setState({
+        billing: '',
+        shipping: '',
+        redirect: true,
+        email: ''
+      })
   }
   render() {
-    if (!this.props.isLoggedIn) {
-      window.alert('MUST LOGIN FIRST')
-      return <Redirect to="/home" />
-    }
-    if (
-      this.state.redirect === true &&
-      !this.props.cart.products &&
-      this.props.isLoggedIn
-    ) {
+    if (this.state.redirect === true) {
       return <Redirect to="/checkout/confirmation" />
     }
     return (
@@ -128,6 +129,16 @@ class Checkout extends Component {
               </label>
               <br />
               <br />
+
+              <label className="checkoutFormLabel">
+                Email:
+                <input
+                  type="text"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+              </label>
               <button type="submit" value="SAIL AWAY">
                 SAIL AWAY
               </button>
