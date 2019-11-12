@@ -10,6 +10,7 @@ import {
   SingleProduct,
   Cart,
   Checkout,
+  Confirmation,
   Orders
 } from './components'
 import {me} from './store'
@@ -32,7 +33,12 @@ class Routes extends Component {
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/products" component={YachtsList} />
         <Route path="/profile" component={UserProfile} />
-        <Route path="/checkout" component={Checkout} />
+        <Route
+          exact
+          path="/checkout"
+          component={() => <Checkout isLoggedIn={this.props.isLoggedIn} />}
+        />
+        <Route exact path="/checkout/confirmation" component={Confirmation} />
         <Route
           path="/cart"
           component={() => <Cart isLoggedIn={this.props.isLoggedIn} />}
