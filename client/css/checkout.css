@@ -5,6 +5,10 @@
   align-items: center;
   width: 100%;
 }
+.checkout img {
+  width: 300px;
+  height: auto;
+}
 .title {
   text-align: center;
   font-family: arial, sans-serif;
@@ -94,7 +98,7 @@ h3 {
   opacity: 1;
   margin: 5px;
 }
-/* 
+/*
 1. underline form above
 2. format the input box
 3. format the buttons
