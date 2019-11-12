@@ -75,7 +75,7 @@ router.put('/confirmation', async (req, res, next) => {
         isPurchased: false
       }
     })
-    // confirmed.update({isPurchased: true})
+
     console.log('BODDDDDDY', req.body)
     const {shipping, billing} = req.body
     let updates = {}
