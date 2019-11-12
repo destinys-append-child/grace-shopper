@@ -1,4 +1,23 @@
 .cart h2 {
   font-family: 'Abril Fatface', cursive;
   text-align: center;
+  color: white;
+}
+
+.cart .order-cost {
+  color: white;
+  text-align: center;
+}
+
+.cart .ui.button {
+  text-align: center;
+}
+
+.cart .checkout-button {
+  display: flex;
+  justify-content: center;
+}
+
+.cart .checkout-button .ui.button {
+  margin: 10px;
 }

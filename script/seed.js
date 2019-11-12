@@ -172,6 +172,13 @@ const orders = [
     shipping: '15 Test Street, New York City, NY, 09385',
     billing: '222 Fork Street, New York City, NY, 09385',
     isPurchased: true
+  },
+  {
+    userId: 6,
+    orderCost: 5523796,
+    shipping: '999 Broad St., New York City, NY, 09385',
+    billing: '999 Broad St., New York City, NY, 09385',
+    isPurchased: true
   }
 ]
 
@@ -205,6 +212,18 @@ const orderProducts = [
     productId: 6,
     itemQty: 1,
     itemPrice: 25463024
+  },
+  {
+    orderId: 5,
+    productId: 5,
+    itemQty: 1,
+    itemPrice: 541396
+  },
+  {
+    orderId: 5,
+    productId: 3,
+    itemQty: 2,
+    itemPrice: 2491200
   }
 ]
 

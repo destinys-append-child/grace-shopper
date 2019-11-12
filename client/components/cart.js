@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import {me} from '../store/user'
 import {getCart, getGuestCart} from '../store/cart'
 import CartItem from './cartItem'
 import './cart.css'
 import {Link} from 'react-router-dom'
+import {Button} from 'semantic-ui-react'
 
 class Cart extends Component {
   componentDidMount() {
@@ -32,15 +32,21 @@ class Cart extends Component {
               {new Intl.NumberFormat('en-US', {
                 style: 'currency',
                 currency: 'USD'
-              }).format(this.props.cart.orderCost)}
+              }).format(this.props.cart.orderCost)}{' '}
+              USD
             </h3>
           </div>
         ) : (
           <h3>No items in cart.</h3>
         )}
-        <Link to="/checkout">
-          <button type="button">CHECKOUT</button>
-        </Link>
+        <div className="checkout-button">
+          <Link to="/categories">
+            <Button className="ui button">KEEP SHOPING</Button>
+          </Link>
+          <Link to="/checkout">
+            <Button className="ui button">CHECKOUT</Button>
+          </Link>
+        </div>
       </div>
     )
   }
@@ -54,7 +60,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchUser: () => dispatch(me()),
     fetchCart: () => dispatch(getCart()),
     fetchGuestCart: () => dispatch(getGuestCart())
   }

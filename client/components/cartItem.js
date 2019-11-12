@@ -3,12 +3,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 import {
-  increaseQty,
-  increaseGuestQty,
-  decreaseQty,
-  decreaseGuestQty,
   removeItem,
-  removeGuestItem
+  removeGuestItem,
+  updateCart,
+  updatedGuestCart
 } from '../store/cart'
 
 import './cartItem.css'
@@ -16,30 +14,31 @@ import './cartItem.css'
 function CartItem(props) {
   const {
     cartItem,
-    increase,
-    increaseGuest,
-    decrease,
-    decreaseGuest,
     remove,
     removeGuest,
     isLoggedIn,
-    quantity
+    quantity,
+    update,
+    updateGuest
   } = props
   const clickHandler = evt => {
     const method = evt.target.name || event.target.parentNode.name
     let productId =
       evt.target.parentNode.id || evt.target.parentNode.parentNode.id
+    productId = Number(productId)
     if (method === 'increase') {
+      const newQuantity = quantity + 1
       if (isLoggedIn) {
-        increase(productId)
+        update(productId, newQuantity)
       } else {
-        increaseGuest(productId)
+        updateGuest(productId, newQuantity)
       }
     } else if (method === 'decrease') {
+      const newQuantity = quantity - 1
       if (isLoggedIn) {
-        decrease(productId)
+        update(productId, newQuantity)
       } else {
-        decreaseGuest(productId)
+        updateGuest(productId, newQuantity)
       }
     } else if (method === 'remove') {
       if (isLoggedIn) {
@@ -73,7 +72,7 @@ function CartItem(props) {
             }).format(cartItem.price)}
           </h3>
           <h3 className="product-qty">Qty: {quantity}</h3>
-          <div className="ui icon buttons" id={cartItem.id}>
+          <div className="mini ui icon buttons" id={cartItem.id}>
             <button
               type="button"
               name="increase"
@@ -115,12 +114,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    increase: productId => dispatch(increaseQty(productId)),
-    increaseGuest: productId => dispatch(increaseGuestQty(productId)),
-    decrease: productId => dispatch(decreaseQty(productId)),
-    decreaseGuest: productId => dispatch(decreaseGuestQty(productId)),
     remove: productId => dispatch(removeItem(productId)),
-    removeGuest: productId => dispatch(removeGuestItem(productId))
+    removeGuest: productId => dispatch(removeGuestItem(productId)),
+    update: (productId, quantity) => dispatch(updateCart(productId, quantity)),
+    updateGuest: (productId, quantity) =>
+      dispatch(updatedGuestCart(productId, quantity))
   }
 }
 
