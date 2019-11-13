@@ -204,13 +204,13 @@ export default function(cart = initialState, action) {
       })
       return {...cart, orderCost: total, products: filteredProds}
     case LOGOUT_CLEAR_CART:
-      return {}
+      return initialState
     case ADD_ITEM_USER:
       return action.cart
     case UPDATE_ADDRESSES:
       return action.addresses
     case CONFIRMATION:
-      return {}
+      return initialState
     default:
       return cart
   }

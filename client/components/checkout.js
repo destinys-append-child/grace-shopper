@@ -55,7 +55,7 @@ class Checkout extends Component {
     return (
       <div>
         {this.props.cart &&
-        this.props.cart.id &&
+        this.props.cart.products &&
         this.props.cart.products.length ? (
           <div className="checkout">
             <h1 className="title">Checkout</h1>
