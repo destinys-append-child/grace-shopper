@@ -15,7 +15,7 @@ const UPDATE_ADDRESSES = 'UPDATE_ADDRESSES'
 const CONFIRMATION = 'CONFIRMATION'
 
 // Action Creators
-const gotCart = cart => ({type: GOT_CART, cart})
+export const gotCart = cart => ({type: GOT_CART, cart})
 export const gotGuestCart = (orderCost, products) => ({
   type: GOT_GUEST_CART,
   orderCost,
@@ -206,6 +206,7 @@ export default function(cart = initialState, action) {
     case LOGOUT_CLEAR_CART:
       return initialState
     case ADD_ITEM_USER:
+      console.log(action.cart)
       return action.cart
     case UPDATE_ADDRESSES:
       return action.addresses

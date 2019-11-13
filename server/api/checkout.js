@@ -1,7 +1,8 @@
 const router = require('express').Router()
 const {Order} = require('../db/models')
-const {isUser} = require('../../utils')
+const {isUser, sendEmail} = require('../../utils')
 module.exports = router
+const nodemailer = require('nodemailer')
 
 router.get('/', isUser, async (req, res, next) => {
   try {
@@ -38,28 +39,34 @@ router.get('/confirmation', isUser, async (req, res, next) => {
   }
 })
 
-router.put('/confirmation', isUser, async (req, res, next) => {
-  try {
-    const confirmed = await Order.findOne({
-      where: {
-        userId: req.user.id,
-        isPurchased: false
+router.put(
+  '/confirmation',
+  isUser,
+  async (req, res, next) => {
+    try {
+      const confirmed = await Order.findOne({
+        where: {
+          userId: req.user.id,
+          isPurchased: false
+        }
+      })
+      const {shipping, billing} = req.body
+      let updates = {}
+      if (shipping) {
+        updates.shipping = shipping
       }
-    })
-    if (confirmed) confirmed.update({isPurchased: true})
-    const {shipping, billing} = req.body
-    let updates = {}
-    if (shipping) {
-      updates.shipping = shipping
+      if (billing) {
+        updates.billing = billing
+      }
+      if (updates.shipping || updates.billing) {
+        confirmed.update(updates)
+      }
+
+      res.send(confirmed)
+      next()
+    } catch (error) {
+      next(error)
     }
-    if (billing) {
-      updates.billing = billing
-    }
-    if (updates.shipping || updates.billing) {
-      confirmed.update(updates)
-    }
-    res.send(confirmed)
-  } catch (error) {
-    next(error)
-  }
-})
+  },
+  sendEmail
+)

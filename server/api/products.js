@@ -8,7 +8,7 @@ module.exports = router
 // Get all products
 router.get('/', async (req, res, next) => {
   try {
-    const {category} = req.query
+    const category = req.query.category
     let products
     if (category) {
       products = await Product.findAll({
