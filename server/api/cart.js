@@ -23,6 +23,64 @@ router.get('/', isUser, async (req, res, next) => {
 
 // POST /api/cart/:productId
 // Add product to cart
+// router.post('/:productId', isUser, async (req, res, next) => {
+//   try {
+//     const {quantity} = req.body
+//     let {productId} = req.params
+//     productId = Number(productId)
+//     console.log('productId', productId)
+//     const product = await Product.findByPk(productId)
+//     if (!product) res.status(404).send(`Cannot find product`)
+//     let order = await Order.findOrCreate({
+//       where: {
+//         userId: req.user.id,
+//         isPurchased: false
+//       },
+//       include: [{model: Product}]
+//     })
+//     order = order[0]
+//     if (order) {
+//       const orderItem = order.products.filter(product => {
+//         if (product.id === productId) {
+//           return true
+//         }
+//         return false
+//       })
+//       if (orderItem) {
+//         const orderProduct = orderItem.orderProduct
+//         const newQuantity = orderProduct + quantity
+//         console.log('orderProduct', orderProduct)
+//         console.log('quantity', quantity)
+//         console.log('newQuantity', newQuantity)
+//         console.log('product quantity', product.quantity)
+//         if (newQuantity <= product.quantity) {
+//           orderProduct.itemQty = newQuantity
+//           const additionalCost = product.price * quantity
+//           order.orderCost += additionalCost
+//           await order.save()
+//           res.send(order)
+//         } else {
+//           res
+//             .status(403)
+//             .send(`Cannot add quantity ${quantity} of product id ${productId}`)
+//         }
+//       } else {
+//         await order.addProduct(productId, {
+//           through: {
+//             itemQty: quantity,
+//             itemPrice: product.price
+//           }
+//         })
+//         await order.save()
+//         res.send(order)
+//       }
+//     } else {
+//       res.status(404).send(`Cannot find order`)
+//     }
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 router.post('/:productId', isUser, async (req, res, next) => {
   try {
     const thisProduct = await Product.findByPk(req.params.productId)
@@ -46,7 +104,7 @@ router.post('/:productId', isUser, async (req, res, next) => {
         if (orderItem.itemQty > product.quantity) {
           res.status(403).send(`Max quantity is ${product.quantity}`)
         } else {
-          order.orderCost += product.price * orderItem.itemQty
+          order.orderCost += product.price * Number(req.body.quantity)
           await orderItem.save()
           await order.save()
           res.send(order)
