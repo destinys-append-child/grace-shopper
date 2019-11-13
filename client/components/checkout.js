@@ -59,7 +59,7 @@ class Checkout extends Component {
         this.props.cart.products.length ? (
           <div className="checkout">
             <h1 className="title">Checkout</h1>
-            <h1 className="title">Order summary</h1>
+            <h1 className="title">Order Summary</h1>
             <div id="table">
               <table id="ordersTable">
                 <tbody>
@@ -139,6 +139,8 @@ class Checkout extends Component {
                   onChange={this.handleChange}
                 />
               </label>
+              <br />
+              <br />
               <button type="submit" value="SAIL AWAY">
                 SAIL AWAY
               </button>

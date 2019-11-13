@@ -1,5 +1,6 @@
 .confirmation {
   display: flex;
+  font-family: 'Abril Fatface', cursive;
   color: black;
   flex-direction: column;
   justify-content: center;
@@ -7,5 +8,11 @@
   width: 100%;
   border: 5px double dodgerblue;
   padding: 7%;
-  background: rgba(245, 245, 245, 0.753);
+  background: rgba(245, 245, 245, 0.7);
+}
+#cursive {
+  font-family: Apple Chancery, cursive;
+}
+#final {
+  font-family: 'Abril Fatface', cursive;
 }
