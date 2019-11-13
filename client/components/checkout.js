@@ -55,11 +55,11 @@ class Checkout extends Component {
     return (
       <div>
         {this.props.cart &&
-        this.props.cart.id &&
+        this.props.cart.products &&
         this.props.cart.products.length ? (
           <div className="checkout">
             <h1 className="title">Checkout</h1>
-            <h1 className="title">Order summary</h1>
+            <h1 className="title">Order Summary</h1>
             <div id="table">
               <table id="ordersTable">
                 <tbody>
@@ -139,6 +139,8 @@ class Checkout extends Component {
                   onChange={this.handleChange}
                 />
               </label>
+              <br />
+              <br />
               <button type="submit" value="SAIL AWAY">
                 SAIL AWAY
               </button>

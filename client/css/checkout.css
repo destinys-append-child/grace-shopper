@@ -11,24 +11,25 @@
 }
 .title {
   text-align: center;
-  font-family: arial, sans-serif;
-  color: whitesmoke;
+  font-family: Georgia, serif;
+  color: navy;
+  text-shadow: 0 0 3px mediumseagreen, 0 0 5px seashell;
+  text-decoration: underline double goldenrod;
 }
 #table {
-  width: 70%;
-  border: 12px ridge saddlebrown;
+  font-family: Georgia, serif;
   color: dodgerblue;
 }
 
 #ordersTable {
   justify-content: center;
   text-align: center;
-  font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+  font-family: Georgia, serif;
   border-collapse: collapse;
-  border: 3px solid floralwhite;
-  width: 100%;
+  border: 12px ridge saddlebrown;
+  width: 70%;
   background: rgba(245, 245, 245, 0.63);
-  box-shadow: 5px 5px 2px sienna;
+  box-shadow: 2px 2px 2px sienna;
 }
 
 #ordersTable td,
@@ -42,36 +43,33 @@
 }
 
 #ordersTable tr:hover {
-  background-color: rgba(0, 0, 139, 0.568);
+  background-color: rgba(2, 99, 243, 0.88);
   box-shadow: 1px 1px 1px 1px black;
 }
 
 #ordersTable th {
+  font-family: 'Abril Fatface', cursive;
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: aqua;
+  background-color: cadetblue;
   color: navy;
   size: 112%;
   font-weight: bold;
 }
-h3 {
-  color: dodgerblue;
-}
+
 .cost {
+  font-family: Georgia, serif;
   background-color: rgba(245, 245, 245, 0.733);
   padding: 22px;
   border: 3px groove navy;
-  /* text-shadow: 1px 1px midnightblue;  */
   box-shadow: 1px 1px 1px 1px rgb(110, 110, 110);
   size: 110%;
   font-weight: bold;
 }
 
 #checkoutForm {
-  /* background: url("https://images-na.ssl-images-amazon.com/images/I/71OQbzZvD3L._SX425_.jpg"); */
-  background-repeat: no-repeat;
-  background-size: auto;
+  font-family: Georgia, serif;
   opacity: 0.9;
   background-color: rgba(245, 245, 245, 0.774);
   padding: 22px;
@@ -83,25 +81,29 @@ h3 {
   align-content: center;
   text-align: center;
   border: 3px solid darkgreen;
+  box-shadow: 1px 3px 6px black;
 }
 .checkoutFormLabel label {
+  font-family: Georgia, serif;
   opacity: 1;
   color: black;
   font-weight: bold;
   justify-content: center;
 }
 .checkoutFormLabel input {
+  font-family: Georgia, serif;
   opacity: 1;
   border: 5px ridge saddlebrown;
 }
 #checkoutForm button {
+  font-family: 'Abril Fatface', cursive;
   opacity: 1;
   margin: 5px;
+  background-color: rgba(255, 255, 255, 0);
+  color: black;
+  border: 2px solid #008cba;
 }
-/*
-1. underline form above
-2. format the input box
-3. format the buttons
-4. Style the order confirmation page
-4a. Inspirational quote, yacht gif, message, and shipping/billing information
-5. Use video on homepage */
+#checkoutForm button:hover {
+  background-color: #008cba;
+  color: white;
+}
