@@ -38,11 +38,8 @@ router.get('/confirmation', isUser, async (req, res, next) => {
   }
 })
 
-router.put('/confirmation', async (req, res, next) => {
+router.put('/confirmation', isUser, async (req, res, next) => {
   try {
-    if (!req.user) {
-      res.status(404).send('MUST HAVE ACCOUNT FIRST')
-    }
     const confirmed = await Order.findOne({
       where: {
         userId: req.user.id,
