@@ -46,7 +46,7 @@ router.post('/:productId', isUser, async (req, res, next) => {
         if (orderItem.itemQty > product.quantity) {
           res.status(403).send(`Max quantity is ${product.quantity}`)
         } else {
-          order.orderCost += product.price * orderItem.itemQty
+          order.orderCost += product.price * Number(req.body.quantity)
           await orderItem.save()
           await order.save()
           res.send(order)
