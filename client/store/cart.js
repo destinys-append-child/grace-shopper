@@ -13,7 +13,6 @@ const REMOVED_GUEST_ITEM = 'REMOVED_GUEST_ITEM'
 const LOGOUT_CLEAR_CART = 'LOGOUT_CLEAR_CART'
 const UPDATE_ADDRESSES = 'UPDATE_ADDRESSES'
 const CONFIRMATION = 'CONFIRMATION'
-const SEND_EMAIL = 'SEND_EMAIL'
 
 // Action Creators
 export const gotCart = cart => ({type: GOT_CART, cart})
@@ -39,10 +38,6 @@ const confirmation = confirmation => ({type: CONFIRMATION, confirmation})
 export const updateAddresses = addresses => ({
   type: UPDATE_ADDRESSES,
   addresses
-})
-const sendEmail = email => ({
-  type: SEND_EMAIL,
-  email
 })
 
 // Thunk Creators

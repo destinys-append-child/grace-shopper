@@ -2,12 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 import {me} from '../store/user'
-import {
-  getCart,
-  getGuestCart,
-  updateAddressThunk,
-  emailThunk
-} from '../store/cart'
+import {getCart, getGuestCart, updateAddressThunk} from '../store/cart'
 import '../css/checkout.css'
 import {Link, Redirect} from 'react-router-dom'
 
@@ -180,8 +175,7 @@ const mapDispatchToProps = dispatch => {
     fetchUser: () => dispatch(me()),
     fetchCart: () => dispatch(getCart()),
     fetchGuestCart: () => dispatch(getGuestCart()),
-    updateAddress: addresses => dispatch(updateAddressThunk(addresses)),
-    sendEmail: email => dispatch(emailThunk(email))
+    updateAddress: addresses => dispatch(updateAddressThunk(addresses))
   }
 }
 
