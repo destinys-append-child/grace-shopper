@@ -114,6 +114,6 @@ https://nodemailer.com/
 
 ## Examples
 
-<img src='https://github.com/Vue-gles/sole-mate/blob/master/public/home.png' width='800' />
+<img src='https://github.com/destinys-append-child/grace-shopper/blob/master/public/home.png' width='800' />
 
-<img src='https://github.com/Vue-gles/sole-mate/blob/master/public/cart.png' width='800' />
+<img src='https://github.com/destinys-append-child/grace-shopper/blob/master/public/cart.png' width='800' />
