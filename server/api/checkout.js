@@ -51,7 +51,9 @@ router.put(
         }
       })
       const {shipping, billing} = req.body
-      let updates = {}
+      let updates = {
+        isPurchased: true
+      }
       if (shipping) {
         updates.shipping = shipping
       }
