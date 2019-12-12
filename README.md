@@ -106,7 +106,7 @@ https://www.postgresql.org/
 
 - PostgreSQL is an open source object-relational database system that uses and extends the SQL language
 
-### Nodemailer
+### `Nodemailer`
 
 https://nodemailer.com/
 
