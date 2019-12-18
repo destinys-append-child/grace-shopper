@@ -10,7 +10,7 @@ Visit [Yachts Don't Stop](https://grace-shopper-yacht-store.herokuapp.com) to tr
 - [Table of Contents](#Table-of-Contents)
 - [Download](#Download)
 - [Team](#Team)
-  - [Meagn Donnelly](#Megan-Donnelly)
+  - [Megan Donnelly](#Megan-Donnelly)
   - [Tayla Jenkins](#Tayla-Jenkins)
   - [Matthew Chen](#Matthew-Chen)
   - [Victor Guerrero](#Victor-Guerrero)
