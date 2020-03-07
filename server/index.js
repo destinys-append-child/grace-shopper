@@ -18,6 +18,13 @@ if (process.env.NODE_ENV === 'test') {
   after('close the session store', () => sessionStore.stopExpiringSessions())
 }
 
+/* Datadog Metrics */
+var StatsD = require('node-dogstatsd').StatsD
+var dogstatsd = new StatsD()
+
+// Increment a counter
+dogstatsd.increment('page.views')
+
 /**
  * In your development environment, you can keep all of your
  * app's secret API keys in a file called `secrets.js`, in your project
